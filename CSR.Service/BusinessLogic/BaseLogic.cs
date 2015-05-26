@@ -1,4 +1,5 @@
-﻿using MigrationTools.DataAccess;
+﻿using CSR.Service.DataAccess;
+using CSR.Service.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UtilityLibrary;
 
-namespace MigrationTools.BusinessLogic
+namespace CSR.Service.BusinessLogic
 {
     public class BaseLogic
     {
@@ -24,6 +25,16 @@ namespace MigrationTools.BusinessLogic
         {
             DataAccess = new BaseDataAccess();
             SPDataAccess = new BaseSPDataAccess();
+        }
+
+        public void SetStoredProcedureOperation()
+        {
+            SPDataAccess = new BaseSPDataAccess();
+        }
+
+        public void SetSqlNativeOperation()
+        {
+            DataAccess = new BaseDataAccess();
         }
 
         public BaseLogic(bool isStoredProcedureOperation)
@@ -71,6 +82,11 @@ namespace MigrationTools.BusinessLogic
         {
             return SPDataAccess.Delete<T>(key);
         }
+
+        public virtual int SPDelete<T>(T entity)
+        {
+            return SPDataAccess.Delete<T>(entity);
+        }
         public virtual int Delete<T>(string key)
         {
             return DataAccess.DeleteEntity<T>(key);
@@ -79,6 +95,11 @@ namespace MigrationTools.BusinessLogic
         public virtual List<T> SPRead<T>(string key) where T : new()
         {
             return SPDataAccess.Read<T>(key);
+        }
+
+        public virtual List<T> SPRead<T>(T item) where T : new()
+        {
+            return SPDataAccess.Read<T>(item);
         }
 
         public virtual List<T> Read<T>(T entity) where T : new()
@@ -251,7 +272,24 @@ namespace MigrationTools.BusinessLogic
                 dt.Columns.Add(propInfo.Name);
             }
             return dt;
-        }       
+        }
 
+        public int SaveAttachmentToSharePointLibrary(string SiteURL, string DocLib, List<AttachmentEntity> attachmentCRUDList)
+        {
+            int result = 0;
+            
+            
+            if (attachmentCRUDList != null)
+            {
+                BaseDataAccess BaseDataAccess = new BaseDataAccess();
+                result = BaseDataAccess.SaveAttachment(SiteURL, DocLib, attachmentCRUDList);
+            }
+            return result;
+        }
+
+        public MasterUserByUserNameEntity UserInformation(string loginName)
+        {
+            return new MasterDataLogic().SPRead<MasterUserByUserNameEntity>(new MasterUserByUserNameEntity() { UserName = loginName }).FirstOrDefault();
+        }
     }
 }

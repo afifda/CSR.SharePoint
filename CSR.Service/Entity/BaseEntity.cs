@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UtilityLibrary;
 
-namespace MigrationTools.Entity
+namespace CSR.Service.Entity
 {
     public class BaseEntity
     {

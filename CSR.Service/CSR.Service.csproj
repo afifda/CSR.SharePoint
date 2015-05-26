@@ -29,7 +29,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -38,22 +45,37 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UtilityLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Afif\DAFW\UtilityLibrary.dll</HintPath>
+    <Reference Include="UtilityLibrary">
+      <HintPath>..\..\..\..\..\..\..\Afif\AP\Migration Tools\UtilityLibrary\UtilityLibrary\bin\Debug\UtilityLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\BaseLogic.cs" />
+    <Compile Include="BusinessLogic\MasterDataLogic.cs" />
+    <Compile Include="BusinessLogic\ProgramLogic.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="DataAccess\AttachmentSQLDataAccess.cs" />
     <Compile Include="DataAccess\BaseDataAccess.cs" />
     <Compile Include="DataAccess\BaseSPDataAccess.cs" />
     <Compile Include="DataAccess\EnumDataAccess.cs" />
+    <Compile Include="DataAccess\MasterDataDataAccess.cs" />
+    <Compile Include="DataAccess\ProgramDataAccess.cs" />
+    <Compile Include="Entity\AttachmentEntity.cs" />
+    <Compile Include="Entity\FilePendukungProgramEntity.cs" />
+    <Compile Include="Entity\FilePendukungRealisasiEntity.cs" />
     <Compile Include="Entity\MasterAreaEntity.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
+    <Compile Include="Entity\MasterBidangProgramEntity.cs" />
+    <Compile Include="Entity\MasterKategoriProgramEntity.cs" />
+    <Compile Include="Entity\MasterLokasiEntity.cs" />
+    <Compile Include="Entity\MasterSumberEntity.cs" />
+    <Compile Include="Entity\MasterUserEntity.cs" />
+    <Compile Include="Entity\ProgramEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="key.snk" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

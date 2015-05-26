@@ -7,17 +7,13 @@ using UtilityLibrary;
 
 namespace CSR.Service.Entity
 {
-    [Table("[Mgr_Stg_Attachment]", true, false)]
+    [Table("[Mst_Area]", true, false, "", "usp_SaveMasterArea", "usp_ReadMasterArea", "usp_UpdateMasterArea", "usp_DeleteMasterArea")]
     public class MasterAreaEntity
     {
-        [Column(name: "Request_No", isPrimaryKey: true)]
-        public string Request_No { get; set; }
+        [Column(name: "Area_Kode", isDeleteParam: true, isUpdateParam: true, isAllowNull: false, isReadParam: true, isInsertParam: true, isPrimaryKey: true)]
+        public string AreaCode { get; set; }
 
-        [Column(name: "FILE")]
-        public string Attachment_File { get; set; }
-        [Column(name: "Document_Link", isToBeRead: false)]
-        public string Document_Link { get; set; }
-        [Column(name: "Temporary_Path", isToBeRead: false)]
-        public string Temporary_Path { get; set; }
+        [Column(name: "Area_Nama", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
+        public string AreaName { get; set; }
     }
 }

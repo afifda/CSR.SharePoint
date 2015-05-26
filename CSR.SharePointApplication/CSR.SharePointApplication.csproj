@@ -42,19 +42,103 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constant.cs" />
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\BidangProgramControl.ascx.cs">
+      <DependentUpon>BidangProgramControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\BidangProgramControl.ascx.designer.cs">
+      <DependentUpon>BidangProgramControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\Attachment.ascx.cs">
+      <DependentUpon>Attachment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\Attachment.ascx.designer.cs">
+      <DependentUpon>Attachment.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterAreaControl.ascx.cs">
+      <DependentUpon>MasterAreaControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterAreaControl.ascx.designer.cs">
+      <DependentUpon>MasterAreaControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterBidangControl.ascx.cs">
+      <DependentUpon>MasterBidangControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterBidangControl.ascx.designer.cs">
+      <DependentUpon>MasterBidangControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterKategoriControl.ascx.cs">
+      <DependentUpon>MasterKategoriControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterKategoriControl.ascx.designer.cs">
+      <DependentUpon>MasterKategoriControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterUserControl.ascx.cs">
+      <DependentUpon>MasterUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterUserControl.ascx.designer.cs">
+      <DependentUpon>MasterUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\BaseLayoutPages.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\GenericHandler.ashx.cs">
+      <DependentUpon>GenericHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\GenericHandler.ashx.designer.cs">
+      <DependentUpon>GenericHandler.ashx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx.cs">
+      <DependentUpon>InputProgramPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx.designer.cs">
+      <DependentUpon>InputProgramPage.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\MasterDataPage.aspx.cs">
+      <DependentUpon>MasterDataPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\MasterDataPage.aspx.designer.cs">
+      <DependentUpon>MasterDataPage.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CONTROLTEMPLATES\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d2cabc30-9be3-4e80-a5b1-86804c304816}</SharePointProjectItemId>
+    </None>
     <None Include="key.snk" />
+    <None Include="Layouts\CSR.SharePointApplication\GenericHandler.ashx" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{909dbf8b-bfef-42df-bd8f-270ffdcb84ec}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{0d01fc0c-c17d-4aee-87aa-29b3baf02fc3}</PackageId>
     </None>
@@ -70,6 +154,24 @@
       <Project>{a8160cab-2937-442d-80dd-172128352d0b}</Project>
       <Name>CSR.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CONTROLTEMPLATES\HumasCSR\BidangProgramControl.ascx" />
+    <Content Include="CONTROLTEMPLATES\HumasCSR\Attachment.ascx" />
+    <Content Include="CONTROLTEMPLATES\HumasCSR\MasterAreaControl.ascx" />
+    <Content Include="CONTROLTEMPLATES\HumasCSR\MasterBidangControl.ascx" />
+    <Content Include="CONTROLTEMPLATES\HumasCSR\MasterKategoriControl.ascx" />
+    <Content Include="CONTROLTEMPLATES\HumasCSR\MasterUserControl.ascx" />
+    <Content Include="Layouts\CSR.SharePointApplication\CSS\SML_template.css" />
+    <Content Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\Attachment.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\BidangProgram.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\MasterArea.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\MasterBidang.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\MasterKategori.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\UserControl.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\MasterDataPage.aspx" />
+    <Content Include="Layouts\CSR.SharePointApplication\ErrorPage.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

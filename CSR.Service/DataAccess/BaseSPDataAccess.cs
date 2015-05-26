@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UtilityLibrary;
 
-namespace MigrationTools.DataAccess
+namespace CSR.Service.DataAccess
 {
     public class BaseSPDataAccess : DoubleASqlSPCommand
     {
@@ -112,7 +112,7 @@ namespace MigrationTools.DataAccess
                 SqlCommand command = base.Read<T>(entity);
                 OpenConnection(command, this.Connection);
                 reader = command.ExecuteReader();
-                entityList = mapData.MapDataToListWithAttributes<T>(reader);
+                entityList = mapData.MapDataToEntityList<T>(reader);
                 CloseCommitConnection();
             }
             catch (Exception ex)
@@ -140,7 +140,7 @@ namespace MigrationTools.DataAccess
                 SqlCommand command = base.Read<T>(key);
                 OpenConnection(command, this.Connection);
                 reader = command.ExecuteReader();
-                entityList = mapData.MapDataToListWithAttributes<T>(reader);
+                entityList = mapData.MapDataToEntityList<T>(reader);
                 CloseCommitConnection();
             }
             catch (Exception ex)
@@ -197,7 +197,7 @@ namespace MigrationTools.DataAccess
 
         public void OpenConnection(SqlCommand command, DoubleASqlConnection conn)
         {
-            if (conn.DBConnection == null) conn.OpenConnection();
+            if (conn.DBConnection == null || conn.DBConnection.State == ConnectionState.Closed) conn.OpenConnection();
             command.Connection = conn.DBConnection;
             if (IsTransOperation)
             {
@@ -224,5 +224,12 @@ namespace MigrationTools.DataAccess
             Connection.CloseConnection();
         }
 
+        public void ReorderTable(ref DataTable table, params String[] columns)
+        {
+            for (int i = 0; i < columns.Length; i++)
+            {
+                table.Columns[columns[i]].SetOrdinal(i);
+            }
+        }
     }
 }

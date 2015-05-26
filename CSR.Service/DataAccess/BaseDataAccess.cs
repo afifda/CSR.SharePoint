@@ -1,14 +1,17 @@
-﻿using System;
+﻿using CSR.Service.Entity;
+using Microsoft.SharePoint;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UtilityLibrary;
 
-namespace MigrationTools.DataAccess
+namespace CSR.Service.DataAccess
 {
     public class BaseDataAccess : DoubleASqlTextCommand
     {
@@ -312,7 +315,7 @@ namespace MigrationTools.DataAccess
 
         public void OpenConnection(SqlCommand command, DoubleASqlConnection conn)
         {
-            if (conn.DBConnection == null) conn.OpenConnection();
+            if (conn.DBConnection == null || conn.DBConnection.State == ConnectionState.Closed) conn.OpenConnection();
             command.Connection = conn.DBConnection;
             if (IsTransOperation)
             {
@@ -400,6 +403,68 @@ namespace MigrationTools.DataAccess
                 sr.Dispose();
             }
             return contents;
+        }
+
+        public int SaveAttachment(string siteUrl, string documentLibraryName,List<AttachmentEntity> attachmentCRUDList)/// string fileToUpload, string sharePointSite, string documentLibraryName, string subfolder)
+        {
+            int result = 0;
+            SPSecurity.RunWithElevatedPrivileges(delegate()
+            {
+                using (SPSite site = new SPSite(siteUrl))
+                {
+
+                    site.AllowUnsafeUpdates = true;
+
+                    using (SPWeb web = site.OpenWeb())
+                    {
+                        SPList docLib = web.Lists.TryGetList(documentLibraryName);
+                        if (docLib == null)
+                        {
+                            throw new Exception(string.Format("Document libary {0} cannot be found", documentLibraryName));
+                        }
+
+                        web.AllowUnsafeUpdates = true;
+
+                        /*** If you want to add inside a folder*******/
+                        SPFolder SubFolder = (from SPFolder folder in docLib.RootFolder.SubFolders
+                                              where folder.Url == docLib.RootFolder.Url + "/" + attachmentCRUDList[0].TransaksiNo
+                                              select folder).FirstOrDefault();
+
+                        if (SubFolder == null)
+                            SubFolder = docLib.RootFolder.SubFolders.Add(attachmentCRUDList[0].TransaksiNo);
+                        foreach (AttachmentEntity attachmentCRUD in attachmentCRUDList)
+                        {
+                            string fileToUpload = attachmentCRUD.TempPath;
+                            //upload only files that needs to be uploaded, not file that already in the server
+                            if (fileToUpload.Contains('\\'))
+                            {
+                                if (!System.IO.File.Exists(fileToUpload))
+                                    throw new FileNotFoundException("File not found.", fileToUpload);
+
+                                //get filename and get path
+                                string strFilePath = Path.GetFullPath(fileToUpload);
+                                string fileName1 = Path.GetFileName(fileToUpload);
+
+                                //FileStream fs = File.OpenRead(strFilePath);
+                                FileStream fs = new FileStream(strFilePath, FileMode.Open, FileAccess.Read);
+                                byte[] FileContent = new byte[fs.Length];
+                                fs.Read(FileContent, 0, Convert.ToInt32(fs.Length));
+                                fs.Close();
+
+                                //Add the file to the sub-folder
+                                SPFile file = SubFolder.Files.Add(SubFolder.Url + "/" + fileName1, FileContent, true);
+                                attachmentCRUD.NamaPath = file.Url;
+                            }
+
+                        }
+                        SubFolder.Update();
+                        result = SubFolder.Item.ID;
+                        web.AllowUnsafeUpdates = false;
+                        
+                    }
+                }
+            });
+            return result;
         }
         
     }
