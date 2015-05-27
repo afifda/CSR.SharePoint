@@ -16,10 +16,10 @@ namespace CSR.Service.Entity
         [Column(name: "Judul_Program", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Judul_Program { get; set; }
         [Column(name: "KP_Kode", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public string KP_Kode { get; set; }
+        public int KP_Kode { get; set; }
         public string KP_Nama { get; set; }
         [Column(name: "BP_Kode", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public string BP_Kode { get; set; }
+        public int BP_Kode { get; set; }
         public string BP_Nama { get; set; }
         [Column(name: "Area_Kode", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Area_Kode { get; set; }

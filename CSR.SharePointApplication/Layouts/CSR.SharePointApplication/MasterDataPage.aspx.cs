@@ -102,7 +102,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 try
                 {
                     MasterDataLogic logic = new MasterDataLogic();
-                    bidangList = logic.SPRead<MasterBidangProgramEntity>(new MasterBidangProgramEntity() { BP_Kode = "" });
+                    bidangList = logic.SPRead<MasterBidangProgramEntity>(new MasterBidangProgramEntity() { BP_Kode = 0 });
                 }
                 catch (Exception ex)
                 {
@@ -134,7 +134,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             }
 
             [System.Web.Services.WebMethod]
-            public static string DeleteMasterBidang(string kodeBidang)
+            public static string DeleteMasterBidang(int kodeBidang)
             {
                 try
                 {
@@ -157,7 +157,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 try
                 {
                     MasterDataLogic logic = new MasterDataLogic();
-                    kategoriList = logic.SPRead<MasterKategoriProgramEntity>(new MasterKategoriProgramEntity() { KP_Kode = "" });
+                    kategoriList = logic.SPRead<MasterKategoriProgramEntity>(new MasterKategoriProgramEntity() { KP_Kode = 0 });
                 }
                 catch (Exception ex)
                 {
@@ -190,7 +190,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             }
 
             [System.Web.Services.WebMethod]
-            public static string DeleteMasterKategori(string kodeKategori)
+            public static string DeleteMasterKategori(int kodeKategori)
             {
                 try
                 {

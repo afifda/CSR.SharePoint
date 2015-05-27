@@ -46,7 +46,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UtilityLibrary">
-      <HintPath>..\..\..\..\..\..\..\Afif\AP\Migration Tools\UtilityLibrary\UtilityLibrary\bin\Debug\UtilityLibrary.dll</HintPath>
+      <HintPath>..\..\UtilityLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

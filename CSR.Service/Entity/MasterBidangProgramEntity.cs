@@ -11,7 +11,7 @@ namespace CSR.Service.Entity
     public class MasterBidangProgramEntity
     {
         [Column(name: "BP_Kode", isDeleteParam: true, isUpdateParam: true, isAllowNull: false, isReadParam: true, isInsertParam: false, isPrimaryKey: true)]
-        public string BP_Kode { get; set; }
+        public int BP_Kode { get; set; }
 
         [Column(name: "BP_Nama", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string BP_Nama { get; set; }

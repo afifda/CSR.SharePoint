@@ -11,7 +11,7 @@ namespace CSR.Service.Entity
     public class MasterKategoriProgramEntity
     {
         [Column(name: "KP_Kode", spParamName: "KP_Kode", isDeleteParam: true, isUpdateParam: true, isAllowNull: false, isReadParam: true, isInsertParam: false, isPrimaryKey: true)]
-        public string KP_Kode { get; set; }
+        public int KP_Kode { get; set; }
 
         [Column(name: "KP_Nama", spParamName: "KP_Nama", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string KP_Nama { get; set; }

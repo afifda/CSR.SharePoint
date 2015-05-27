@@ -26,8 +26,8 @@ namespace CSR.Service.BusinessLogic
         public object GetInputProgramPage()
         {
             MasterDataDataAccess dataAccess = new MasterDataDataAccess();
-            List<MasterKategoriProgramEntity> kategori = SPRead<MasterKategoriProgramEntity>(new MasterKategoriProgramEntity() { KP_Kode = "" });
-            List<MasterBidangProgramEntity> bidang = SPRead<MasterBidangProgramEntity>(new MasterBidangProgramEntity() { BP_Kode = "" });
+            List<MasterKategoriProgramEntity> kategori = SPRead<MasterKategoriProgramEntity>(new MasterKategoriProgramEntity() { KP_Kode = 0 });
+            List<MasterBidangProgramEntity> bidang = SPRead<MasterBidangProgramEntity>(new MasterBidangProgramEntity() { BP_Kode = 0 });
             List<MasterAreaEntity> area = SPRead<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
             var inputPage = new 
             {

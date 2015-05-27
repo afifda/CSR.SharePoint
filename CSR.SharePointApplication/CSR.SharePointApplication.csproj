@@ -54,7 +54,7 @@
     <Reference Include="Microsoft.SharePoint" />
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
     <Reference Include="UtilityLibrary">
-      <HintPath>..\UtilityLibrary.dll</HintPath>
+      <HintPath>..\..\UtilityLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

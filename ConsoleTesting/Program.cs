@@ -15,7 +15,7 @@ namespace ConsoleTesting
         {
             MasterKategoriProgramEntity kategori = new MasterKategoriProgramEntity()
             {
-                KP_Kode = "1",
+                KP_Kode = 0,
                 KP_Nama = "CSR"
             };
             MasterDataLogic masterLogic = new MasterDataLogic(true);
