@@ -14,7 +14,6 @@
              <table id="tblMasterBidang" class="tabelgrid">
                   <thead>                
                     <tr>   
-                       <th class="header-grid">Kode Bidang</th>
                        <th class="header-grid">Nama Bidang</th>
                        <th class="header-grid">Action</th>
                     </tr>
@@ -33,12 +32,7 @@
                         <h4 class="modal-title">Detail Bidang</h4>
                     </div>
                     <div class="modal-body">
-                        <div>
-                            <div class="div">
-                                <span class="lbl">Kode Bidang</span>
-                                <span class="titikdua">:</span>
-                                <input name="txtKodeBidang" class="input" maxlength="10" id="txtKodeBidang" type="text" />
-                            </div>
+                        <div>                            
                             <div class="div">
                                 <span class="lbl">Nama Bidang</span>
                                 <span class="titikdua">:</span>

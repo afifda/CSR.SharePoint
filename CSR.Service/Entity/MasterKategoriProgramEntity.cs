@@ -10,7 +10,7 @@ namespace CSR.Service.Entity
     [Table("[Mst_KategoriProgram]", true, false, "", "usp_SaveMasterKategoriProgram", "usp_ReadMasterKategoriProgram", "usp_UpdateMasterKategoriProgram", "usp_DeleteMasterKategoriProgram")]
     public class MasterKategoriProgramEntity
     {
-        [Column(name: "KP_Kode", spParamName: "KP_Kode", isDeleteParam: true, isUpdateParam: true, isAllowNull: false, isReadParam: true, isInsertParam: true, isPrimaryKey: true)]
+        [Column(name: "KP_Kode", spParamName: "KP_Kode", isDeleteParam: true, isUpdateParam: true, isAllowNull: false, isReadParam: true, isInsertParam: false, isPrimaryKey: true)]
         public string KP_Kode { get; set; }
 
         [Column(name: "KP_Nama", spParamName: "KP_Nama", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]

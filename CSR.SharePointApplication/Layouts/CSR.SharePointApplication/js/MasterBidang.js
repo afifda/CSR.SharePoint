@@ -4,8 +4,7 @@
     $('#btnAddMasterBidang').click(function () {
         clearModalMasterBidang();
         $('#hfEditMode').val('0');
-        $('#modalMasterBidang').modal('show');
-        $("#txtKodeBidang").prop("disabled", false);
+        $('#modalMasterBidang').modal('show');        
     });
 
     $('#btnSaveMasterBidang').click(function () {
@@ -16,8 +15,7 @@
     $('#tblMasterBidang').on("click", ".btnDelete", deleteBidang);
 });
 
-function clearModalMasterBidang() {
-    $("#txtKodeBidang").val("");
+function clearModalMasterBidang() {    
     $("#txtNamaBidang").val("");
 }
 
@@ -36,7 +34,6 @@ function Init() {
                 for (i = 0; i < Bidang.length; i++) {
                     var seq = i + 1;
                     var strhtml = '<tr id="BidangRow"' + seq + '>' +
-                        '<td >' + Bidang[i].BP_Kode + ' </td>' +
                         '<td >' + Bidang[i].BP_Nama + ' </td>' +                        
                         '<td align="Center"><input type="button"  class="button2 btnEdit" value="Edit"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
@@ -57,9 +54,8 @@ function editBidang() {
 
     clearModalMasterBidang();
     $("#hfEditMode").val("1");
-    $("#modalMasterBidang").modal("show");
-    $("#txtKodeBidang").val(row.children()[0].innerText).prop("disabled", true);    
-    $("#txtNamaBidang").val(row.children()[1].innerText)
+    $("#modalMasterBidang").modal("show");    
+    $("#txtNamaBidang").val(row.children()[0].innerText)
 }
 
 function deleteBidang() {
@@ -99,7 +95,7 @@ function saveArea() {
     var editMode = $("#hfEditMode").val();
     if (editMode == 0) EditMethod = false;
     var masterBidang = new Object();
-    masterBidang.BP_Kode = $("#txtKodeBidang").val();
+    //masterBidang.BP_Kode = $("#txtKodeBidang").val();
     masterBidang.BP_Nama = $("#txtNamaBidang").val();
     var parameter = new Object();
     parameter.masterBidangString = JSON.stringify(masterBidang);

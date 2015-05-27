@@ -14,7 +14,6 @@
              <table id="tblMasterKategori" class="tabelgrid">
                   <thead>                
                     <tr>   
-                       <th class="header-grid">Kode Kategori</th>
                        <th class="header-grid">Nama Kategori</th>
                        <th class="header-grid">Action</th>
                     </tr>
@@ -33,12 +32,7 @@
                         <h4 class="modal-title">Detail Kategori</h4>
                     </div>
                     <div class="modal-body">
-                        <div>
-                            <div class="div">
-                                <span class="lbl">Kode Kategori</span>
-                                <span class="titikdua">:</span>
-                                <input name="txtKodeKategori" class="input" maxlength="10" id="txtKodeKategori" type="text" />
-                            </div>
+                        <div>                            
                             <div class="div">
                                 <span class="lbl">Nama Kategori</span>
                                 <span class="titikdua">:</span>
