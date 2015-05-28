@@ -61,6 +61,7 @@
     <Compile Include="DataAccess\MasterDataDataAccess.cs" />
     <Compile Include="DataAccess\ProgramDataAccess.cs" />
     <Compile Include="Entity\AttachmentEntity.cs" />
+    <Compile Include="Entity\EmailEntyti.cs" />
     <Compile Include="Entity\FilePendukungProgramEntity.cs" />
     <Compile Include="Entity\FilePendukungRealisasiEntity.cs" />
     <Compile Include="Entity\MasterAreaEntity.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Entity\MasterSumberEntity.cs" />
     <Compile Include="Entity\MasterUserEntity.cs" />
     <Compile Include="Entity\ProgramEntity.cs" />
+    <Compile Include="Entity\RealisasiEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

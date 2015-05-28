@@ -7,6 +7,7 @@
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register Src="~/_CONTROLTEMPLATES/15/HumasCSR/Attachment.ascx" TagPrefix="uc1" TagName="Attachment" %>
 
+
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BidangProgramControl.ascx.cs" Inherits="CSR.SharePointApplication.CONTROLTEMPLATES.BidangProgramControl" %>
 
 <div class="border">

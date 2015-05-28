@@ -6,6 +6,8 @@ using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using UtilityLibrary;
@@ -290,6 +292,37 @@ namespace CSR.Service.BusinessLogic
         public MasterUserByUserNameEntity UserInformation(string loginName)
         {
             return new MasterDataLogic().SPRead<MasterUserByUserNameEntity>(new MasterUserByUserNameEntity() { UserName = loginName }).FirstOrDefault();
+        }
+
+        public void sendEMailThroughGmail(string Area_Code)
+        {
+            //get data email
+            List<EmailEntyti> EmailEntyti = null;
+            MasterDataLogic logic = new MasterDataLogic();
+            EmailEntyti = logic.SPRead<EmailEntyti>(Area_Code);
+
+            for (int i = 0; i < EmailEntyti.Count; i++)
+            {
+                try
+                {
+                    MailMessage mM = new MailMessage();
+                    mM.From = new MailAddress("@pertamina.com");//appsetting
+                    mM.To.Add(EmailEntyti[i].To);
+                    mM.Subject = EmailEntyti[i].Subject;
+                    mM.Body = "Test EMail From Area='" + Area_Code + "'";
+                    mM.IsBodyHtml = true;
+                    SmtpClient sC = new SmtpClient("smtp.gmail.com");
+                    sC.Port = 587;//487
+                    sC.Credentials = new NetworkCredential("fandi.indah@gmail.com", "GmailPassword");
+                    sC.EnableSsl = true;
+                    sC.Send(mM);
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                }
+            }
+
         }
     }
 }

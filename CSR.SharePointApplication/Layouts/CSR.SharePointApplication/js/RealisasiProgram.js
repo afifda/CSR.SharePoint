@@ -4,24 +4,19 @@
     $('#btnAddProgram').click(function () {
         submit();
     });
-
-    $('#txtJumlah').blur(function () {
-        $('#txtJumlah').formatCurrency({
-            symbol: ''
-        });
-    });
+  
     $('#txtSumberPGE').blur(function () {
-        $('#txtJumlah').formatCurrency({
+        $('#txtSumberPGE').formatCurrency({
             symbol: ''
         });
     });
     $('#txtSumberPersero').blur(function () {
-        $('#txtJumlah').formatCurrency({
+        $('#txtSumberPersero').formatCurrency({
             symbol: ''
         });
     });
     $('#txtSumberPKBL').blur(function () {
-        $('#txtJumlah').formatCurrency({
+        $('#txtSumberPKBL').formatCurrency({
             symbol: ''
         });
     });
@@ -81,19 +76,18 @@ function submit() {
 }
 
 function getRequestData() {
-    var inputProgram = new Object();
-    inputProgram.TransaksiNo = $('#hfTransaksiNo').val() == null ? "" : $('#hfTransaksiNo').val();
-    inputProgram.Judul_Program = $('#txtJudul').val();
-    inputProgram.KP_Kode = $('#ddlKategori').val();
-    inputProgram.BP_Kode = $('#ddlBidang').val();
-    inputProgram.Area_Kode = $('#ddlArea').val();
-    inputProgram.Jumlah_Anggaran = parseFloat($('#txtJumlahAnggaran').val().replace(/[^0-9\.]+/g, ""));
-    inputProgram.Outcome_Diharapkan = $('#txtOutcome').val();
-    inputProgram.Waktu_Mulai = $('#dateFrom').val();
-    inputProgram.Waktu_Sampai = $('#dateTo').val();
-    inputProgram.Keterangan = $('#txtKeterangan').val();
-    inputProgram.AttachmentList = saveAttachment();
-    return inputProgram;
+    var inputRealisasi = new Object();
+    inputRealisasi.TransaksiNo = $('#txtTransaksiNo').val();
+    inputRealisasi.WaktuMulai = $('#dateFrom').val();
+    inputRealisasi.WaktuSelesai = $('#dateTo').val();
+    inputRealisasi.Pelaksana = $('#txtPelaksana').val();
+    inputRealisasi.Penerima = $('#txtPenerima').val();
+    inputRealisasi.SumberDanaPGE = parseFloat($('#txtSumberPGE').val().replace(/[^0-9\.]+/g, ""));
+    inputRealisasi.SumberDanaPersero = parseFloat($('#txtSumberPersero').val().replace(/[^0-9\.]+/g, ""));
+    inputRealisasi.SumberPKBL = parseFloat($('#txtSumberPKBL').val().replace(/[^0-9\.]+/g, ""));
+    inputRealisasi.Keterangan = $('#txtKeterangan').val();
+    inputRealisasi.AttachmentList = saveAttachment();
+    return inputRealisasi;
 }
 
 function isNumberKey(evt) {

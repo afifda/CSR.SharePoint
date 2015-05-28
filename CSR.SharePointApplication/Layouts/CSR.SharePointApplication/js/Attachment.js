@@ -158,6 +158,8 @@ function AddtoGridAttch() {
 function SuccessAddAttachList(data, status, xhr) {
     var result = data;
     $("input[id$='fuAttachment']").val("");
+    $("input[id$='fuAttachment1']").val("");
+    $("input[id$='fuAttachment2']").val("");
     if (result.length != null) {
 
         for (i = 0; i < result.length; i++) {
@@ -303,7 +305,7 @@ function saveAttachment() {
         var Link = $("td:eq(3)", elm).html();
 
         var item = {};
-        item.RequestNo = "Tes1";
+        item.TransaksiNo = "Tes1";
         item.NoUrut = sOrderBy;
         item.NamaFile = sFileName;
         item.NamaPath = sPathFile;

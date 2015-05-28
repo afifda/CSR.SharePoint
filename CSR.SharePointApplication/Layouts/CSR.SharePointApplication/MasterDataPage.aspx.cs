@@ -259,5 +259,57 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             }
         #endregion
 
+        #region MasterEmail
+            [System.Web.Services.WebMethod]
+            public static List<EmailEntyti> LoadMasterEmail()
+            {
+                List<EmailEntyti> UserList = null;
+                try
+                {
+                    MasterDataLogic logic = new MasterDataLogic();
+                    UserList = logic.SPRead<EmailEntyti>(new EmailEntyti() { Area = "" });
+                }
+                catch
+                {
+                    return UserList;
+                }
+                return UserList;
+            }
+
+            [System.Web.Services.WebMethod]
+            public static string SaveMasterEmail(string masterEmailString, bool isEdit)
+            {
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                EmailEntyti masterUser = (EmailEntyti)serializer.Deserialize(masterEmailString, typeof(EmailEntyti));
+                try
+                {
+                    MasterDataLogic logic = new MasterDataLogic();
+                    if (isEdit) logic.SPUpdate<EmailEntyti>(masterUser);
+                    else logic.SPSave<EmailEntyti>(masterUser);
+                }
+                catch
+                {
+                    return "Telah terjadi error";
+                }
+                return "Success";
+            }
+
+            [System.Web.Services.WebMethod]
+            public static string DeleteMasterEmail(string Area)
+            {
+                try
+                {
+                    MasterDataLogic logic = new MasterDataLogic();
+                    logic.SPDelete<EmailEntyti>(Area);
+                }
+                catch
+                {
+                    return "Telah terjadi error";
+                }
+                return "Success";
+            }
+
+            #endregion
+
     }
 }

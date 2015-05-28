@@ -87,6 +87,12 @@
     <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterBidangControl.ascx.designer.cs">
       <DependentUpon>MasterBidangControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterEmail.ascx.cs">
+      <DependentUpon>MasterEmail.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterEmail.ascx.designer.cs">
+      <DependentUpon>MasterEmail.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterKategoriControl.ascx.cs">
       <DependentUpon>MasterKategoriControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -124,6 +130,13 @@
     <Compile Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx.designer.cs">
       <DependentUpon>InputProgramPage.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\InputRealisasiPage.aspx.cs">
+      <DependentUpon>InputRealisasiPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\InputRealisasiPage.aspx.designer.cs">
+      <DependentUpon>InputRealisasiPage.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\CSR.SharePointApplication\MasterDataPage.aspx.cs">
       <DependentUpon>MasterDataPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -157,6 +170,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CONTROLTEMPLATES\CSR.SharePointApplication\" />
     <Folder Include="Features\" />
   </ItemGroup>
   <ItemGroup>
@@ -170,15 +184,18 @@
     <Content Include="CONTROLTEMPLATES\HumasCSR\Attachment.ascx" />
     <Content Include="CONTROLTEMPLATES\HumasCSR\MasterAreaControl.ascx" />
     <Content Include="CONTROLTEMPLATES\HumasCSR\MasterBidangControl.ascx" />
+    <Content Include="CONTROLTEMPLATES\HumasCSR\MasterEmail.ascx" />
     <Content Include="CONTROLTEMPLATES\HumasCSR\MasterKategoriControl.ascx" />
     <Content Include="CONTROLTEMPLATES\HumasCSR\MasterUserControl.ascx" />
     <Content Include="CONTROLTEMPLATES\HumasCSR\RealisasiProgramControl.ascx" />
     <Content Include="Layouts\CSR.SharePointApplication\CSS\SML_template.css" />
     <Content Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx" />
+    <Content Include="Layouts\CSR.SharePointApplication\InputRealisasiPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\js\Attachment.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\BidangProgram.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterArea.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterBidang.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\MasterEmail.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterKategori.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\RealisasiProgram.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\UserControl.js" />

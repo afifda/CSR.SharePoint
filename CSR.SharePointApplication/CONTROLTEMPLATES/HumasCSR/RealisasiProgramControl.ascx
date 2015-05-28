@@ -11,7 +11,7 @@
 
 <div class="border">
     <div id="wrapping" class="clearfix">
-       <div class="title-h1">Input Program</div>
+       <div class="title-h1">Input Realisasi</div>
         <div id="left-side">
              <div class="div">
                 <span class="lbl">Transaksi No <span class="red">*</span></span>
@@ -39,10 +39,10 @@
                 <select id="ddlArea" class="input"></select>                
             </div>
             <div class="div">
-                <span class="lbl">Waktu </span>
+                <span class="lbl">Waktu <span class="red">*</span></span>
                 <span class="titikdua">:</span>
                 <input name="txtDueDate" class="input-withbutton2" id="dateFrom" type="text"/>
-                <span> s/d </span> 
+                <span> s/d  </span> 
                 <input name="txtDueDate" class="input-withbutton2" id="dateTo" type="text"/>    
             </div>
         </div>        
@@ -53,15 +53,15 @@
                 <input type="text" id="txtPelaksana" class="input" />
             </div> 
             <div class="div">
-                <span class="lbl">Penerima </span>
+                <span class="lbl">Penerima <span class="red">*</span></span>
                 <span class="titikdua">:</span>
                 <input type="text" id="txtPenerima" class="input" />           
             </div> 
-            <div class="div">
+            <%--<div class="div">
                 <span class="lbl">Jumlah <span class="red">*</span></span>
                 <span class="titikdua">:</span>
                 <input type="text" id="txtJumlah" class="input currencyFormat" onkeypress="return isNumberKey(event)"/>
-            </div>            
+            </div>            --%>
             <div class="div">
                 <span class="lbl">Sumber PGE </span>
                 <span class="titikdua">:</span>
@@ -101,7 +101,8 @@
 </div>
 <div class="button-template2">
     <input type="button" id="btnAddProgram" class="button" value="Simpan"/>
-    <input type="button" id="btnBatal" class="button" value="Batal"/>
+    <input type="button" id="btnAddProgramAndLock" class="button" value="Simpan dan Kunci"/>
+    <input type="button" id="btnBatal" class="button" value="Batal"/>    
 </div>
 
 <script src="/SharePointFree/SiteAssets/jsCSR/jquery.formatCurrency-1.4.0.min.js"></script>
