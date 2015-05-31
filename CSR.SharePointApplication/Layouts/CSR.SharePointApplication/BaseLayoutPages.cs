@@ -14,11 +14,11 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
 {
     public class BaseLayoutPages : LayoutsPageBase
     {   
-        protected static List<MasterUserByUserNameEntity> User
+        protected static MasterUserByUserNameEntity User
         {
             get
             {
-                return new MasterDataLogic().SPRead<MasterUserByUserNameEntity>(new MasterUserByUserNameEntity() { UserName = SPContext.Current.Web.CurrentUser.LoginName });
+                return new MasterDataLogic().SPRead<MasterUserByUserNameEntity>(new MasterUserByUserNameEntity() { UserName = SPContext.Current.Web.CurrentUser.LoginName }).FirstOrDefault();
             }
         }
 
@@ -26,7 +26,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         {
             get
             {
-                return User.Count > 0;
+                return User != null;
             }
         }
 

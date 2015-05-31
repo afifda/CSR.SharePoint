@@ -59,16 +59,16 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 if (IsEdit)
                 {
                     programEntity.Last_Modified_Date = DateTime.Now;
-                    programEntity.Last_Modified_By = User[0].UserName;
+                    programEntity.Last_Modified_By = User.UserName;
                     logic.SPUpdate<ProgramEntity>(programEntity);
                     
                 }
                 else
                 {
                     programEntity.Created_Date = DateTime.Now;
-                    programEntity.Created_By = User[0].UserName;
+                    programEntity.Created_By = User.UserName;
                     programEntity.Last_Modified_Date = DateTime.Now;
-                    programEntity.Last_Modified_By = User[0].UserName;
+                    programEntity.Last_Modified_By = User.UserName;
                     logic.SPSave<ProgramEntity>(programEntity);
                     if (programEntity.AttachmentList.Count != 0)
                     {

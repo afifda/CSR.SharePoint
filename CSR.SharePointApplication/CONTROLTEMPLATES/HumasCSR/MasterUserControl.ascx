@@ -52,8 +52,9 @@
                                 <input name="txtUserName" class="input" maxlength="50" id="txtUserName" type="text" />
                             </div>   
                             <div class="div">
-                                <span class="lbl">Kode Area</span>
+                                <span class="lbl">Area</span>
                                 <span class="titikdua">:</span>
+                                <select id="ddlArea" class="input"></select>
                                 <input name="txtKodeArea" class="input" maxlength="10" id="txtKodeArea" type="text" />
                             </div>                                                
                         </div>                
