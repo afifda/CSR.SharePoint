@@ -61,6 +61,7 @@
     <Compile Include="DataAccess\MasterDataDataAccess.cs" />
     <Compile Include="DataAccess\ProgramDataAccess.cs" />
     <Compile Include="Entity\AttachmentEntity.cs" />
+    <Compile Include="Entity\BaseReportEntity.cs" />
     <Compile Include="Entity\EmailEntyti.cs" />
     <Compile Include="Entity\FilePendukungProgramEntity.cs" />
     <Compile Include="Entity\FilePendukungRealisasiEntity.cs" />
