@@ -48,6 +48,27 @@ namespace CSR.Service.DataAccess
             return rowsAffected;
         }
 
+        public string SaveWithOutput<T>(T entity, string outputParam)
+        {
+            string output = string.Empty;
+            try
+            {
+                SqlCommand command = base.Save<T>(entity);
+                command.Parameters[outputParam].Direction = ParameterDirection.Output;
+                command.Parameters[outputParam].Size = -1;
+                OpenConnection(command, this.Connection);
+                command.ExecuteNonQuery();
+                output = Convert.ToString(command.Parameters[outputParam].Value.ToString());
+                CloseCommitConnection();
+            }
+            catch (Exception ex)
+            {
+                CloseRollbackConnection();
+                throw ex;
+            }
+            return output;
+        }
+
         public virtual int Update<T>(T entity)
         {
             int rowsAffected = 0;
@@ -158,7 +179,7 @@ namespace CSR.Service.DataAccess
             return entityList;
         }
 
-        public virtual T1 ReadWithDetails<T1, T2>(T1 entity) where T1 : new() where T2 : new()
+        public virtual T1 ReadWithDetails<T1, T2>(T1 entity, string detailName) where T1 : new() where T2 : new()
         {
             DoubleASqlMapper mapData = new DoubleASqlMapper();
             T1 outEntity;
@@ -168,7 +189,7 @@ namespace CSR.Service.DataAccess
                 SqlCommand command = base.Read<T1>(entity);
                 OpenConnection(command, this.Connection);
                 reader = command.ExecuteReader();
-                outEntity = mapData.MapDataToEntityWithDetailsWithAttributes<T1, T2>(reader);
+                outEntity = mapData.MapDataToListWithDetails<T1, T2>(reader, detailName);
             }
             catch (Exception ex)
             {
@@ -222,6 +243,16 @@ namespace CSR.Service.DataAccess
                 Connection.RollbackTransaction();
             }
             Connection.CloseConnection();
+        }
+
+        protected void AddInParameter(SqlCommand command, string name, object value)
+        {
+            SqlParameter parameter = new SqlParameter();
+            parameter.ParameterName = name;
+            parameter.Value = value;
+            parameter.Direction = ParameterDirection.Input;
+
+            command.Parameters.Add(parameter);
         }
 
         public void ReorderTable(ref DataTable table, params String[] columns)

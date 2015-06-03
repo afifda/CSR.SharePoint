@@ -60,6 +60,11 @@ namespace CSR.Service.BusinessLogic
             return SPDataAccess.Save<T>(entity);
         }
 
+        public string SPSaveWithOutput<T>(T entity, string outputParam)
+        {
+            return SPDataAccess.SaveWithOutput<T>(entity, outputParam);
+        }
+
         public virtual int SaveBulk<T>(List<T> entityList)
         {
             return DataAccess.SaveBulkEntity<T>(entityList);
@@ -97,6 +102,13 @@ namespace CSR.Service.BusinessLogic
         public virtual List<T> SPRead<T>(string key) where T : new()
         {
             return SPDataAccess.Read<T>(key);
+        }
+
+        public virtual T1 SPReadWithDetails<T1, T2>(T1 entity, string detailName)
+            where T1 : new()
+            where T2 : new()
+        {
+            return SPDataAccess.ReadWithDetails<T1, T2>(entity, detailName);
         }
 
         public virtual List<T> SPRead<T>(T item) where T : new()
@@ -274,6 +286,16 @@ namespace CSR.Service.BusinessLogic
                 dt.Columns.Add(propInfo.Name);
             }
             return dt;
+        }
+
+        public List<AttachmentEntity> GetAttachments(AttachmentEntity attachmntEntity)
+        {
+            return new AttachmentSQLDataAccess().GetAttachments(attachmntEntity);
+        }
+
+        public int SaveAttachment(List<AttachmentEntity> attachmentList)
+        {
+            return new AttachmentSQLDataAccess().SaveAttachment(attachmentList);
         }
 
         public int SaveAttachmentToSharePointLibrary(string SiteURL, string DocLib, List<AttachmentEntity> attachmentCRUDList)

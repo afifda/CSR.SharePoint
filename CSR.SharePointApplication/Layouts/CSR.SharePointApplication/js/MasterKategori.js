@@ -34,6 +34,7 @@ function Init() {
                 for (i = 0; i < Kategori.length; i++) {
                     var seq = i + 1;
                     var strhtml = '<tr id="KategoriRow_"' + seq + '>' +
+                        '<td style = "display:none">' + Kategori[i].KP_Kode + ' </td>' +
                         '<td >' + Kategori[i].KP_Nama + ' </td>' +                        
                         '<td align="Center"><input type="button"  class="button2 btnEdit" value="Edit"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
@@ -54,8 +55,9 @@ function editKategori() {
 
     clearModalMasterKategori();
     $("#hfEditMode").val("1");
-    $("#modalMasterKategori").modal("show");    
-    $("#txtNamaKategori").val(row.children()[0].innerText)
+    $("#modalMasterKategori").modal("show");
+    $("#hfKodeKategori").val(row.children()[0].innerText)
+    $("#txtNamaKategori").val(row.children()[1].innerText)
 }
 
 function deleteKategori() {
@@ -95,7 +97,7 @@ function saveKategori() {
     var editMode = $("#hfEditMode").val();
     if (editMode == 0) EditMethod = false;
     var masterKategori = new Object();
-    //masterKategori.KP_Kode = $("#txtKodeKategori").val();
+    masterKategori.KP_Kode = $("#hfKodeKategori").val();
     masterKategori.KP_Nama = $("#txtNamaKategori").val();
     var parameter = new Object();
     parameter.masterKategoriString = JSON.stringify(masterKategori);

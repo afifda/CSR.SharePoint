@@ -46,12 +46,31 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         }
 
         [System.Web.Services.WebMethod]
+        public static string LoadProgram(string transaksiNo)
+        {
+            ProgramWithRealisasinEntity program = null;
+            try
+            {
+                if (string.IsNullOrEmpty(transaksiNo)) return string.Empty;
+                program = new ProgramWithRealisasinEntity() { TransaksiNo = transaksiNo };
+                ProgramLogic logic = new ProgramLogic();
+                program = logic.SPReadWithDetails<ProgramWithRealisasinEntity, RealisasiEntity>(program, "RealisasiList");
+                program.AttachmentList = logic.GetAttachments(new AttachmentEntity() { TransaksiNo = transaksiNo });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return new JavaScriptSerializer().Serialize(program);
+        }
+
+        [System.Web.Services.WebMethod]
         public static string SaveProgram(string programString)
         {            
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             ProgramEntity programEntity = (ProgramEntity)serializer.Deserialize(programString, typeof(ProgramEntity));
             string SiteURL = SPContext.Current.Web.Url;
-            string DocLib = System.Configuration.ConfigurationManager.AppSettings[DocLibProgram];
+            string DocLib = DocLibProgram;
             int status = 0;
             try
             {
@@ -61,7 +80,12 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     programEntity.Last_Modified_Date = DateTime.Now;
                     programEntity.Last_Modified_By = User.UserName;
                     logic.SPUpdate<ProgramEntity>(programEntity);
-                    
+                    if (programEntity.AttachmentList.Count != 0)
+                    {
+                        programEntity.AttachmentList.ForEach(a => a.TransaksiNo = programEntity.TransaksiNo);
+                        status = logic.SaveAttachment(programEntity.AttachmentList);
+                        status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, programEntity.AttachmentList);
+                    }
                 }
                 else
                 {
@@ -69,11 +93,12 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     programEntity.Created_By = User.UserName;
                     programEntity.Last_Modified_Date = DateTime.Now;
                     programEntity.Last_Modified_By = User.UserName;
-                    logic.SPSave<ProgramEntity>(programEntity);
+                    programEntity.TransaksiNo = logic.SPSaveWithOutput<ProgramEntity>(programEntity, "TransaksiNo");
                     if (programEntity.AttachmentList.Count != 0)
                     {
-                        BaseLogic BaseLogic = new BaseLogic();
-                        status = BaseLogic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, programEntity.AttachmentList);
+                        programEntity.AttachmentList.ForEach(a => a.TransaksiNo = programEntity.TransaksiNo);
+                        status = logic.SaveAttachment(programEntity.AttachmentList);
+                        status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, programEntity.AttachmentList);
                     }
                 }
             }

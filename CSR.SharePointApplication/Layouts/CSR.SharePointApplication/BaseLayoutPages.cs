@@ -45,6 +45,23 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 default: return string.Empty;
             }
         }
+
+        protected string ReportInputControl(string masterType)
+        {
+            switch (masterType)
+            {
+                case Constant.MASTER_AREA_TYPE:
+                    return Constant.MASTER_AREA_CONTROL;
+                case Constant.MASTER_BIDANG_PROGRAM_TYPE:
+                    return Constant.MASTER_BIDANG_PROGRAM_CONTROL;
+                case Constant.MASTER_KATEGORI_PROGRAM_TYPE:
+                    return Constant.MASTER_KATEGORI_PROGRAM_CONTROL;
+                case Constant.MASTER_USER_TYPE:
+                    return Constant.MASTER_USER_CONTROL;
+                default: return string.Empty;
+            }
+        }
+
         protected string MasterInputTitle(string masterType)
         {
             switch (masterType)

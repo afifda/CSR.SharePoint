@@ -47,8 +47,8 @@
                         </div>                
                     </div>
                     <div class="modal-footer">
-                        <input type="button" id="btnSaveMasterArea" value="Add" class="button"/>
-                        <button type="button" data-dismiss="modal" class="button">Close</button>
+                        <input type="button" id="btnSaveMasterArea" value="Simpan" class="button"/>
+                        <button type="button" data-dismiss="modal" class="button">Tutup</button>
                     </div>
                 </div>
             </div>

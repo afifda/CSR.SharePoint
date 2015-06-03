@@ -75,6 +75,30 @@
        </div>
     </div>
 </div>
+<br />
+<div class="border ToggleDiv" style="display:none">
+    <div id="wrapping" class="clearfix">
+        <div class="title-h1">Realisasi</div>
+        <div class="div">
+             <table id="tblRealisasi" class="tabelgrid">
+                  <thead>                
+                    <tr>   
+                        <th class="header-grid">Realisasi No</th>
+                        <th class="header-grid">WaktuMulai</th>
+                        <th class="header-grid">WaktuSelesai</th>
+                        <th class="header-grid">Pelaksana</th>
+                        <th class="header-grid">Penerima</th>
+                        <th class="header-grid">Jumlah Dana</th>
+                        <th class="header-grid">Detail</th>
+                    </tr>
+                 </thead>
+           </table>
+        </div>
+        <div class="button-template2">
+            <input type="button" id="btnAddMasterBidang" value="Add"/>
+        </div>
+    </div>
+</div>
 <div class="button-template2">
     <input type="button" id="btnAddProgram" class="button" value="Simpan"/>
     <input type="button" id="btnBatal" class="button" value="Batal"/>

@@ -55,13 +55,12 @@
                                 <span class="lbl">Area</span>
                                 <span class="titikdua">:</span>
                                 <select id="ddlArea" class="input"></select>
-                                <input name="txtKodeArea" class="input" maxlength="10" id="txtKodeArea" type="text" />
                             </div>                                                
                         </div>                
                     </div>
                     <div class="modal-footer">
-                        <input type="button" id="btnSaveMasterUser" value="Add" class="button"/>
-                        <button type="button" data-dismiss="modal" class="button">Close</button>
+                        <input type="button" id="btnSaveMasterUser" value="Simpan" class="button"/>
+                        <button type="button" data-dismiss="modal" class="button">Tutup</button>
                     </div>
                 </div>
             </div>

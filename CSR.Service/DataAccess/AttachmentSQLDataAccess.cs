@@ -22,6 +22,7 @@ namespace CSR.Service.DataAccess
         {
             DoubleASqlMapper mapData = new DoubleASqlMapper();
             SqlCommand command = new SqlCommand(USP_GET_PAGING_ATTACHMENT);
+            command.CommandType = CommandType.StoredProcedure;
             List<AttachmentEntity> entityList = null;
             IDataReader reader = null;
             
@@ -51,12 +52,13 @@ namespace CSR.Service.DataAccess
         public int SaveAttachment(List<AttachmentEntity> attachmentList)
         {
             SqlCommand command = new SqlCommand(USP_SAVE_ATTACHMENT);
+            command.CommandType = CommandType.StoredProcedure;
             int rowAffected = 0;
             IDataReader reader = null;
             DataTable attachmentTable = ToDataTable<AttachmentEntity>(attachmentList);
             attachmentTable.Columns.Remove("TempPath");
             ReorderTable(ref attachmentTable, "TransaksiNo", "NamaFile", "NamaPath", "Flag", "NoUrut");
-            command.Parameters.AddWithValue(PARAM_TVP_ATTACHMENT, attachmentTable);
+            AddInParameter(command, PARAM_TVP_ATTACHMENT, attachmentTable);
 
             try
             {

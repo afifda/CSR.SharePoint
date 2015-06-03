@@ -45,8 +45,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UtilityLibrary">
-      <HintPath>..\..\UtilityLibrary.dll</HintPath>
+    <Reference Include="UtilityLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08618834eeecc1f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Afif\AP\Migration Tools\UtilityLibrary\UtilityLibrary\bin\Debug\UtilityLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

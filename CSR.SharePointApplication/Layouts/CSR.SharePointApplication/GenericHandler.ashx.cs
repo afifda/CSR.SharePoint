@@ -8,9 +8,12 @@ using System.IO;
 using System.Web.Script.Serialization;
 using CSR.Service.BusinessLogic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Web.Script.Services;
 
 namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
 {
+    [Guid("8FE07083-259F-44AC-BC83-154A76AB5F88")]
     public partial class GenericHandler : IHttpHandler
     {
         private const string TEMP_FILE = "TempFile";
@@ -30,7 +33,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         }
         public bool IsReusable
         {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
 
         public void ProcessRequest(HttpContext context)
@@ -46,8 +49,26 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     string reqNo = context.Request.Params["ReqNo"];
                     DownloadFileAttachment(context, docPath, reqNo);
                     break;
+                case "getAvailableYear":
+                    GetAvailableYear(context);
+                    break;
+                case "loadProgramList":
+                    int year = int.Parse(context.Request.Params["Year"]);
+                    LoadProgramList(context, year);
+                    break;
             }
-            throw new NotImplementedException();
+        }
+
+        private void LoadProgramList(HttpContext context, int year)
+        {
+            List<ProgramEntity> programList = new ProgramLogic().GetProgramList(year);
+            context.Response.Write(new JavaScriptSerializer().Serialize(programList));
+        }
+
+        private void GetAvailableYear(HttpContext context)
+        {
+            List<int> Available_Year = new MasterDataLogic().GetAvailableYear();
+            context.Response.Write(new JavaScriptSerializer().Serialize(Available_Year));
         }
 
         private void UploadFileAttachment(HttpContext context)

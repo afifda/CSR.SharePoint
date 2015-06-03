@@ -7,27 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication {
+namespace CSR.SharePointApplication.ProgramList {
     
     
-    public partial class InputProgramPage {
+    public partial class ProgramListUserControl {
         
         /// <summary>
-        /// hfTransaksiNo control.
+        /// LblError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfTransaksiNo;
-        
-        /// <summary>
-        /// BidangProgramControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl BidangProgramControl;
+        protected global::System.Web.UI.WebControls.Label LblError;
     }
 }

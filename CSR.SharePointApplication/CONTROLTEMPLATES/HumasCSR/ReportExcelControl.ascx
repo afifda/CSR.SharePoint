@@ -38,9 +38,7 @@
     </div>    
 </div>
 <div class="button-template2">
-    <input type="button" id="btnExecute" class="button" value="Proses"/>
-    <input type="button" id="btnView" class="button" value="Lihat"/>
-    <input type="button" id="btnBatal" class="button" value="Batal"/>    
+    <input type="button" id="btnExecute" class="button" value="Lihat Report"/>
 </div>
 
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/ReportExcel.js"></script>

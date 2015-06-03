@@ -4,9 +4,6 @@
     $('#btnExecute').click(function () {
         isValid();
     });
-    $('#btnView').click(function () {
-        view();
-    });
 
     $('#dateFrom').datepicker();
     $('#dateTo').datepicker();
