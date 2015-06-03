@@ -40,10 +40,7 @@ function Init() {
                         '<td >' + Area[i].To + ' </td>' +
                         '<td >' + Area[i].Subject + ' </td>' +
                         '<td >' + Area[i].Message + ' </td>' +
-                        //'<td><input type="button" class="btnEdit" value="Edit" /> <input type="button" class="btnDelete" value="Delete" /></td>' +
-                        '<td><Table border="0"><tr><td><input type="button"  class="td-button" value="Edit"/></td>' +
-                        '<td><input type="button"  class="td-button" value="Hapus"/></td></tr></table></td>' +
-                        //'<input type="button"  class="td-button" value="Edit"/><input type="button"  class="td-button" value="Hapus"/> </td> ' +
+                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Edit"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
                     $(strhtml).appendTo($("#tblMasterArea"));
 

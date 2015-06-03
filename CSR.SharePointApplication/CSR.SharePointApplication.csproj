@@ -54,7 +54,7 @@
     <Reference Include="Microsoft.SharePoint" />
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
     <Reference Include="UtilityLibrary">
-      <HintPath>..\..\UtilityLibrary.dll</HintPath>
+      <HintPath>..\PGE\UtilityLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterEmail.ascx.cs">
       <DependentUpon>MasterEmail.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CONTROLTEMPLATES\HumasCSR\MasterEmail.ascx.designer.cs">
       <DependentUpon>MasterEmail.ascx.cs</DependentUpon>

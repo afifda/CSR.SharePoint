@@ -54,6 +54,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             string SiteURL = SPContext.Current.Web.Url;
             string DocLib = System.Configuration.ConfigurationManager.AppSettings[DocLibProgram];
             int status = 0;
+            BaseLogic BaseLogic = new BaseLogic();
             try
             {
                 ProgramLogic logic = new ProgramLogic();
@@ -73,9 +74,11 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     logic.SPSave<RealisasiEntity>(realisasiEntity);
                     if (realisasiEntity.AttachmentList.Count != 0)
                     {
-                        BaseLogic BaseLogic = new BaseLogic();
+                        
                         status = BaseLogic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
                     }
+                    //sendEMail
+                    BaseLogic.sendEMailThroughGmail(realisasiEntity.TransaksiNo);
                 }
             }
             catch (Exception ex)

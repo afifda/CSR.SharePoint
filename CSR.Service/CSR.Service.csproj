@@ -46,7 +46,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UtilityLibrary">
-      <HintPath>..\..\UtilityLibrary.dll</HintPath>
+      <HintPath>..\PGE\UtilityLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

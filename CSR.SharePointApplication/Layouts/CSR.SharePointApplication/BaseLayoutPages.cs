@@ -42,6 +42,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     return Constant.MASTER_KATEGORI_PROGRAM_CONTROL;
                 case Constant.MASTER_USER_TYPE:
                     return Constant.MASTER_USER_CONTROL;
+                case Constant.MASTER_EMAIL_TYPE:
+                    return Constant.MASTER_EMAIL_CONTROL;
                 default: return string.Empty;
             }
         }
@@ -57,6 +59,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     return Constant.MASTER_KATEGORI_PROGRAM_TITLE;
                 case Constant.MASTER_USER_TYPE:
                     return Constant.MASTER_USER_TITLE;
+                case Constant.MASTER_EMAIL_TYPE:
+                    return Constant.MASTER_EMAIl_TITLE;
                 default: return string.Empty;
             }
         }

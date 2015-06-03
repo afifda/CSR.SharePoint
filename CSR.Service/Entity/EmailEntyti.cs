@@ -18,6 +18,7 @@ namespace CSR.Service.Entity
         public string To { get; set; }
         [Column(name: "Subject", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Subject { get; set; }
+        [Column(name: "Message", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Message { get; set; }
 
     }
