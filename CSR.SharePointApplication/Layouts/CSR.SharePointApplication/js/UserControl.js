@@ -14,7 +14,6 @@
 
     $('#tblMasterUser').on("click", ".btnEdit", editUser);
     $('#tblMasterUser').on("click", ".btnDelete", deleteUser);
-    $("#tblMasterUser").on("click", ".ClsRemove", deleteRowAttach);
 });
 
 function clearModalMasterUser() {
@@ -42,12 +41,34 @@ function Init() {
                         '<td >' + User[i].No_Pegawai + ' </td>' +
                         '<td >' + User[i].Nama_Pegawai + ' </td>' +
                         '<td >' + User[i].UserName + ' </td>' +
-                        '<td >' + User[i].AreaCode + ' </td>' +
+                        '<td >' + User[i].AreaName + ' </td>' +
+                        '<td style = "display:none">' + User[i].AreaCode + ' </td>' +
                         '<td align="Center"><input type="button"  class="button2 btnEdit" value="Edit"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
                     $(strhtml).appendTo($("#tblMasterUser"));
 
                 }
+            }
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    });
+    $("#ddlArea").empty();
+    $.ajax({
+        type: "POST",
+        url: window.location.pathname + "/LoadMasterArea",
+        data: "{}",
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        async: true,
+        success: function (response) {
+            var Area = response.d;
+            if (Area.length > 0) {
+                $.each(Area, function (key, value) {
+                    $("#ddlArea").append($("<option></option>").val
+                 (value.AreaCode).html(value.AreaName));
+                });
             }
         },
         error: function (response) {
@@ -66,7 +87,7 @@ function editUser() {
     $("#txtNoPegawai").val(row.children()[0].innerText).prop("disabled", true);
     $("#txtNamaPegawai").val(row.children()[1].innerText)
     $("#txtUserName").val(row.children()[2].innerText)
-    $("#txtKodeArea").val(row.children()[3].innerText)
+    $("#ddlArea").val(row.children()[4].innerText.trim())
 
 }
 
@@ -110,7 +131,7 @@ function saveUser() {
     masterUser.No_Pegawai = $("#txtNoPegawai").val();
     masterUser.Nama_Pegawai = $("#txtNamaPegawai").val();
     masterUser.UserName = $("#txtUserName").val();
-    masterUser.AreaCode = $("#txtKodeArea").val();
+    masterUser.AreaCode = $("#ddlArea").val();
     var parameter = new Object();
     parameter.masterUserString = JSON.stringify(masterUser);
     parameter.isEdit = EditMethod;

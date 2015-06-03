@@ -14,11 +14,11 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
 {
     public class BaseLayoutPages : LayoutsPageBase
     {   
-        protected static List<MasterUserByUserNameEntity> User
+        protected static MasterUserByUserNameEntity User
         {
             get
             {
-                return new MasterDataLogic().SPRead<MasterUserByUserNameEntity>(new MasterUserByUserNameEntity() { UserName = SPContext.Current.Web.CurrentUser.LoginName });
+                return new MasterDataLogic().SPRead<MasterUserByUserNameEntity>(new MasterUserByUserNameEntity() { UserName = SPContext.Current.Web.CurrentUser.LoginName }).FirstOrDefault();
             }
         }
 
@@ -26,7 +26,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         {
             get
             {
-                return User.Count > 0;
+                return User != null;
             }
         }
 
@@ -47,6 +47,23 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 default: return string.Empty;
             }
         }
+
+        protected string ReportInputControl(string masterType)
+        {
+            switch (masterType)
+            {
+                case Constant.MASTER_AREA_TYPE:
+                    return Constant.MASTER_AREA_CONTROL;
+                case Constant.MASTER_BIDANG_PROGRAM_TYPE:
+                    return Constant.MASTER_BIDANG_PROGRAM_CONTROL;
+                case Constant.MASTER_KATEGORI_PROGRAM_TYPE:
+                    return Constant.MASTER_KATEGORI_PROGRAM_CONTROL;
+                case Constant.MASTER_USER_TYPE:
+                    return Constant.MASTER_USER_CONTROL;
+                default: return string.Empty;
+            }
+        }
+
         protected string MasterInputTitle(string masterType)
         {
             switch (masterType)

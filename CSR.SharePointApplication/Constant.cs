@@ -20,6 +20,9 @@ namespace CSR.SharePointApplication
         public const string MASTER_AREA_TYPE = "MasterArea";
         public const string MASTER_BIDANG_PROGRAM_TYPE = "MasterBidangProgram";
         public const string MASTER_KATEGORI_PROGRAM_TYPE = "MasterKategoriProgram";
+        public const string REPORT_PIE_CHART_TYPE = "PieChart";
+        public const string REPORT_BAR_CHART_TYPE = "BarChart";
+        public const string REPORT_DETAIL_REPORT_TYPE = "DetailReport";
         public const string MASTER_USER_TYPE = "MasterUser";
         public const string MASTER_EMAIL_TYPE = "MasterEmail";
 

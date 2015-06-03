@@ -37,5 +37,10 @@ namespace CSR.Service.BusinessLogic
             };
             return inputPage;
         }
+
+        public List<int> GetAvailableYear()
+        {
+            return new MasterDataDataAccess().GetAvailableYear();
+        }
     }
 }

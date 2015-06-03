@@ -48,11 +48,53 @@ function Init() {
                 $("#ddlArea").append($("<option></option>").val
              (value.AreaCode).html(value.AreaName));
             });
+            InitializeRealisasi();
         },
         error: function (response) {
             alert(response.responseText);
         }
     });
+}
+
+function InitializeRealisasi() {
+    var dateFormat = "dd-MMM-yyyy";
+    if (($('#hfRealisasiNo').val() == undefined || $('#hfRealisasiNo').val() == null) && ($('#hfRealhfTransaksiNoisasiNo').val() == null || $('#hfTransaksiNo').val() == null)) {
+        return false;
+    
+    }
+    var parameter = new Object();
+    parameter.realisasiNo = $('#hfRealisasiNo').val();
+    parameter.transaksiNo = $('#hfTransaksiNo').val();
+    $.ajax({
+        type: "POST",
+        url: window.location.pathname + "/LoadRealisasi",
+        data: JSON.stringify(parameter),
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        async: true,
+        success: function (response) {
+            var Input = JSON.parse(response.d);
+            if (Input == null) return false;
+            $('#txtTransaksiNo').val(Input.TransaksiNo).prop('disabled', true);
+            $('#ddlKategori').val(Input.KP_Kode).prop('disabled', true);
+            $('#ddlBidang').val(Input.BP_Kode).prop('disabled', true);
+            $('#txtJudul').val(Input.Judul_Program).prop('disabled', true);
+            $('#ddlArea').val(Input.Area_Kode).prop('disabled', true);
+            $('#dateFrom').val(formatDate(dateFromJSON(Input.WaktuMulai), dateFormat));
+            $('#dateTo').val(formatDate(dateFromJSON(Input.WaktuSelesai), dateFormat));
+            $('#txtPelaksana').val(Input.Pelaksana);
+            $('#txtPenerima').val(Input.Penerima);
+            $('#txtSumberPGE').val(Input.SumberDanaPGE);
+            $('#txtSumberPersero').val(Input.SumberDanaPersero);
+            $('#txtSumberPKBL').val(Input.PeneriSumberPKBL);
+            $('#txtKeterangan').val(Input.Keterangan);
+            GetSuccessAddAttachList(Input.AttachmentList, false);
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    });
+    
 }
 
 function submit() {
@@ -62,7 +104,7 @@ function submit() {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         datatype: "json",
-        url: window.location.pathname + "/SaveProgram",
+        url: window.location.pathname + "/SaveRealisasi",
         data: JSON.stringify(parameter),
         async: true,
         success: function (response) {
@@ -77,6 +119,7 @@ function submit() {
 
 function getRequestData() {
     var inputRealisasi = new Object();
+    inputRealisasi.RealisasiNo = $('#hfRealisasiNo').val();
     inputRealisasi.TransaksiNo = $('#txtTransaksiNo').val();
     inputRealisasi.WaktuMulai = $('#dateFrom').val();
     inputRealisasi.WaktuSelesai = $('#dateTo').val();
@@ -86,6 +129,12 @@ function getRequestData() {
     inputRealisasi.SumberDanaPersero = parseFloat($('#txtSumberPersero').val().replace(/[^0-9\.]+/g, ""));
     inputRealisasi.SumberPKBL = parseFloat($('#txtSumberPKBL').val().replace(/[^0-9\.]+/g, ""));
     inputRealisasi.Keterangan = $('#txtKeterangan').val();
+    if (inputRealisasi.TransaksiNo == null || inputRealisasi.TransaksiNo == "") {
+        inputRealisasi.KP_Kode = $('#ddlKategori').val();
+        inputRealisasi.BP_Kode = $('#ddlBidang').val();
+        inputRealisasi.Judul_Program = $('#txtJudul').val();
+        inputRealisasi.Area_Kode = $('#ddlArea').val();
+    }
     inputRealisasi.AttachmentList = saveAttachment();
     return inputRealisasi;
 }

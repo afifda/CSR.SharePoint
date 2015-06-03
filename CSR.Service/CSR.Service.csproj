@@ -45,8 +45,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UtilityLibrary">
-      <HintPath>..\PGE\UtilityLibrary.dll</HintPath>
+    <Reference Include="UtilityLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08618834eeecc1f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Afif\AP\Migration Tools\UtilityLibrary\UtilityLibrary\bin\Debug\UtilityLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +62,7 @@
     <Compile Include="DataAccess\MasterDataDataAccess.cs" />
     <Compile Include="DataAccess\ProgramDataAccess.cs" />
     <Compile Include="Entity\AttachmentEntity.cs" />
+    <Compile Include="Entity\BaseReportEntity.cs" />
     <Compile Include="Entity\EmailEntyti.cs" />
     <Compile Include="Entity\FilePendukungProgramEntity.cs" />
     <Compile Include="Entity\FilePendukungRealisasiEntity.cs" />

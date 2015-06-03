@@ -19,7 +19,7 @@ function isUpload() {
 }
 
 function AddtoGridAttch() { 
-    var handlerUrl = "/_layouts/15/eWorkflow.WebAccess/listhandler.ashx?Method=uploadFileAttachment";
+    var handlerUrl = "/SharePointFree/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=uploadFileAttachment";
     if ($("input[id$='fuAttachment']").length > 0)
     {
         var DocLink = $("#fuAttachment").get(0);
@@ -289,7 +289,7 @@ function downloadDocFunc(docLink) {
     if (requestNo == null)
         requestNo = $('#hfRequestNo').val();
 
-    window.location.href = "/_layouts/15/eWorkflow.WebAccess/listhandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + requestNo;
+    window.location.href = "/SharePointFree/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + requestNo;
 
     return false;
 }
@@ -305,7 +305,6 @@ function saveAttachment() {
         var Link = $("td:eq(3)", elm).html();
 
         var item = {};
-        item.TransaksiNo = "Tes1";
         item.NoUrut = sOrderBy;
         item.NamaFile = sFileName;
         item.NamaPath = sPathFile;

@@ -19,7 +19,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden hfTransaksiNo;
+        protected global::System.Web.UI.WebControls.HiddenField hfTransaksiNo;
         
         /// <summary>
         /// BidangProgramControl control.

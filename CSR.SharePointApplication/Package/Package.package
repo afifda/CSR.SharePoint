@@ -4,6 +4,9 @@
     <projectOutputAssembly location="CSR.Service.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\CSR.Service\CSR.Service.csproj" />
     <customAssembly location="UtilityLibrary.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\PGE\UtilityLibrary.dll" />
   </assemblies>
+  <features>
+    <featureReference itemId="1e9d1537-d3fe-4233-b68e-07039c5b7a52" />
+  </features>
   <projectItems>
     <projectItemReference itemId="909dbf8b-bfef-42df-bd8f-270ffdcb84ec" />
     <projectItemReference itemId="d2cabc30-9be3-4e80-a5b1-86804c304816" />

@@ -5,10 +5,17 @@
         submit();
     });
 
+    $('#btnAddMasterBidang').click(function () {
+        var transaksiNo = $('#hfTransaksiNo').val()
+        window.location = "/_layouts/15/CSR.SharePointApplication/InputRealisasiPage.aspx?TransaksiNo=" + transaksiNo;
+        return false;
+    });
+
     $('#txtJumlahAnggaran').blur(function () {
         $('#txtJumlahAnggaran').formatCurrency({
             symbol: ''
         });
+        
     });
 
     $('#dateFrom').datepicker();
@@ -16,6 +23,7 @@
 });
 
 function Init() {
+    $('.ToggleDiv').hide();
     $.ajax({
         type: "POST",
         url: window.location.pathname + "/LoadInputPage",
@@ -38,11 +46,77 @@ function Init() {
                 $("#ddlArea").append($("<option></option>").val
              (value.AreaCode).html(value.AreaName));
             });
+            InitializeProgram();
         },
         error: function (response) {
             alert(response.responseText);
         }
     });
+}
+
+function InitializeProgram() {
+    var dateFormat = "dd-MMM-yyyy";
+    if ($('#hfTransaksiNo').val() != undefined && $('#hfTransaksiNo').val() != null && $('#hfTransaksiNo').val().length > 0) {
+        $('.ToggleDiv').show();
+        var parameter = {
+            transaksiNo: $('#hfTransaksiNo').val()
+        };
+        $.ajax({
+            type: "POST",
+            url: window.location.pathname + "/LoadProgram",
+            data: JSON.stringify(parameter),
+            contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            async: true,
+            success: function (response) {
+                var Input = JSON.parse(response.d);
+                if (Input == null) return false;
+                $('#ddlKategori').val(Input.KP_Kode);
+                $('#ddlBidang').val(Input.BP_Kode);
+                $('#txtJudul').val(Input.Judul_Program);
+                $('#ddlArea').val(Input.Area_Kode);
+                $('#txtJumlahAnggaran').val(Input.Jumlah_Anggaran);
+                $('#txtOutcome').val(Input.Outcome_Diharapkan);
+                $('#dateFrom').val(formatDate(dateFromJSON(Input.Waktu_Mulai), dateFormat));
+                $('#dateTo').val(formatDate(dateFromJSON(Input.Waktu_Sampai), dateFormat));
+                $('#txtKeterangan').val(Input.Keterangan);
+                GetSuccessDetailsList(Input.RealisasiList);
+                GetSuccessAddAttachList(Input.AttachmentList, false);
+                
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    }
+}
+
+function GetSuccessDetailsList(RealisasiList) {
+    var dateFormat = "dd-MMM-yyyy";
+    if (RealisasiList.length > 0) {
+        var total = 0;
+        for (i = 0; i < RealisasiList.length; i++) {
+            var Jumlah = RealisasiList[i].SumberDanaPGE + RealisasiList[i].SumberDanaPersero + RealisasiList[i].SumberPKBL;
+            var strhtml = '<tr>' +
+                '<td >' + RealisasiList[i].RealisasiNo + ' </td>' +
+                '<td >' + formatDate(dateFromJSON(RealisasiList[i].WaktuMulai), dateFormat) + ' </td>' +
+                '<td >' + formatDate(dateFromJSON(RealisasiList[i].WaktuSelesai), dateFormat) + ' </td>' +
+                '<td >' + RealisasiList[i].Pelaksana + ' </td>' +
+                '<td >' + RealisasiList[i].Penerima + ' </td>' +
+                '<td class="currencyFormat rightAligned">' + Jumlah + '</td>' +
+                '<td ><a href="/_layouts/15/CSR.SharePointApplication/InputRealisasiPage.aspx?RealisasiNo=' + RealisasiList[i].RealisasiNo + '">lihat</a>' + '</td>' +
+                '</tr>';
+            $(strhtml).appendTo($("#tblRealisasi"));
+        }
+        $('.currencyFormat').formatCurrency({
+            symbol: ''
+        });
+        $('.rightAligned').css('text-align', 'right');
+    }
+
+    else {
+        alert('System cannot query your keyword...');
+    }
 }
 
 function submit() {

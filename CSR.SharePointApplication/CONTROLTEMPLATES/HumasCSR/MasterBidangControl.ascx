@@ -36,13 +36,14 @@
                             <div class="div">
                                 <span class="lbl">Nama Bidang</span>
                                 <span class="titikdua">:</span>
+                                <input type="hidden" id="hfKodeBidang" />
                                 <input name="txtNamaBidang" class="input" maxlength="50" id="txtNamaBidang" type="text" />
                             </div>                                                   
                         </div>                
                     </div>
                     <div class="modal-footer">
-                        <input type="button" id="btnSaveMasterBidang" value="Add" class="button"/>
-                        <button type="button" data-dismiss="modal" class="button">Close</button>
+                        <input type="button" id="btnSaveMasterBidang" value="Simpan" class="button"/>
+                        <button type="button" data-dismiss="modal" class="button">Tutup</button>
                     </div>
                 </div>
             </div>

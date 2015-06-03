@@ -14,7 +14,7 @@
 </asp:Content>
 
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <input type="hidden" id="hfTransaksiNo" runat="server"/>
+    <asp:HiddenField ID="hfTransaksiNo" runat="server" ClientIDMode="Static"/>
     <uc1:BidangProgramControl runat="server" id="BidangProgramControl" />    
 
 </asp:Content>

@@ -36,13 +36,14 @@
                             <div class="div">
                                 <span class="lbl">Nama Kategori</span>
                                 <span class="titikdua">:</span>
+                                <input type="hidden" id="hfKodeKategori" />
                                 <input name="txtNamaKategori" class="input" maxlength="50" id="txtNamaKategori" type="text" />
                             </div>                                                   
                         </div>                
                     </div>
                     <div class="modal-footer">
-                        <input type="button" id="btnSaveMasterKategori" value="Add" class="button"/>
-                        <button type="button" data-dismiss="modal" class="button">Close</button>
+                        <input type="button" id="btnSaveMasterKategori" value="Simpan" class="button"/>
+                        <button type="button" data-dismiss="modal" class="button">Tutup</button>
                     </div>
                 </div>
             </div>

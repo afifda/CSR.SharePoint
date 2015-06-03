@@ -52,15 +52,15 @@
                                 <input name="txtUserName" class="input" maxlength="50" id="txtUserName" type="text" />
                             </div>   
                             <div class="div">
-                                <span class="lbl">Kode Area</span>
+                                <span class="lbl">Area</span>
                                 <span class="titikdua">:</span>
-                                <input name="txtKodeArea" class="input" maxlength="10" id="txtKodeArea" type="text" />
+                                <select id="ddlArea" class="input"></select>
                             </div>                                                
                         </div>                
                     </div>
                     <div class="modal-footer">
-                        <input type="button" id="btnSaveMasterUser" value="Add" class="button"/>
-                        <button type="button" data-dismiss="modal" class="button">Close</button>
+                        <input type="button" id="btnSaveMasterUser" value="Simpan" class="button"/>
+                        <button type="button" data-dismiss="modal" class="button">Tutup</button>
                     </div>
                 </div>
             </div>

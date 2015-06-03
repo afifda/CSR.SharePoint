@@ -14,6 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SandboxedSolution>False</SandboxedSolution>
+    <TokenReplacementFileExtensions>ashx</TokenReplacementFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,8 +54,9 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
-    <Reference Include="UtilityLibrary">
-      <HintPath>..\PGE\UtilityLibrary.dll</HintPath>
+    <Reference Include="UtilityLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08618834eeecc1f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Afif\AP\Migration Tools\UtilityLibrary\UtilityLibrary\bin\Debug\UtilityLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -115,14 +117,25 @@
     <Compile Include="CONTROLTEMPLATES\HumasCSR\RealisasiProgramControl.ascx.designer.cs">
       <DependentUpon>RealisasiProgramControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\ReportExcelControl.ascx.cs">
+      <DependentUpon>ReportExcelControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\ReportExcelControl.ascx.designer.cs">
+      <DependentUpon>ReportExcelControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\ReportPieChartControl.ascx.cs">
+      <DependentUpon>ReportPieChartControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\HumasCSR\ReportPieChartControl.ascx.designer.cs">
+      <DependentUpon>ReportPieChartControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\CSR.SharePointApplication\BaseLayoutPages.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Layouts\CSR.SharePointApplication\GenericHandler.ashx.cs">
       <DependentUpon>GenericHandler.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Layouts\CSR.SharePointApplication\GenericHandler.ashx.designer.cs">
-      <DependentUpon>GenericHandler.ashx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx.cs">
       <DependentUpon>InputProgramPage.aspx</DependentUpon>
@@ -152,11 +165,43 @@
     <Compile Include="Layouts\CSR.SharePointApplication\ErrorPage.aspx.designer.cs">
       <DependentUpon>ErrorPage.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\ReportExcelPage.aspx.cs">
+      <DependentUpon>ReportExcelPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\ReportExcelPage.aspx.designer.cs">
+      <DependentUpon>ReportExcelPage.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\ReportParameterPage.aspx.cs">
+      <DependentUpon>ReportParameterPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\ReportParameterPage.aspx.designer.cs">
+      <DependentUpon>ReportParameterPage.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\ReportPieChartPage.aspx.cs">
+      <DependentUpon>ReportPieChartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\CSR.SharePointApplication\ReportPieChartPage.aspx.designer.cs">
+      <DependentUpon>ReportPieChartPage.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProgramList\ProgramList.cs" />
+    <Compile Include="ProgramList\ProgramListUserControl.ascx.cs">
+      <DependentUpon>ProgramListUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProgramList\ProgramListUserControl.ascx.designer.cs">
+      <DependentUpon>ProgramListUserControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CONTROLTEMPLATES\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d2cabc30-9be3-4e80-a5b1-86804c304816}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\Feature1\Feature1.feature">
+      <FeatureId>{1e9d1537-d3fe-4233-b68e-07039c5b7a52}</FeatureId>
     </None>
     <None Include="key.snk" />
     <None Include="Layouts\CSR.SharePointApplication\GenericHandler.ashx" />
@@ -169,10 +214,13 @@
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
+    <None Include="ProgramList\ProgramList.webpart" />
+    <None Include="ProgramList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{0d057b65-ddb9-40d6-a6cf-6d56fb0b8f23}</SharePointProjectItemId>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CONTROLTEMPLATES\CSR.SharePointApplication\" />
-    <Folder Include="Features\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSR.Service\CSR.Service.csproj">
@@ -189,19 +237,33 @@
     <Content Include="CONTROLTEMPLATES\HumasCSR\MasterKategoriControl.ascx" />
     <Content Include="CONTROLTEMPLATES\HumasCSR\MasterUserControl.ascx" />
     <Content Include="CONTROLTEMPLATES\HumasCSR\RealisasiProgramControl.ascx" />
+    <Content Include="CONTROLTEMPLATES\HumasCSR\ReportExcelControl.ascx" />
+    <Content Include="CONTROLTEMPLATES\HumasCSR\ReportPieChartControl.ascx" />
+    <Content Include="Features\Feature1\Feature1.Template.xml">
+      <DependentUpon>Feature1.feature</DependentUpon>
+    </Content>
     <Content Include="Layouts\CSR.SharePointApplication\CSS\SML_template.css" />
     <Content Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\InputRealisasiPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\js\Attachment.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\BidangProgram.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\jquery.dataTables.min.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterArea.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterBidang.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterEmail.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterKategori.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\ProgramList.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\RealisasiProgram.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\ReportExcel.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\ReportPieChart.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\UserControl.js" />
     <Content Include="Layouts\CSR.SharePointApplication\MasterDataPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\ErrorPage.aspx" />
+    <Content Include="Layouts\CSR.SharePointApplication\ReportExcelPage.aspx" />
+    <Content Include="Layouts\CSR.SharePointApplication\ReportParameterPage.aspx" />
+    <Content Include="Layouts\CSR.SharePointApplication\ReportPieChartPage.aspx" />
+    <Content Include="ProgramList\Elements.xml" />
+    <Content Include="ProgramList\ProgramListUserControl.ascx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
