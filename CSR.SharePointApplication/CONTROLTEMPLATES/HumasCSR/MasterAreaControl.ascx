@@ -35,12 +35,12 @@
                     <div class="modal-body">
                         <div>
                             <div class="div">
-                                <span class="lbl">Kode Area</span>
+                                <span class="lbl">Kode Area <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtKodeArea"  class="input" maxlength="10" id="txtKodeArea" type="text" />
                             </div>
                             <div class="div">
-                                <span class="lbl">Nama Area</span>
+                                <span class="lbl">Nama Area <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtNamaArea" class="input" maxlength="50" id="txtNamaArea" type="text" />
                             </div>                                                   

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CSR.SharePointApplication.CONTROLTEMPLATES {
+namespace CSR.SharePointApplication.CONTROLTEMPLATES.HumasCSR {
     
     
     public partial class MasterEmail {

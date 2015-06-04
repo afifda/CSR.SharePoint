@@ -8,6 +8,29 @@
     });
 
     $('#btnSaveMasterArea').click(function () {
+        var Area = $("#txtArea").val();
+        var To = $("#txtTo").val();
+        var Subject = $("#txtSubject").val();
+        var Message = $("#txtMessage").val();
+
+        var validationMessage = "";
+
+        if (Area.length < 1) {
+            validationMessage += "Area harus di pilih. \n";
+        }
+        if (To.length < 1) {
+            validationMessage += "Kepada harus di isi. \n";
+        }
+        if (Subject.length < 1) {
+            validationMessage += "Subject harus di isi. \n";
+        }
+        if (Message.length < 1) {
+            validationMessage += "Pesan harus di pilih. \n";
+        }
+        if (validationMessage.length > 0) {
+            alert(validationMessage);
+            return false;
+        }
         saveEmail();
     });
 
@@ -40,14 +63,32 @@ function Init() {
                         '<td >' + Area[i].To + ' </td>' +
                         '<td >' + Area[i].Subject + ' </td>' +
                         '<td >' + Area[i].Message + ' </td>' +
-                        //'<td><input type="button" class="btnEdit" value="Edit" /> <input type="button" class="btnDelete" value="Delete" /></td>' +
-                        '<td><Table border="0"><tr><td><input type="button"  class="td-button" value="Edit"/></td>' +
-                        '<td><input type="button"  class="td-button" value="Hapus"/></td></tr></table></td>' +
-                        //'<input type="button"  class="td-button" value="Edit"/><input type="button"  class="td-button" value="Hapus"/> </td> ' +
+                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Edit"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
                     $(strhtml).appendTo($("#tblMasterArea"));
 
                 }
+            }
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    });
+    $("#txtArea").empty();
+    $.ajax({
+        type: "POST",
+        url: window.location.pathname + "/LoadMasterArea",
+        data: "{}",
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        async: true,
+        success: function (response) {
+            var Area = response.d;
+            if (Area.length > 0) {
+                $.each(Area, function (key, value) {
+                    $("#txtArea").append($("<option></option>").val
+                 (value.AreaCode).html(value.AreaName));
+                });
             }
         },
         error: function (response) {

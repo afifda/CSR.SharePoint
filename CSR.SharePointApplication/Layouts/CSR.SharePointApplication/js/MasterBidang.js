@@ -8,6 +8,15 @@
     });
 
     $('#btnSaveMasterBidang').click(function () {
+        var BP_Nama = $("#txtNamaBidang").val();
+        var validationMessage = "";
+        if (BP_Nama.length < 1) {
+            validationMessage += "Nama Bidang harus di isi. \n";
+        }       
+        if (validationMessage.length > 0) {
+            alert(validationMessage);
+            return false;
+        }
         saveArea();
     });
 

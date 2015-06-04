@@ -2,6 +2,54 @@
     Init();
 
     $('#btnAddProgram').click(function () {
+
+        var KP_Kode = $('#ddlKategori').val();
+        var BP_Kode = $('#ddlBidang').val();
+        var Judul_Program = $('#txtJudul').val();
+        var Area_Kode = $('#ddlArea').val();
+        var WaktuMulai = $('#dateFrom').val();
+        var WaktuSelesai = $('#dateTo').val();
+        var Pelaksana = $('#txtPelaksana').val();
+        var Penerima = $('#txtPenerima').val();
+        var SumberDanaPGE = $('#txtSumberPGE').val();
+        var SumberDanaPersero = $('#txtSumberPersero').val();
+        var SumberPKBL = $('#txtSumberPKBL').val();        
+
+        var validationMessage = "";
+
+        if (KP_Kode.length < 1) {
+            validationMessage += "Kategori Program harus di pilih. \n";
+        }
+        if (BP_Kode.length < 1) {
+            validationMessage += "Bidang Program harus di pilih. \n";
+        }
+        if (Judul_Program.length < 1) {
+            validationMessage += "Judul Program harus di isi. \n";
+        }
+        if (Area_Kode.length < 1) {
+            validationMessage += "Area harus di pilih. \n";
+        }
+        if (WaktuMulai.length < 1) {
+            validationMessage += "Waktu Mulai harus di isi. \n";
+        }
+        if (WaktuSelesai.length < 1) {
+            validationMessage += "Waktu Selesai harus di isi. \n";
+        }
+        if (Pelaksana.length < 1) {
+            validationMessage += "Pelaksana harus di isi. \n";
+        }
+        if (Penerima.length < 1) {
+            validationMessage += "Penerima harus di isi. \n";
+        }
+        if (SumberDanaPGE.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1) {
+            validationMessage += "Tidak ada sumber dana, Silahkan di isi minimal satu sumber dana. \n";
+        }
+        
+        if (validationMessage.length > 0) {
+            alert(validationMessage);
+            return false;
+        }
+          
         submit();
     });
   
@@ -58,9 +106,9 @@ function Init() {
 
 function InitializeRealisasi() {
     var dateFormat = "dd-MMM-yyyy";
-    if (($('#hfRealisasiNo').val() == undefined || $('#hfRealisasiNo').val() == null) && ($('#hfRealhfTransaksiNoisasiNo').val() == null || $('#hfTransaksiNo').val() == null)) {
-        return false;
-    
+    if (($('#hfRealisasiNo').val() == undefined || $('#hfRealisasiNo').val() == null) && ($('#hfTransaksiNo').val() == undefined || $('#hfTransaksiNo').val() == null)) {
+        $('#txtTransaksiNo').prop('disabled', true);
+        return false;        
     }
     var parameter = new Object();
     parameter.realisasiNo = $('#hfRealisasiNo').val();
@@ -86,7 +134,7 @@ function InitializeRealisasi() {
             $('#txtPenerima').val(Input.Penerima);
             $('#txtSumberPGE').val(Input.SumberDanaPGE);
             $('#txtSumberPersero').val(Input.SumberDanaPersero);
-            $('#txtSumberPKBL').val(Input.PeneriSumberPKBL);
+            $('#txtSumberPKBL').val(Input.SumberPKBL);
             $('#txtKeterangan').val(Input.Keterangan);
             GetSuccessAddAttachList(Input.AttachmentList, false);
         },
@@ -110,6 +158,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
+            window.location = "/Sharepointfree/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);

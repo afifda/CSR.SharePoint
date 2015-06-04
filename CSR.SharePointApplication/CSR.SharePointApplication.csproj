@@ -42,6 +42,7 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -186,6 +187,13 @@
     <Compile Include="Layouts\CSR.SharePointApplication\ReportPieChartPage.aspx.designer.cs">
       <DependentUpon>ReportPieChartPage.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProgramList\ProgramList.cs" />
     <Compile Include="ProgramList\ProgramListUserControl.ascx.cs">
       <DependentUpon>ProgramListUserControl.ascx</DependentUpon>
@@ -220,7 +228,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CONTROLTEMPLATES\CSR.SharePointApplication\" />
+    <Folder Include="Layouts\CSR.SharePointApplication\CSS\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSR.Service\CSR.Service.csproj">
@@ -242,7 +250,6 @@
     <Content Include="Features\Feature1\Feature1.Template.xml">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
-    <Content Include="Layouts\CSR.SharePointApplication\CSS\SML_template.css" />
     <Content Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\InputRealisasiPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\js\Attachment.js" />
@@ -262,6 +269,7 @@
     <Content Include="Layouts\CSR.SharePointApplication\ReportExcelPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\ReportParameterPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\ReportPieChartPage.aspx" />
+    <Content Include="Layouts\Report.aspx" />
     <Content Include="ProgramList\Elements.xml" />
     <Content Include="ProgramList\ProgramListUserControl.ascx" />
   </ItemGroup>

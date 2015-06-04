@@ -8,6 +8,15 @@
     });
 
     $('#btnSaveMasterKategori').click(function () {
+        var KP_Nama = $("#txtNamaKategori").val();
+        var validationMessage = "";
+        if (KP_Nama.length < 1) {
+            validationMessage += "Nama Kategori harus di isi. \n";
+        }
+        if (validationMessage.length > 0) {
+            alert(validationMessage);
+            return false;
+        }
         saveKategori();
     });
 

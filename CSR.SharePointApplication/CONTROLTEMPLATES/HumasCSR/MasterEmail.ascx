@@ -5,8 +5,7 @@
 <%@ Register Tagprefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MasterEmail.ascx.cs" Inherits="CSR.SharePointApplication.CONTROLTEMPLATES.MasterEmail" %>
-<link href="../../_layouts/15/CSR.SharePointApplication/CSS/SML_template.css" rel="stylesheet" />
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MasterEmail.ascx.cs" Inherits="CSR.SharePointApplication.CONTROLTEMPLATES.HumasCSR.MasterEmail" %>
 
 <div class="border">
     <div id="wrapping" class="clearfix">
@@ -18,7 +17,8 @@
                        <th class="header-grid">Area Code</th>
                        <th class="header-grid">To</th>
                        <th class="header-grid">Subject</th>
-                        <th class="header-grid">Message</th>
+                       <th class="header-grid">Message</th>
+                       <th class="header-grid">Action</th>
                     </tr>
                  </thead>
            </table>
@@ -32,27 +32,27 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Detail User</h4>
+                        <h4 class="modal-title">Detail Email</h4>
                     </div>
-                    <div class="modal-body">Email
+                    <div class="modal-body">
                         <div>
                             <div class="div">
-                                <span class="lbl">Area</span>
-                                <span class="titikdua">:</span>
-                                <input name="txtArea" class="input" id="txtArea" type="text" />
+                                <span class="lbl">Area <span class="red">*</span></span>
+                                <span class="titikdua">:</span>                                
+                                <select id="txtArea" class="input"></select>
                             </div>
                             <div class="div">
-                                <span class="lbl">To</span>
+                                <span class="lbl">Kepada <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtTo" class="input" id="txtTo" type="text" />
                             </div>
                             <div class="div">
-                                <span class="lbl">Subject</span>
+                                <span class="lbl">Subject <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtSubject" class="input" id="txtSubject" type="text" />
                             </div>   
                             <div class="div">
-                                <span class="lbl">Message</span>
+                                <span class="lbl">Pesan <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtMessage" class="input" id="txtMessage" type="text" />
                             </div>                                                
@@ -67,4 +67,4 @@
         </div>    
     </div>
 </div>
-<script src="../../_layouts/15/CSR.SharePointApplication/js/MasterEmail.js"></script>
+<script src="../../../_layouts/15/CSR.SharePointApplication/js/MasterEmail.js"type="text/javascript"></script>

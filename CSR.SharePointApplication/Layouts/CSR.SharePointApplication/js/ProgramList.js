@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    LoadAvailableYear();
+    LoadAvailableYear();    
 });
 
 function LoadAvailableYear() {
@@ -8,14 +8,21 @@ function LoadAvailableYear() {
         type: "POST",
         url: handlerUrl,
         data: {},
-        contentType: "application/json",
+        contentType: "application/json; charset=utf-8",
         datatype: "json",
-        async: true,
-        success: SuccessAddYear,
-        error: function (response) {
+        async: "false",
+        success: function (response) {
+            var result = JSON.parse(response);
+            $.each(result, function (key, value) {
+                $("#ddlYear").append($("<option></option>").val(result).html(result));
+            });
+            LoadProgramList();
+            },
+        error: function (response) {            
             alert(response.responseText);
         }
     });
+    return true;
 }
 
 function SuccessAddYear(data, status, xhr) {
@@ -38,33 +45,36 @@ function LoadProgramList() {
         contentType: "application/json; charset=utf-8",
         datatype: "json",
         async: true,
-        success: GetSuccessProgramList,
+        success: function (response) {
+            var result = JSON.parse(response);
+            GetSuccessProgramList(result);           
+        },
         error: function (response) {
             alert(response.responseText);
         }
     });
 }
 
-function GetSuccessProgramList(data, status, xhr) {
+function GetSuccessProgramList(data) {
     var dateFormat = "dd-MMM-yyyy";
     if (data.length > 0) {
         var total = 0;
         for (i = 0; i < data.length; i++) {
             var strhtml = '<tr>' +
-                '<td >' + data[i].TransaksiNo + ' </td>' +
-                '<td >' + data[i].BP_Name + ' </td>' +
+                '<td ><a href="/SharePointFree/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
+                '<td >' + data[i].BP_Nama + ' </td>' +
                 '<td >' + data[i].Judul_Program + ' </td>' +
-                '<td >' + data[i].KP_Name + ' </td>' +
-                '<td >' + data[i].AreaName + ' </td>' +
+                '<td >' + data[i].KP_Nama + ' </td>' +
+                '<td >' + data[i].Area_Nama + ' </td>' +
                 '<td >' + data[i].Keterangan + ' </td>' +
-                '<td >' + data[i].Jumlah_Anggaran + ' </td>' +
+                '<td class="currencyFormat rightAligned">' + data[i].Jumlah_Anggaran + ' </td>' +
                 '</tr>';
             $(strhtml).appendTo($("#tblProgramList"));
         }
-        $('.currencyFormat').formatCurrency({
-            symbol: ''
-        });
-        $('.rightAligned').css('text-align', 'right');
+        //$('.currencyFormat').formatCurrency({
+        //    symbol: ''
+        //});
+        //$('.rightAligned').css('text-align', 'right');
     }
 
     else {
@@ -87,7 +97,7 @@ function CreateDataTable() {
             api.column(0, { page: 'current' }).data().each(function (group, i) {
                 if (last !== group) {
                     $(rows).eq(i).before(
-                        '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+                        '<tr class="group"><td colspan="6">' + group + '</td></tr>'
                     );
 
                     last = group;

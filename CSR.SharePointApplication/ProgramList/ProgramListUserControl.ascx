@@ -6,6 +6,7 @@
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProgramListUserControl.ascx.cs" Inherits="CSR.SharePointApplication.ProgramList.ProgramListUserControl" %>
+
 <div id="wrapping" class="clearfix">
     <div id="one-side">
         <div class="title-h1">Program List</div>
@@ -18,7 +19,7 @@
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>        
     </div>
     <br /><br />
-    <table id="tblProgramList" class="display au-policy-list" cellspacing="0" width="100%">
+    <table id="tblProgramList" class="display" cellspacing="1" width="100%">
         <thead>
             <tr>                
                 <th title="Program No"></th>
@@ -38,9 +39,11 @@
                 <th> Keterangan</th>
                 <th> Jumlah Anggaran</th>
             </tr>
-        </thead>
-
+         </thead>
     </table>
+</div>
+ <div class="modal-footer">
+    <input type="button" id="btnConfirm" value="Kirim dan Kunci" class="button"/>
 </div>
 <script src="../_layouts/15/CSR.SharePointApplication/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="../_layouts/15/CSR.SharePointApplication/js/ProgramList.js" type="text/javascript"></script>

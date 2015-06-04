@@ -3,7 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 
-namespace CSR.SharePointApplication.CONTROLTEMPLATES
+namespace CSR.SharePointApplication.CONTROLTEMPLATES.HumasCSR
 {
     public partial class MasterEmail : UserControl
     {

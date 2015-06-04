@@ -36,7 +36,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             try
             {
                 MasterDataLogic logic = new MasterDataLogic();
-                InputPage = logic.GetInputProgramPage();
+                InputPage = logic.GetInputProgramPage(User);
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             {
                 return string.Format("Telah terjadi error. ({0})", ex.Message);
             }
-            return "Success. Program Dan Lampiran File telah disimpan.";
+            return "Success. Program Dan Lampiran File telah disimpan.";            
         }
     }
 }

@@ -328,14 +328,14 @@ namespace CSR.Service.BusinessLogic
                 try
                 {
                     MailMessage mM = new MailMessage();
-                    mM.From = new MailAddress("@pertamina.com");//appsetting
+                    mM.From = new MailAddress("fandi.indah@gmail.com");//appsetting
                     mM.To.Add(EmailEntyti[i].To);
                     mM.Subject = EmailEntyti[i].Subject;
                     mM.Body = "Test EMail From Area='" + Area_Code + "'";
                     mM.IsBodyHtml = true;
                     SmtpClient sC = new SmtpClient("smtp.gmail.com");
                     sC.Port = 587;//487
-                    sC.Credentials = new NetworkCredential("fandi.indah@gmail.com", "GmailPassword");
+                    sC.Credentials = new NetworkCredential("fandi.indah@gmail.com", "nurhayati");
                     sC.EnableSsl = true;
                     sC.Send(mM);
                 }

@@ -13,7 +13,7 @@
 
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
     <div id="ControlContainer" runat="server" ClientIDMode="Static">
-        <input type="hidden" id="hfEditMode" />
+        <input type="hidden" id="hfReport" />
     </div>
 </asp:Content>
 

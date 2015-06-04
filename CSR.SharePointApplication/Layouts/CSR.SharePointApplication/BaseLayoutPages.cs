@@ -42,22 +42,22 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     return Constant.MASTER_KATEGORI_PROGRAM_CONTROL;
                 case Constant.MASTER_USER_TYPE:
                     return Constant.MASTER_USER_CONTROL;
+                case Constant.MASTER_EMAIL_TYPE:
+                    return Constant.MASTER_EMAIL_CONTROL;
                 default: return string.Empty;
             }
         }
 
-        protected string ReportInputControl(string masterType)
+        protected string ReportInputControl(string reportType)
         {
-            switch (masterType)
+            switch (reportType)
             {
-                case Constant.MASTER_AREA_TYPE:
-                    return Constant.MASTER_AREA_CONTROL;
-                case Constant.MASTER_BIDANG_PROGRAM_TYPE:
-                    return Constant.MASTER_BIDANG_PROGRAM_CONTROL;
-                case Constant.MASTER_KATEGORI_PROGRAM_TYPE:
-                    return Constant.MASTER_KATEGORI_PROGRAM_CONTROL;
-                case Constant.MASTER_USER_TYPE:
-                    return Constant.MASTER_USER_CONTROL;
+                case Constant.REPORT_BAR_CHART_TYPE:
+                    return Constant.REPORT_BAR_PARAM_CONTROL;
+                case Constant.REPORT_PIE_CHART_TYPE:
+                    return Constant.REPORT_PIE_PARAM_CONTROL;
+                case Constant.REPORT_DETAIL_REPORT_TYPE:
+                    return Constant.REPORT_EXCEL_PARAM_CONTROL;
                 default: return string.Empty;
             }
         }
@@ -74,6 +74,12 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     return Constant.MASTER_KATEGORI_PROGRAM_TITLE;
                 case Constant.MASTER_USER_TYPE:
                     return Constant.MASTER_USER_TITLE;
+                case Constant.REPORT_BAR_CHART_TYPE:
+                    return Constant.REPORT_BAR_TITLE;
+                case Constant.REPORT_PIE_CHART_TYPE:
+                    return Constant.REPORT_PIE_TITLE;
+                case Constant.REPORT_DETAIL_REPORT_TYPE:
+                    return Constant.REPORT_EXCEL_TITLE;
                 default: return string.Empty;
             }
         }

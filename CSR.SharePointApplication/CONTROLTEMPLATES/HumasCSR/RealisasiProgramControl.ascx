@@ -42,7 +42,7 @@
                 <span class="lbl">Waktu <span class="red">*</span></span>
                 <span class="titikdua">:</span>
                 <input name="txtDueDate" class="input-withbutton2" id="dateFrom" type="text"/>
-                <span> s/d  </span> 
+                <span> s/d </span> 
                 <input name="txtDueDate" class="input-withbutton2" id="dateTo" type="text"/>    
             </div>
         </div>        

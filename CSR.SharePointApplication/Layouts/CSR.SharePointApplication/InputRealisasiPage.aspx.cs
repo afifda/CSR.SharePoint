@@ -22,6 +22,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 string web = SPContext.Current.Web.Url;
                 Response.Redirect(web + "/_layouts/15/eWorkflow.WebAccess/ErrorPage.aspx?ErrCode=NotAuthorized", true);
             }
+            IsEdit = false;
+            IsPlanned = true;
             string strTransNo = Request.QueryString["TransaksiNo"];
             string strRealNo = Request.QueryString["RealisasiNo"];
 
@@ -67,6 +69,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     realisasiByTrans.BP_Kode = program.BP_Kode;
                     realisasiByTrans.Judul_Program = program.Judul_Program;
                     realisasiByTrans.Area_Kode = program.Area_Kode;
+                    realisasiByTrans.WaktuMulai = null;
+                    realisasiByTrans.WaktuSelesai = null;
 
                     result = new JavaScriptSerializer().Serialize(realisasiByTrans);
                 }                
@@ -85,7 +89,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             try
             {
                 MasterDataLogic logic = new MasterDataLogic();
-                InputPage = logic.GetInputProgramPage();
+                InputPage = logic.GetInputProgramPage(User);
             }
             catch (Exception ex)
             {
@@ -160,6 +164,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         Judul_Program = realisasiEntity.Judul_Program,
                         Waktu_Mulai = realisasiEntity.WaktuMulai,
                         Waktu_Sampai = realisasiEntity.WaktuSelesai,
+                        Outcome_Diharapkan = string.Empty,
+                        Keterangan = realisasiEntity.Keterangan,
                         Jumlah_Anggaran = realisasiEntity.SumberDanaPersero + realisasiEntity.SumberDanaPGE + realisasiEntity.SumberPKBL,
                         Created_Date = DateTime.Now,
                         Created_By = User.UserName,
@@ -185,7 +191,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             {
                 return string.Format("Telah terjadi error. ({0})", ex.Message);
             }
-            return "Success. Realisasi Dan Lampiran File telah disimpan.";
+            return "Success. Realisasi Dan Lampiran File telah disimpan.";           
         }
     }
 }

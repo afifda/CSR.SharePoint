@@ -49,11 +49,12 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     string reqNo = context.Request.Params["ReqNo"];
                     DownloadFileAttachment(context, docPath, reqNo);
                     break;
-                case "getAvailableYear":
+                case "getavailableyear":
                     GetAvailableYear(context);
                     break;
-                case "loadProgramList":
-                    int year = int.Parse(context.Request.Params["Year"]);
+                case "loadprogramlist":
+                    int year;
+                    if (!int.TryParse(context.Request.Params["Year"], out year)) break;
                     LoadProgramList(context, year);
                     break;
             }
@@ -62,6 +63,12 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         private void LoadProgramList(HttpContext context, int year)
         {
             List<ProgramEntity> programList = new ProgramLogic().GetProgramList(year);
+            if (UserInformation.AreaName != "Jakarta")
+            {
+                programList = (from p in programList
+                              where p.Area_Kode == UserInformation.AreaCode
+                              select p).ToList();
+            }
             context.Response.Write(new JavaScriptSerializer().Serialize(programList));
         }
 
