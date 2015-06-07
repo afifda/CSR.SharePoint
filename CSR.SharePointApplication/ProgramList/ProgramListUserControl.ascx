@@ -45,5 +45,7 @@
  <div class="modal-footer">
     <input type="button" id="btnConfirm" value="Kirim dan Kunci" class="button"/>
 </div>
+
+<link href="../../_layouts/15/CSR.SharePointApplication/CSS/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="../_layouts/15/CSR.SharePointApplication/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="../_layouts/15/CSR.SharePointApplication/js/ProgramList.js" type="text/javascript"></script>

@@ -8,7 +8,7 @@
         var Kategori = $('#ddlKategori').val();
         var Bidang = $('#ddlBidang').val();
         var Area = $('#ddlArea').val();
-        window.open("/SharePointFree/_layouts/15/CSR.SharePointApplication/Report.aspx?ReportType=DetailReport&WaktuFrom=" + WaktuFrom + "&WaktuTo=" + WaktuTo + "&Area=" + Area + "&Kategori=" + Kategori + "&Bidang=" + Bidang,
+        window.open("/_layouts/15/CSR.SharePointApplication/Report.aspx?ReportType=DetailReport&WaktuFrom=" + WaktuFrom + "&WaktuTo=" + WaktuTo + "&Area=" + Area + "&Kategori=" + Kategori + "&Bidang=" + Bidang,
                         "_blank", "width=800,height=600,resizable=yes,scrollbars=yes,directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0");
         return false;
     });

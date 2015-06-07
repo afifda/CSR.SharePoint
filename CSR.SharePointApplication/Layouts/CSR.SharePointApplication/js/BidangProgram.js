@@ -169,7 +169,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/Sharepointfree/SitePages/Home.aspx";
+            window.location = "/SharePointFree/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
@@ -189,7 +189,7 @@ function getRequestData() {
     inputProgram.Waktu_Mulai = $('#dateFrom').val();
     inputProgram.Waktu_Sampai = $('#dateTo').val();
     inputProgram.Keterangan = $('#txtKeterangan').val();
-    inputProgram.AttachmentList = saveAttachment();
+    inputProgram.AttachmentList = saveAttachment("P");
     return inputProgram;
 }
 

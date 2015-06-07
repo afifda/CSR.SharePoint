@@ -39,6 +39,11 @@ namespace CSR.SharePointApplication
         public const string REPORT_PIE_TITLE = "Pie Chart Report";
         public const string REPORT_BAR_TITLE = "Bar Chart Report";
         public const string REPORT_EXCEL_TITLE = "Detail Report";
+
+        public const string TEMP_FILE = "TempFile";
+        public const string SITE_URL = "SiteCSR";
+        public const string REAL_DOC_LIB = "RealDocLib";
+        public const string DOC_LIB_PROGRAM = "DocLibProgram";
         #endregion
 
         #region Message

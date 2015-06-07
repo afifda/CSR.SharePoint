@@ -1,5 +1,6 @@
 ﻿using CSR.Service.DataAccess;
 using CSR.Service.Entity;
+using Microsoft.SharePoint;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -311,17 +312,37 @@ namespace CSR.Service.BusinessLogic
             return result;
         }
 
+        public List<AttachmentEntity> DownloadFile(string SiteURL,string Doclib, List<AttachmentEntity> attachmentCRUDList)
+        {
+
+            if (attachmentCRUDList != null)
+            {
+                BaseDataAccess BaseDataAccess = new BaseDataAccess();
+                attachmentCRUDList = BaseDataAccess.DownloadFile(SiteURL,Doclib, attachmentCRUDList);
+            }
+            return attachmentCRUDList;
+        }
+
+        public int UpdateLockedStatus(List<string> transNo, string type, bool locked)
+        {
+            return new BaseDataAccess().UpdateLockedStatus(transNo, type, locked);
+        }
+
         public MasterUserByUserNameEntity UserInformation(string loginName)
         {
             return new MasterDataLogic().SPRead<MasterUserByUserNameEntity>(new MasterUserByUserNameEntity() { UserName = loginName }).FirstOrDefault();
         }
 
-        public void sendEMailThroughGmail(string Area_Code)
+        public void sendEmailThroughGmail(string Area_Code,string transaksi_No)
         {
             //get data email
             List<EmailEntyti> EmailEntyti = null;
             MasterDataLogic logic = new MasterDataLogic();
-            EmailEntyti = logic.SPRead<EmailEntyti>(Area_Code);
+            EmailEntyti = logic.SPRead<EmailEntyti>(new EmailEntyti() { Area = "" });
+            MasterUserByUserNameEntity UserInformationNew = new MasterUserByUserNameEntity();
+            UserInformationNew = UserInformation(SPContext.Current.Web.CurrentUser.LoginName);
+            //string SiteURL = SPContext.Current.Web.Url;
+            string URL = "<a href=" + SPContext.Current.Web.Url + "/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=" + transaksi_No + "> Lihat Laporan Disini </a>";
 
             for (int i = 0; i < EmailEntyti.Count; i++)
             {
@@ -331,7 +352,8 @@ namespace CSR.Service.BusinessLogic
                     mM.From = new MailAddress("fandi.indah@gmail.com");//appsetting
                     mM.To.Add(EmailEntyti[i].To);
                     mM.Subject = EmailEntyti[i].Subject;
-                    mM.Body = "Test EMail From Area='" + Area_Code + "'";
+                    //mM.Body = "Test EMail From Area='" + Area_Code + "'";
+                    mM.Body = "<html><head>Yth Bapak/Ibu "+EmailEntyti[i].Kepada+"</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.UserName + "  di Area " + EmailEntyti[i].Area_Nama + " telah memasukkan data" + EmailEntyti[i].NameType + "CSR bidang " + EmailEntyti[i].BP_Nama + "</dt></br><dt>Silahkan Melakukan Review melalui link Berikut:" + URL + "'</dt></br><dt></dt></br><dt>Terima Kasih</dt></dl></body></html>";
                     mM.IsBodyHtml = true;
                     SmtpClient sC = new SmtpClient("smtp.gmail.com");
                     sC.Port = 587;//487

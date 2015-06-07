@@ -227,9 +227,7 @@
       <SharePointProjectItemId>{0d057b65-ddb9-40d6-a6cf-6d56fb0b8f23}</SharePointProjectItemId>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Layouts\CSR.SharePointApplication\CSS\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CSR.Service\CSR.Service.csproj">
       <Project>{a8160cab-2937-442d-80dd-172128352d0b}</Project>
@@ -250,11 +248,14 @@
     <Content Include="Features\Feature1\Feature1.Template.xml">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
+    <Content Include="Layouts\CSR.SharePointApplication\CSS\jquery.dataTables.min.css" />
+    <Content Include="Layouts\CSR.SharePointApplication\CSS\SML_template.css" />
     <Content Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\InputRealisasiPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\js\Attachment.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\BidangProgram.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\jquery.dataTables.min.js" />
+    <Content Include="Layouts\CSR.SharePointApplication\js\jquery.formatCurrency-1.4.0.min.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterArea.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterBidang.js" />
     <Content Include="Layouts\CSR.SharePointApplication\js\MasterEmail.js" />

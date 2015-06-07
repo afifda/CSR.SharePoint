@@ -15,15 +15,11 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
 {
     [Guid("8FE07083-259F-44AC-BC83-154A76AB5F88")]
     public partial class GenericHandler : IHttpHandler
-    {
-        private const string TEMP_FILE = "TempFile";
-        private const string SITE_URL = "SiteCSR";
-        private const string REAL_DOC_LIB = "RealDocLib";
-        private const string DOC_LIB_PROGRAM = "DocLibProgram";
-        string tempFolder = System.Configuration.ConfigurationManager.AppSettings[TEMP_FILE];
-        string SiteURL = System.Configuration.ConfigurationManager.AppSettings[SITE_URL];
-        string DocLibProgram = System.Configuration.ConfigurationManager.AppSettings[DOC_LIB_PROGRAM];
-        string RealDocLib = System.Configuration.ConfigurationManager.AppSettings[REAL_DOC_LIB];
+    {        
+        string tempFolder = System.Configuration.ConfigurationManager.AppSettings[Constant.TEMP_FILE];
+        string SiteURL = System.Configuration.ConfigurationManager.AppSettings[Constant.SITE_URL];
+        string DocLibProgram = System.Configuration.ConfigurationManager.AppSettings[Constant.DOC_LIB_PROGRAM];
+        string RealDocLib = System.Configuration.ConfigurationManager.AppSettings[Constant.REAL_DOC_LIB];
         private static MasterUserByUserNameEntity UserInformation
         {
             get
@@ -53,17 +49,42 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     GetAvailableYear(context);
                     break;
                 case "loadprogramlist":
-                    int year;
-                    if (!int.TryParse(context.Request.Params["Year"], out year)) break;
-                    LoadProgramList(context, year);
+                    int year1;
+                    if (!int.TryParse(context.Request.Params["Year"], out year1)) break;
+                    LoadProgramList(context, year1);
+                    break;
+                case "confirmprogramlist":
+                    int year2;
+                    if (!int.TryParse(context.Request.Params["Year"], out year2)) break;
+                    UpdateLockedProgram(context, year2);
                     break;
             }
         }
 
+        private void UpdateLockedProgram(HttpContext context, int year)
+        {
+            List<ProgramEntity> program = new BaseLogic().SPRead<ProgramEntity>(new ProgramEntity() { TransaksiNo = "" });
+            List<string> transNo = (from p in program
+                                    where p.Area_Kode == UserInformation.AreaCode
+                                    select p.TransaksiNo).ToList();
+            try
+            {
+                int row = new BaseLogic().UpdateLockedStatus(transNo, "P", true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         private void LoadProgramList(HttpContext context, int year)
         {
             List<ProgramEntity> programList = new ProgramLogic().GetProgramList(year);
-            if (UserInformation.AreaName != "Jakarta")
+
+            MasterUserByUserNameEntity UserInformationNew = new MasterUserByUserNameEntity();
+            UserInformationNew = UserInformation;
+            if (UserInformationNew.AreaName != "Jakarta")
             {
                 programList = (from p in programList
                               where p.Area_Kode == UserInformation.AreaCode
@@ -88,7 +109,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 {
                     string fileTime = DateTime.Now.ToFileTime().ToString();
                     //string tempFolder = HttpContext.Current.Server.MapPath("/Temp_File");
-                    string tempFolder = System.Configuration.ConfigurationManager.AppSettings[TEMP_FILE];
+                    string tempFolder = System.Configuration.ConfigurationManager.AppSettings[Constant.TEMP_FILE];
                     if (!Directory.Exists(tempFolder))
                     {
                         Directory.CreateDirectory(tempFolder);

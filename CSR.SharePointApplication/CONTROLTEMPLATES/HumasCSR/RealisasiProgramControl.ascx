@@ -105,5 +105,5 @@
     <input type="button" id="btnBatal" class="button" value="Batal"/>    
 </div>
 
-<script src="/SharePointFree/SiteAssets/jsCSR/jquery.formatCurrency-1.4.0.min.js"></script>
+<script src="../../../_layouts/15/CSR.SharePointApplication/js/jquery.formatCurrency-1.4.0.min.js"></script>
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/RealisasiProgram.js"></script>
