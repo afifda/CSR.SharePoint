@@ -9,7 +9,7 @@
 
 <div class="border">
     <div id="wrapping" class="clearfix">
-        <div class="title-h1">Master Area</div>
+        <div class="title-h1">Master Penerima Email Pemberitahuan</div>
         <div class="div">
              <table id="tblMasterArea" class="tabelgrid">
                   <thead>                
@@ -61,10 +61,10 @@
 				                <table>
 					                <tr>
 						                <td>
-							                <input type="radio" name="Program" value="P" rows="3" id="RadioProgram">Program</input>
+							                <input type="radio" name="Program" value="P" rows="3" id="RadioProgram">Program </input>
 						                </td>
 						                <td>
-							                <input type="radio" name="Realisasi" value="R" rows="3" id="RadioRealisasi">Realisasi</input>
+							                <input type="radio" name="Realisasi" value="R" rows="3" id="RadioRealisasi">Realisasi </input>
 						                </td>		
 					                </tr>
 				                </table>   

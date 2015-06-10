@@ -52,7 +52,6 @@
           
         submit();
     });
-  
     $('#btnAddProgramAndLock').click(function () {
         var KP_Kode = $('#ddlKategori').val();
         var BP_Kode = $('#ddlBidang').val();
@@ -103,8 +102,10 @@
 
         submitAndLock();
     });
-
-    //$('#txtSumberPGE').inputmask('decimal', { radixPoint: ".", autoGroup: true, groupSeparator: ",", groupSize: 3 });
+    $('#btnBatal').click(function () {
+        window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+    });
+        
     $('#txtSumberPGE').blur(function () {
         $('#txtSumberPGE').formatCurrency({
             symbol: ''
@@ -120,10 +121,7 @@
             symbol: ''
         });
     });
-    //function formatmoney(id, value) {
-    //    $('#txtSumberPGE').val(value).currencyFormat({
-    //        symbol: ''
-    //    });
+    
     $('#dateFrom').datepicker();
     $('#dateTo').datepicker();
 });
@@ -161,7 +159,7 @@ function Init() {
 
 function InitializeRealisasi() {
     var dateFormat = "dd-MMM-yyyy";
-    if (($('#hfRealisasiNo').val() == undefined || $('#hfRealisasiNo').val() == null) && ($('#hfTransaksiNo').val() == undefined || $('#hfTransaksiNo').val() == null)) {
+    if (($('#hfRealisasiNo').val() == undefined || $('#hfRealisasiNo').val() == null || $('#hfRealisasiNo').val() == "") && ($('#hfTransaksiNo').val() == undefined || $('#hfTransaksiNo').val() == null || $('#hfTransaksiNo').val() == "")) {
         $('#txtTransaksiNo').prop('disabled', true);
         return false;        
     }
@@ -195,6 +193,15 @@ function InitializeRealisasi() {
                 symbol: ''
             });
             GetSuccessAddAttachList(Input.AttachmentList, false);
+            if (Input.Is_Locked == true) {
+                $('#btnAddProgram').prop('disabled', true);
+                $('#btnAddProgramAndLock').prop('disabled', true);
+            }
+            else {
+                $('#btnAddProgram').prop('disabled', false);
+                $('#btnAddProgramAndLock').prop('disabled', false);                
+            }
+
         },
         error: function (response) {
             alert(response.responseText);
@@ -216,7 +223,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/SharePointFree/SitePages/Home.aspx";
+            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
@@ -237,7 +244,7 @@ function submitAndLock() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/SharePointFree/SitePages/Home.aspx";
+            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
@@ -253,9 +260,27 @@ function getRequestData() {
     inputRealisasi.WaktuSelesai = $('#dateTo').val();
     inputRealisasi.Pelaksana = $('#txtPelaksana').val();
     inputRealisasi.Penerima = $('#txtPenerima').val();
-    inputRealisasi.SumberDanaPGE = parseFloat($('#txtSumberPGE').val().replace(/[^0-9\.]+/g, ""));
-    inputRealisasi.SumberDanaPersero = parseFloat($('#txtSumberPersero').val().replace(/[^0-9\.]+/g, ""));
-    inputRealisasi.SumberPKBL = parseFloat($('#txtSumberPKBL').val().replace(/[^0-9\.]+/g, ""));
+    
+    if ($('#txtSumberPGE').val() == "") {
+        inputRealisasi.SumberDanaPGE = 0
+    }
+    else {
+        inputRealisasi.SumberDanaPGE = parseFloat($('#txtSumberPGE').val().replace(/[^0-9\.]+/g, ""));
+    }
+
+    if ($('#txtSumberPersero').val() == "") {
+        inputRealisasi.SumberDanaPersero = 0
+    }
+    else {
+        inputRealisasi.SumberDanaPersero = parseFloat($('#txtSumberPersero').val().replace(/[^0-9\.]+/g, ""));
+    }
+    if ($('#txtSumberPKBL').val() == "") {
+        inputRealisasi.SumberPKBL = 0
+    }
+    else {
+        inputRealisasi.SumberPKBL = parseFloat($('#txtSumberPKBL').val().replace(/[^0-9\.]+/g, ""));
+    }
+       
     inputRealisasi.Keterangan = $('#txtKeterangan').val();
     if (inputRealisasi.TransaksiNo == null || inputRealisasi.TransaksiNo == "") {
         inputRealisasi.KP_Kode = $('#ddlKategori').val();
@@ -264,6 +289,7 @@ function getRequestData() {
         inputRealisasi.Area_Kode = $('#ddlArea').val();
     }
     inputRealisasi.AttachmentList = saveAttachment("R");
+
     return inputRealisasi;
 }
 

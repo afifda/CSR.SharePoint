@@ -15,6 +15,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         private static bool IsEdit = false;
         protected void Page_Load(object sender, EventArgs e)
         {
+            IsEdit = false;
             if (!IsValidUser)
             {
                 Response.Redirect("/_layouts/15/eWorkflow.WebAccess/ErrorPage.aspx?ErrCode=NotAuthorized", true);

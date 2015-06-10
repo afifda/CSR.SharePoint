@@ -46,6 +46,7 @@ function clearModalMasterArea() {
 }
 
 function Init() {
+    $('#tblMasterArea tbody').remove();
     $.ajax({
         type: "POST",
         url: window.location.pathname + "/LoadMasterEmail",

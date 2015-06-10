@@ -9,7 +9,7 @@
 <link href="../../../_layouts/15/CSR.SharePointApplication/CSS/SML_template.css" rel="stylesheet" />
 <div class="border">
     <div id="wrapping" class="clearfix">
-        <div class="title-h1">Master Area</div>
+        <div class="title-h1">Master Kategori</div>
         <div class="div">
              <table id="tblMasterKategori" class="tabelgrid">
                   <thead>                
