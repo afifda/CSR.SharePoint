@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
     Init();
-
+    $('#btnBatal').click(function () {
+        window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+    });
     $('#btnAddProgram').click(function () {
         var Judul_Program = $('#txtJudul').val();
         var KP_Kode = $('#ddlKategori').val();
@@ -11,19 +13,19 @@
         var Waktu_Sampai = $('#dateTo').val();
         var validationMessage = "";
         
-        if (KP_Kode.length < 1) {
+        if (KP_Kode == null || KP_Kode == "") {
             validationMessage += "Kategori Program harus di pilih. \n";
         }
-        if (BP_Kode.length < 1) {
+        if (BP_Kode == null || BP_Kode == "") {
             validationMessage += "Bidang Program harus di pilih. \n";
         }
-        if (Judul_Program.length < 1) {
+        if (Judul_Program == null || Judul_Program == "") {
             validationMessage += "Judul Program harus di isi. \n";
         }               
-        if (Area_Kode.length < 1) {
+        if (Area_Kode == null || Area_Kode == "") {
             validationMessage += "Area harus di pilih. \n";
         }
-        if (Jumlah_Anggaran.length < 1) {
+        if (Jumlah_Anggaran == null || Jumlah_Anggaran == "") {
             validationMessage += "Jumlah Anggaran harus di isi. \n";
         }
         if (Waktu_Mulai.length < 1) {
@@ -169,7 +171,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/SharePointFree/SitePages/Home.aspx";
+            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
