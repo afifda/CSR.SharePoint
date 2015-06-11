@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using UtilityLibrary;
@@ -15,9 +16,10 @@ namespace CSR.Service.DataAccess
 {
     public class BaseDataAccess : DoubleASqlTextCommand
     {
+        
         public DoubleASqlConnection Connection { get; set; }
         bool IsTransOperation;
-
+        
         public void SetTransactionOperation(bool isTransaction = true)
         {
             this.IsTransOperation = isTransaction;
@@ -342,6 +344,42 @@ namespace CSR.Service.DataAccess
             Connection.CloseConnection();            
         }
 
+        public int UpdateLockedStatus(List<string> transNoList, string type, bool locked)
+        {
+            SqlCommand command = new SqlCommand("usp_UpdateLocked");
+            command.CommandType = CommandType.StoredProcedure;
+            int rowAffected = 0;
+            IDataReader reader = null;
+            DataTable transNoTable = ToDataTableFromStringList(transNoList);
+            SqlParameter parameter = new SqlParameter();
+            parameter.ParameterName = "@TransaksiNo";
+            parameter.Value = transNoTable;
+            parameter.Direction = ParameterDirection.Input;
+            command.Parameters.Add(parameter);
+            command.Parameters.AddWithValue("@Type", type);
+            command.Parameters.AddWithValue("@Locked", locked);
+            try
+            {
+                OpenConnection(command, this.Connection);
+                rowAffected = command.ExecuteNonQuery();
+                CloseCommitConnection();
+            }
+            catch (Exception ex)
+            {
+                CloseRollbackConnection();
+                throw ex;
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+
+            return rowAffected;
+        }
+
         public void CallUpdateList()
         { 
            
@@ -407,6 +445,7 @@ namespace CSR.Service.DataAccess
 
         public int SaveAttachment(string siteUrl, string documentLibraryName,List<AttachmentEntity> attachmentCRUDList)/// string fileToUpload, string sharePointSite, string documentLibraryName, string subfolder)
         {
+
             int result = 0;
             SPSecurity.RunWithElevatedPrivileges(delegate()
             {
@@ -465,6 +504,63 @@ namespace CSR.Service.DataAccess
                 }
             });
             return result;
+        }
+        const string TEMP_FILE = "TempFile";
+        public List<AttachmentEntity> DownloadFile(string siteUrl, string documentLibraryName, List<AttachmentEntity> attachmentCRUDList)
+        {
+            string tempFolder = System.Configuration.ConfigurationManager.AppSettings[TEMP_FILE];
+
+            SPSecurity.RunWithElevatedPrivileges(delegate()
+            {
+                using (SPSite site = new SPSite(siteUrl))
+                {
+                    site.AllowUnsafeUpdates = true;
+                    using (SPWeb web = site.OpenWeb("/SharePointFree"))
+                    {
+                        try
+                        {
+                            SPList docLib = web.Lists.TryGetList(documentLibraryName);
+                            if (docLib == null)
+                            {
+                                throw new Exception(string.Format("Document libary {0} cannot be found", documentLibraryName));
+                            }
+
+                            web.AllowUnsafeUpdates = true;
+
+                            /*** If you want to add inside a folder*******/
+                            SPFolder SubFolder = (from SPFolder folder in docLib.RootFolder.SubFolders
+                                                  where folder.Name == attachmentCRUDList[0].TransaksiNo
+                                                  select folder).FirstOrDefault();
+
+
+                            if (SubFolder == null)
+                                SubFolder = docLib.RootFolder.SubFolders.Add(attachmentCRUDList[0].TransaksiNo);
+                            
+
+                            for (int i = 0; i < attachmentCRUDList.Count; i++)
+                            {
+                                string path = site.Url + "/" + attachmentCRUDList[i].NamaPath;
+                                SPFile file = SubFolder.Files[attachmentCRUDList[i].NamaFile];
+                                if (file.Exists)
+                                {
+                                    WebClient client1 = new WebClient();
+                                    client1.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                                    //stream file on local 
+                                    FileStream outStream = new FileStream(tempFolder + file.Name, FileMode.Create);
+                                    outStream.Close();
+                                    attachmentCRUDList[i].TempPath = tempFolder + file.Name;
+                                }
+                                else attachmentCRUDList[i].TempPath = string.Empty;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+                }
+            });
+            return attachmentCRUDList;
         }
         
     }

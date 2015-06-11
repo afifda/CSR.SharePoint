@@ -16,10 +16,10 @@ namespace CSR.Service.Entity
         public string TransaksiNo { get; set; }
 
         [Column(name: "WaktuMulai", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public DateTime WaktuMulai { get; set; }
+        public DateTime? WaktuMulai { get; set; }
 
         [Column(name: "WaktuSelesai", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public DateTime WaktuSelesai { get; set; }
+        public DateTime? WaktuSelesai { get; set; }
 
         [Column(name: "Pelaksana", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Pelaksana { get; set; }
@@ -70,10 +70,10 @@ namespace CSR.Service.Entity
         public string TransaksiNo { get; set; }
 
         [Column(name: "WaktuMulai", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public DateTime WaktuMulai { get; set; }
+        public DateTime? WaktuMulai { get; set; }
 
         [Column(name: "WaktuSelesai", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public DateTime WaktuSelesai { get; set; }
+        public DateTime? WaktuSelesai { get; set; }
 
         [Column(name: "Pelaksana", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Pelaksana { get; set; }

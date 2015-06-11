@@ -2,9 +2,109 @@
     Init();
 
     $('#btnAddProgram').click(function () {
+
+        var KP_Kode = $('#ddlKategori').val();
+        var BP_Kode = $('#ddlBidang').val();
+        var Judul_Program = $('#txtJudul').val();
+        var Area_Kode = $('#ddlArea').val();
+        var WaktuMulai = $('#dateFrom').val();
+        var WaktuSelesai = $('#dateTo').val();
+        var Pelaksana = $('#txtPelaksana').val();
+        var Penerima = $('#txtPenerima').val();
+        var SumberDanaPGE = $('#txtSumberPGE').val();
+        var SumberDanaPersero = $('#txtSumberPersero').val();
+        var SumberPKBL = $('#txtSumberPKBL').val();        
+
+        var validationMessage = "";
+
+        if (KP_Kode.length < 1) {
+            validationMessage += "Kategori Program harus di pilih. \n";
+        }
+        if (BP_Kode.length < 1) {
+            validationMessage += "Bidang Program harus di pilih. \n";
+        }
+        if (Judul_Program.length < 1) {
+            validationMessage += "Judul Program harus di isi. \n";
+        }
+        if (Area_Kode.length < 1) {
+            validationMessage += "Area harus di pilih. \n";
+        }
+        if (WaktuMulai.length < 1) {
+            validationMessage += "Waktu Mulai harus di isi. \n";
+        }
+        if (WaktuSelesai.length < 1) {
+            validationMessage += "Waktu Selesai harus di isi. \n";
+        }
+        if (Pelaksana.length < 1) {
+            validationMessage += "Pelaksana harus di isi. \n";
+        }
+        if (Penerima.length < 1) {
+            validationMessage += "Penerima harus di isi. \n";
+        }
+        if (SumberDanaPGE.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1) {
+            validationMessage += "Tidak ada sumber dana, Silahkan di isi minimal satu sumber dana. \n";
+        }
+        
+        if (validationMessage.length > 0) {
+            alert(validationMessage);
+            return false;
+        }
+          
         submit();
     });
   
+    $('#btnAddProgramAndLock').click(function () {
+        var KP_Kode = $('#ddlKategori').val();
+        var BP_Kode = $('#ddlBidang').val();
+        var Judul_Program = $('#txtJudul').val();
+        var Area_Kode = $('#ddlArea').val();
+        var WaktuMulai = $('#dateFrom').val();
+        var WaktuSelesai = $('#dateTo').val();
+        var Pelaksana = $('#txtPelaksana').val();
+        var Penerima = $('#txtPenerima').val();
+        var SumberDanaPGE = $('#txtSumberPGE').val();
+        var SumberDanaPersero = $('#txtSumberPersero').val();
+        var SumberPKBL = $('#txtSumberPKBL').val();
+
+        var validationMessage = "";
+
+        if (KP_Kode.length < 1) {
+            validationMessage += "Kategori Program harus di pilih. \n";
+        }
+        if (BP_Kode.length < 1) {
+            validationMessage += "Bidang Program harus di pilih. \n";
+        }
+        if (Judul_Program.length < 1) {
+            validationMessage += "Judul Program harus di isi. \n";
+        }
+        if (Area_Kode.length < 1) {
+            validationMessage += "Area harus di pilih. \n";
+        }
+        if (WaktuMulai.length < 1) {
+            validationMessage += "Waktu Mulai harus di isi. \n";
+        }
+        if (WaktuSelesai.length < 1) {
+            validationMessage += "Waktu Selesai harus di isi. \n";
+        }
+        if (Pelaksana.length < 1) {
+            validationMessage += "Pelaksana harus di isi. \n";
+        }
+        if (Penerima.length < 1) {
+            validationMessage += "Penerima harus di isi. \n";
+        }
+        if (SumberDanaPGE.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1) {
+            validationMessage += "Tidak ada sumber dana, Silahkan di isi minimal satu sumber dana. \n";
+        }
+
+        if (validationMessage.length > 0) {
+            alert(validationMessage);
+            return false;
+        }
+
+        submitAndLock();
+    });
+
+    //$('#txtSumberPGE').inputmask('decimal', { radixPoint: ".", autoGroup: true, groupSeparator: ",", groupSize: 3 });
     $('#txtSumberPGE').blur(function () {
         $('#txtSumberPGE').formatCurrency({
             symbol: ''
@@ -20,7 +120,10 @@
             symbol: ''
         });
     });
-
+    //function formatmoney(id, value) {
+    //    $('#txtSumberPGE').val(value).currencyFormat({
+    //        symbol: ''
+    //    });
     $('#dateFrom').datepicker();
     $('#dateTo').datepicker();
 });
@@ -58,9 +161,9 @@ function Init() {
 
 function InitializeRealisasi() {
     var dateFormat = "dd-MMM-yyyy";
-    if (($('#hfRealisasiNo').val() == undefined || $('#hfRealisasiNo').val() == null) && ($('#hfRealhfTransaksiNoisasiNo').val() == null || $('#hfTransaksiNo').val() == null)) {
-        return false;
-    
+    if (($('#hfRealisasiNo').val() == undefined || $('#hfRealisasiNo').val() == null) && ($('#hfTransaksiNo').val() == undefined || $('#hfTransaksiNo').val() == null)) {
+        $('#txtTransaksiNo').prop('disabled', true);
+        return false;        
     }
     var parameter = new Object();
     parameter.realisasiNo = $('#hfRealisasiNo').val();
@@ -86,8 +189,11 @@ function InitializeRealisasi() {
             $('#txtPenerima').val(Input.Penerima);
             $('#txtSumberPGE').val(Input.SumberDanaPGE);
             $('#txtSumberPersero').val(Input.SumberDanaPersero);
-            $('#txtSumberPKBL').val(Input.PeneriSumberPKBL);
+            $('#txtSumberPKBL').val(Input.SumberPKBL);
             $('#txtKeterangan').val(Input.Keterangan);
+            $('.currencyFormat').formatCurrency({
+                symbol: ''
+            });
             GetSuccessAddAttachList(Input.AttachmentList, false);
         },
         error: function (response) {
@@ -110,6 +216,28 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
+            window.location = "/SharePointFree/SitePages/Home.aspx";
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    });
+}
+
+function submitAndLock() {
+    var parameter = new Object();
+    parameter.programString = JSON.stringify(getRequestData());
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        url: window.location.pathname + "/SaveAndLockRealisasi",
+        data: JSON.stringify(parameter),
+        async: true,
+        success: function (response) {
+            var Input = response.d;
+            alert(Input);
+            window.location = "/SharePointFree/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
@@ -135,7 +263,7 @@ function getRequestData() {
         inputRealisasi.Judul_Program = $('#txtJudul').val();
         inputRealisasi.Area_Kode = $('#ddlArea').val();
     }
-    inputRealisasi.AttachmentList = saveAttachment();
+    inputRealisasi.AttachmentList = saveAttachment("R");
     return inputRealisasi;
 }
 

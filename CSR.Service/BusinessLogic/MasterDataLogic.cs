@@ -23,12 +23,20 @@ namespace CSR.Service.BusinessLogic
             }
         }
 
-        public object GetInputProgramPage()
+        public object GetInputProgramPage(MasterUserByUserNameEntity User = null)
         {
+            
             MasterDataDataAccess dataAccess = new MasterDataDataAccess();
             List<MasterKategoriProgramEntity> kategori = SPRead<MasterKategoriProgramEntity>(new MasterKategoriProgramEntity() { KP_Kode = 0 });
             List<MasterBidangProgramEntity> bidang = SPRead<MasterBidangProgramEntity>(new MasterBidangProgramEntity() { BP_Kode = 0 });
             List<MasterAreaEntity> area = SPRead<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
+            if (User != null && User.AreaName != "Jakarta")
+            {
+                area = (from a in area
+                        where a.AreaCode == User.AreaCode
+                        select a).ToList();
+            }
+
             var inputPage = new 
             {
                 Kategori = kategori,

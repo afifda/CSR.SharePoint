@@ -29,9 +29,9 @@ namespace CSR.Service.Entity
         [Column(name: "Outcome_Diharapkan", isUpdateParam: true, isInsertParam: true)]
         public string Outcome_Diharapkan { get; set; }
         [Column(name: "Waktu_Mulai", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public DateTime Waktu_Mulai { get; set; }
+        public DateTime? Waktu_Mulai { get; set; }
         [Column(name: "Waktu_Sampai", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public DateTime Waktu_Sampai { get; set; }
+        public DateTime? Waktu_Sampai { get; set; }
         [Column(name: "Keterangan", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Keterangan { get; set; }
         [Column(name: "Created_Date", isUpdateParam: false, isAllowNull: false, isInsertParam: true)]

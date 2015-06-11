@@ -34,9 +34,9 @@
                     <div class="modal-body">
                         <div>                            
                             <div class="div">
-                                <span class="lbl">Nama Bidang</span>
+                                <span class="lbl">Nama Bidang <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
-                                <input type="hidden" id="hfKodeBidang" />
+                                <input type="hidden" id="hfKodeBidang" value="0"/>
                                 <input name="txtNamaBidang" class="input" maxlength="50" id="txtNamaBidang" type="text" />
                             </div>                                                   
                         </div>                

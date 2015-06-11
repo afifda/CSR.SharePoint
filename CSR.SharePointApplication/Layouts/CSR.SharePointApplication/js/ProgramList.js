@@ -1,21 +1,28 @@
 ﻿$(document).ready(function () {
-    LoadAvailableYear();
+    LoadAvailableYear();    
 });
 
 function LoadAvailableYear() {
-    var handlerUrl = "/SharePointFree/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=getAvailableYear";
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=getAvailableYear";
     $.ajax({
         type: "POST",
         url: handlerUrl,
         data: {},
-        contentType: "application/json",
+        contentType: "application/json; charset=utf-8",
         datatype: "json",
-        async: true,
-        success: SuccessAddYear,
-        error: function (response) {
+        async: "false",
+        success: function (response) {
+            var result = JSON.parse(response);
+            $.each(result, function (key, value) {
+                $("#ddlYear").append($("<option></option>").val(result).html(result));
+            });
+            LoadProgramList();
+            },
+        error: function (response) {            
             alert(response.responseText);
         }
     });
+    return true;
 }
 
 function SuccessAddYear(data, status, xhr) {
@@ -30,7 +37,7 @@ function SuccessAddYear(data, status, xhr) {
 
 function LoadProgramList() {
     var yearSelected = $('#ddlYear').val();
-    var handlerUrl = "/SharePointFree/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=loadProgramList&Year=" + yearSelected;
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=loadProgramList&Year=" + yearSelected;
     $.ajax({
         type: "POST",
         url: handlerUrl,
@@ -38,33 +45,37 @@ function LoadProgramList() {
         contentType: "application/json; charset=utf-8",
         datatype: "json",
         async: true,
-        success: GetSuccessProgramList,
+        success: function (response) {
+            var result = JSON.parse(response);
+            GetSuccessProgramList(result);           
+        },
         error: function (response) {
             alert(response.responseText);
         }
     });
 }
 
-function GetSuccessProgramList(data, status, xhr) {
+function GetSuccessProgramList(data) {
     var dateFormat = "dd-MMM-yyyy";
     if (data.length > 0) {
         var total = 0;
         for (i = 0; i < data.length; i++) {
             var strhtml = '<tr>' +
-                '<td >' + data[i].TransaksiNo + ' </td>' +
-                '<td >' + data[i].BP_Name + ' </td>' +
+                '<td ><a href="/SharePointFree/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
+                '<td >' + data[i].BP_Nama + ' </td>' +
                 '<td >' + data[i].Judul_Program + ' </td>' +
-                '<td >' + data[i].KP_Name + ' </td>' +
-                '<td >' + data[i].AreaName + ' </td>' +
+                '<td >' + data[i].KP_Nama + ' </td>' +
+                '<td >' + data[i].Area_Nama + ' </td>' +
                 '<td >' + data[i].Keterangan + ' </td>' +
-                '<td >' + data[i].Jumlah_Anggaran + ' </td>' +
+                '<td class="currencyFormat rightAligned">' + data[i].Jumlah_Anggaran + ' </td>' +
                 '</tr>';
             $(strhtml).appendTo($("#tblProgramList"));
         }
         $('.currencyFormat').formatCurrency({
             symbol: ''
         });
-        $('.rightAligned').css('text-align', 'right');
+        CreateDataTable();
+        //$('.rightAligned').css('text-align', 'right');
     }
 
     else {
@@ -75,7 +86,7 @@ function GetSuccessProgramList(data, status, xhr) {
 function CreateDataTable() {
     var table = $('#tblProgramList').DataTable({
         "columnDefs": [
-            { "visible": false, "targets": 0 }
+            { "visible": false, "targets": 1 }
         ],
         "order": [[1, 'asc']],
         "displayLength": 25,
@@ -84,10 +95,10 @@ function CreateDataTable() {
             var rows = api.rows({ page: 'current' }).nodes();
             var last = null;
 
-            api.column(0, { page: 'current' }).data().each(function (group, i) {
+            api.column(1, { page: 'current' }).data().each(function (group, i) {
                 if (last !== group) {
                     $(rows).eq(i).before(
-                        '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+                        '<tr class="group"><td colspan="7">' + group + '</td></tr>'
                     );
 
                     last = group;
@@ -104,6 +115,25 @@ function CreateDataTable() {
         }
         else {
             table.order([1, 'asc']).draw();
+        }
+    });
+}
+
+function Confirm() {
+    var yearSelected = $('#ddlYear').val();
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=ConfirmProgramList&Year=" + yearSelected;
+    $.ajax({
+        type: "POST",
+        url: handlerUrl,
+        data: {},
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        async: true,
+        success: function (response) {
+            alert("Konfirmasi Sukses")
+        },
+        error: function (response) {
+            alert(response.responseText);
         }
     });
 }

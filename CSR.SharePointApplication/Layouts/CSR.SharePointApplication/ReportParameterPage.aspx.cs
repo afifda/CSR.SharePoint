@@ -20,7 +20,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 return;
             }
 
-            string controlTemplate = MasterInputControl(stReportType);
+            string controlTemplate = ReportInputControl(stReportType);
             if (string.IsNullOrEmpty(controlTemplate))
             {
                 ShowStatusBar(this, "Information", string.Format("Report {0} is not found", stReportType));

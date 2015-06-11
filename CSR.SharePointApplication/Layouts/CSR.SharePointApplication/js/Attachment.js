@@ -18,10 +18,9 @@ function isUpload() {
     }
 }
 
-function AddtoGridAttch() { 
-    var handlerUrl = "/SharePointFree/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=uploadFileAttachment";
-    if ($("input[id$='fuAttachment']").length > 0)
-    {
+function AddtoGridAttch() {
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=uploadFileAttachment";
+    if ($("input[id$='fuAttachment']").length > 0) {
         var DocLink = $("#fuAttachment").get(0);
         var DocFile = DocLink.files;
         var files = document.getElementById('fuAttachment').files;
@@ -130,7 +129,7 @@ function AddtoGridAttch() {
 
     }
 
-    
+
     //if (Cek == 'true') {
     //    alert('file already exist');
     //    return false;
@@ -166,8 +165,8 @@ function SuccessAddAttachList(data, status, xhr) {
             var rowCount = $('#gvAttachment tr').length;
             var strhtml = '<tr>' +
                     '<td class = "ClsNumber">' + rowCount + ' </td>' +
-                    '<td class = "ClsFileName">' + result[i].DocName + '</td>' +
-                    '<td class = "ClsPathFile">' + result[i].DocLink + '</td>' +
+                    '<td class = "ClsFileName">' + result[i].NamaFile + '</td>' +
+                    '<td class = "ClsPathFile">' + result[i].NamaPath + '</td>' +
                     '<td class = "ClsTempFile"  style="display:none;">' + result[i].TempPath + '</td>' +
                     '<td class = "ClsAction"><input type="button"  class="button2 ClsRemove" value="Remove" /></td>' +
                     '</tr>'
@@ -236,13 +235,16 @@ function GetSuccessAddAttachList(attachmentCRUDList, Aktif) {
 
         if (!Aktif) {
             $('#fuAttachment').hide();
+            $('#fuAttachment1').hide();
+            $('#fuAttachment2').hide();
+            $('#btnUpload').hide();
             for (i = 0; i < result.length; i++) {
                 var rowCount = $('#gvAttachment tr').length;
                 var strhtml = '<tr>' +
                     '<td class = "ClsNumber">' + rowCount + ' </td>' +
-                    '<td class = "ClsFileName">' + result[i].DocName + '</td>' +
-                    '<td class = "ClsPathFile aDocLink"><a href="javascript:void(0)" onclick="downloadDocFunc(\'' + result[i].DocLink.replace(/'/g, "####&&&&") + '\');">' + result[i].DocLink + '</a></td>' +
-					'<td class = "ClsTempFile" td style = "display:none">' + result[i].TempPath + '</td>' +
+                    '<td class = "ClsFileName">' + result[i].NamaFile + '</td>' +
+                    '<td class = "ClsPathFile aDocLink"><a href="javascript:void(0)" onclick="downloadDocFunc(\'' + result[i].NamaPath.replace(/'/g, "####&&&&") + '\');">' + result[i].NamaPath + '</a></td>' +
+					'<td class = "ClsTempFile" td style = "display:none">' + result[i].NamaPath + '</td>' +
                     //'<td class = "ClsAction" ><input type="button" class="button2 ClsRemove" value="Remove" disabled="true"/></td>' +
                     '</tr>'
                 document.getElementById("Action_ID").style.display = 'none';
@@ -253,9 +255,9 @@ function GetSuccessAddAttachList(attachmentCRUDList, Aktif) {
                 var rowCount = $('#gvAttachment tr').length;
                 var strhtml = '<tr>' +
                     '<td class = "ClsNumber">' + rowCount + ' </td>' +
-                    '<td class = "ClsFileName">' + result[i].DocName + '</td>' +
-                    '<td class = "ClsPathFile aDocLink"><a href="javascript:void(0)" onclick="downloadDocFunc(\'' + result[i].DocLink.replace(/'/g, "####&&&&") + '\');">' + result[i].DocLink + '</a></td>' +
-					'<td class = "ClsTempFile" td style = "display:none">' + result[i].TempPath + '</td>' +
+                    '<td class = "ClsFileName">' + result[i].NamaFile + '</td>' +
+                    '<td class = "ClsPathFile aDocLink"><a href="javascript:void(0)" onclick="downloadDocFunc(\'' + result[i].TempPath.replace(/'/g, "####&&&&") + '\');">' + result[i].TempPath + '</a></td>' +
+					'<td class = "ClsTempFile" td style = "display:none">' + result[i].NamaPath + '</td>' +
                     '<td class = "ClsAction"><input type="button"  class="button2 ClsRemove" value="Remove" /></td>' +
                     '</tr>'
 
@@ -266,9 +268,9 @@ function GetSuccessAddAttachList(attachmentCRUDList, Aktif) {
                 var rowCount = $('#gvAttachment tr').length;
                 var strhtml = '<tr>' +
                     '<td class = "ClsNumber">' + rowCount + ' </td>' +
-                    '<td class = "ClsFileName">' + result[i].DocName + '</td>' +
-                    '<td class = "ClsPathFile aDocLink"><a href="javascript:void(0)" onclick="downloadDocFunc(\'' + result[i].DocLink.replace(/'/g, "####&&&&") + '\');">' + result[i].DocLink + '</a></td>' +
-					'<td class = "ClsTempFile" td style = "display:none">' + result[i].TempPath + '</td>' +
+                    '<td class = "ClsFileName">' + result[i].NamaFile + '</td>' +
+                    '<td class = "ClsPathFile aDocLink"><a href="javascript:void(0)" onclick="downloadDocFunc(\'' + result[i].TempPath.replace(/'/g, "####&&&&") + '\');">' + result[i].TempPath + '</a></td>' +
+					'<td class = "ClsTempFile" td style = "display:none">' + result[i].NamaPath + '</td>' +
                     '<td class = "ClsAction"><input type="button"  class="button2 ClsRemove" value="Remove"/></td>' +
                     '</tr>'
 
@@ -285,16 +287,17 @@ function GetSuccessAddAttachList(attachmentCRUDList, Aktif) {
 
 function downloadDocFunc(docLink) {
     docLink = docLink.replace("####&&&&", "'");
-    var requestNo = $.getUrlVars()["RequestNo"];
+    //var requestNo = $.getUrlVars()["TransaksiNo"];
+    var requestNo = getUrlVars()["TransaksiNo"];
     if (requestNo == null)
-        requestNo = $('#hfRequestNo').val();
+        requestNo = $('#hfTransaksiNo').val();
 
-    window.location.href = "/SharePointFree/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + requestNo;
+    window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + requestNo;
 
     return false;
 }
 
-function saveAttachment() {
+function saveAttachment(flag) {
 
     var attachmentCRUDList = [];
     $("#gvAttachment tbody tr").each(function (idx, elm) {
@@ -308,8 +311,8 @@ function saveAttachment() {
         item.NoUrut = sOrderBy;
         item.NamaFile = sFileName;
         item.NamaPath = sPathFile;
-        item.Flag = "P";        
-        item.TempPath = Link;        
+        item.Flag = flag;
+        item.TempPath = Link;
         attachmentCRUDList.push(item);
 
         if (sFileName.length <= 0) {
@@ -326,4 +329,12 @@ function reLayoutAttachment() {
     $('#btnUpload').hide();
     $('#gvAttachment').find('th:eq(4)').hide();
     $('#gvAttachment').find('.ClsAction').hide();
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
 }

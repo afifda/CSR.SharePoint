@@ -37,22 +37,22 @@
                     <div class="modal-body">
                         <div>
                             <div class="div">
-                                <span class="lbl">No Pegawai</span>
+                                <span class="lbl">No Pegawai <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtNoPegawai" class="input" maxlength="20" id="txtNoPegawai" type="text" />
                             </div>
                             <div class="div">
-                                <span class="lbl">Nama Pegawai</span>
+                                <span class="lbl">Nama Pegawai <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtNamaPegawai" class="input" maxlength="50" id="txtNamaPegawai" type="text" />
                             </div>
                             <div class="div">
-                                <span class="lbl">UserName</span>
+                                <span class="lbl">UserName <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtUserName" class="input" maxlength="50" id="txtUserName" type="text" />
                             </div>   
                             <div class="div">
-                                <span class="lbl">Area</span>
+                                <span class="lbl">Area <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <select id="ddlArea" class="input"></select>
                             </div>                                                

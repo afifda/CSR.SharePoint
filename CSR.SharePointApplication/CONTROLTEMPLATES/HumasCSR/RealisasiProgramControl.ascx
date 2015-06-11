@@ -42,7 +42,7 @@
                 <span class="lbl">Waktu <span class="red">*</span></span>
                 <span class="titikdua">:</span>
                 <input name="txtDueDate" class="input-withbutton2" id="dateFrom" type="text"/>
-                <span> s/d  </span> 
+                <span> s/d </span> 
                 <input name="txtDueDate" class="input-withbutton2" id="dateTo" type="text"/>    
             </div>
         </div>        
@@ -105,5 +105,5 @@
     <input type="button" id="btnBatal" class="button" value="Batal"/>    
 </div>
 
-<script src="/SharePointFree/SiteAssets/jsCSR/jquery.formatCurrency-1.4.0.min.js"></script>
+<script src="../../../_layouts/15/CSR.SharePointApplication/js/jquery.formatCurrency-1.4.0.min.js"></script>
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/RealisasiProgram.js"></script>

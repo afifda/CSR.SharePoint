@@ -9,6 +9,27 @@
     });
 
     $('#btnSaveMasterUser').click(function () {
+        var No_Pegawai = $("#txtNoPegawai").val();
+        var Nama_Pegawai = $("#txtNamaPegawai").val();
+        var UserName = $("#txtUserName").val();
+        var AreaCode = $("#ddlArea").val();
+        var validationMessage = "";
+        if (No_Pegawai.length < 1) {
+            validationMessage += "No Kategori harus di isi. \n";
+        }
+        if (Nama_Pegawai.length < 1) {
+            validationMessage += "Nama Pegawai harus di isi. \n";
+        }
+        if (UserName.length < 1) {
+            validationMessage += "User Name harus di isi. \n";
+        }
+        if (AreaCode.length < 1) {
+            validationMessage += "Kode Area harus di pilih. \n";
+        }
+        if (validationMessage.length > 0) {
+            alert(validationMessage);
+            return false;
+        }
         saveUser();
     });
 

@@ -34,9 +34,9 @@
                     <div class="modal-body">
                         <div>                            
                             <div class="div">
-                                <span class="lbl">Nama Kategori</span>
+                                <span class="lbl">Nama Kategori <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
-                                <input type="hidden" id="hfKodeKategori" />
+                                <input type="hidden" id="hfKodeKategori" value="0" />
                                 <input name="txtNamaKategori" class="input" maxlength="50" id="txtNamaKategori" type="text" />
                             </div>                                                   
                         </div>                

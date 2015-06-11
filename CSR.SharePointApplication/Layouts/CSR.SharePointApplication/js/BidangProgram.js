@@ -2,12 +2,47 @@
     Init();
 
     $('#btnAddProgram').click(function () {
+        var Judul_Program = $('#txtJudul').val();
+        var KP_Kode = $('#ddlKategori').val();
+        var BP_Kode = $('#ddlBidang').val();
+        var Area_Kode = $('#ddlArea').val();
+        var Jumlah_Anggaran = $('#txtJumlahAnggaran').val();
+        var Waktu_Mulai = $('#dateFrom').val();
+        var Waktu_Sampai = $('#dateTo').val();
+        var validationMessage = "";
+        
+        if (KP_Kode.length < 1) {
+            validationMessage += "Kategori Program harus di pilih. \n";
+        }
+        if (BP_Kode.length < 1) {
+            validationMessage += "Bidang Program harus di pilih. \n";
+        }
+        if (Judul_Program.length < 1) {
+            validationMessage += "Judul Program harus di isi. \n";
+        }               
+        if (Area_Kode.length < 1) {
+            validationMessage += "Area harus di pilih. \n";
+        }
+        if (Jumlah_Anggaran.length < 1) {
+            validationMessage += "Jumlah Anggaran harus di isi. \n";
+        }
+        if (Waktu_Mulai.length < 1) {
+            validationMessage += "Waktu Mulai harus di isi. \n";
+        }
+        if (Waktu_Sampai.length < 1) {
+            validationMessage += "Waktu Selesai harus di isi. \n";
+        }       
+        if (validationMessage.length > 0) {
+            alert(validationMessage);
+            return false;
+        }
+
         submit();
     });
 
     $('#btnAddMasterBidang').click(function () {
         var transaksiNo = $('#hfTransaksiNo').val()
-        window.location = "/_layouts/15/CSR.SharePointApplication/InputRealisasiPage.aspx?TransaksiNo=" + transaksiNo;
+        window.location = "InputRealisasiPage.aspx?TransaksiNo=" + transaksiNo;
         return false;
     });
 
@@ -96,17 +131,19 @@ function GetSuccessDetailsList(RealisasiList) {
     if (RealisasiList.length > 0) {
         var total = 0;
         for (i = 0; i < RealisasiList.length; i++) {
-            var Jumlah = RealisasiList[i].SumberDanaPGE + RealisasiList[i].SumberDanaPersero + RealisasiList[i].SumberPKBL;
-            var strhtml = '<tr>' +
-                '<td >' + RealisasiList[i].RealisasiNo + ' </td>' +
-                '<td >' + formatDate(dateFromJSON(RealisasiList[i].WaktuMulai), dateFormat) + ' </td>' +
-                '<td >' + formatDate(dateFromJSON(RealisasiList[i].WaktuSelesai), dateFormat) + ' </td>' +
-                '<td >' + RealisasiList[i].Pelaksana + ' </td>' +
-                '<td >' + RealisasiList[i].Penerima + ' </td>' +
-                '<td class="currencyFormat rightAligned">' + Jumlah + '</td>' +
-                '<td ><a href="/_layouts/15/CSR.SharePointApplication/InputRealisasiPage.aspx?RealisasiNo=' + RealisasiList[i].RealisasiNo + '">lihat</a>' + '</td>' +
-                '</tr>';
-            $(strhtml).appendTo($("#tblRealisasi"));
+            if (RealisasiList[i].RealisasiNo != null) {
+                var Jumlah = RealisasiList[i].SumberDanaPGE + RealisasiList[i].SumberDanaPersero + RealisasiList[i].SumberPKBL;
+                var strhtml = '<tr>' +
+                    '<td >' + RealisasiList[i].RealisasiNo + ' </td>' +
+                    '<td >' + formatDate(dateFromJSON(RealisasiList[i].WaktuMulai), dateFormat) + ' </td>' +
+                    '<td >' + formatDate(dateFromJSON(RealisasiList[i].WaktuSelesai), dateFormat) + ' </td>' +
+                    '<td >' + RealisasiList[i].Pelaksana + ' </td>' +
+                    '<td >' + RealisasiList[i].Penerima + ' </td>' +
+                    '<td class="currencyFormat rightAligned">' + Jumlah + '</td>' +
+                    '<td ><a href="InputRealisasiPage.aspx?RealisasiNo=' + RealisasiList[i].RealisasiNo + '">lihat</a>' + '</td>' +
+                    '</tr>';
+                $(strhtml).appendTo($("#tblRealisasi"));
+            }
         }
         $('.currencyFormat').formatCurrency({
             symbol: ''
@@ -132,6 +169,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
+            window.location = "/SharePointFree/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
@@ -151,7 +189,7 @@ function getRequestData() {
     inputProgram.Waktu_Mulai = $('#dateFrom').val();
     inputProgram.Waktu_Sampai = $('#dateTo').val();
     inputProgram.Keterangan = $('#txtKeterangan').val();
-    inputProgram.AttachmentList = saveAttachment();
+    inputProgram.AttachmentList = saveAttachment("P");
     return inputProgram;
 }
 
