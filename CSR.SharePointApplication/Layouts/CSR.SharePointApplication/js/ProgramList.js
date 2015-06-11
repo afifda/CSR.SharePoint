@@ -61,7 +61,7 @@ function GetSuccessProgramList(data) {
         var total = 0;
         for (i = 0; i < data.length; i++) {
             var strhtml = '<tr>' +
-                '<td ><a href="/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
+                '<td ><a href="/Sharepointfree/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
                 '<td >' + data[i].BP_Nama + ' </td>' +
                 '<td >' + data[i].Judul_Program + ' </td>' +
                 '<td >' + data[i].KP_Nama + ' </td>' +

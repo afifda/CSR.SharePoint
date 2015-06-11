@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     Init();
     $('#btnBatal').click(function () {
-        window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+        window.location = "/Sharepointfree/SitePages/Home.aspx";
     });
     $('#btnAddProgram').click(function () {
         var Judul_Program = $('#txtJudul').val();
@@ -118,7 +118,15 @@ function InitializeProgram() {
                 $('#dateTo').val(formatDate(dateFromJSON(Input.Waktu_Sampai), dateFormat));
                 $('#txtKeterangan').val(Input.Keterangan);
                 GetSuccessDetailsList(Input.RealisasiList);
-                GetSuccessAddAttachList(Input.AttachmentList, false);
+                
+                if (Input.Is_Locked == true) {
+                    $('#btnAddProgram').prop('disabled', true);
+                    GetSuccessAddAttachList(Input.AttachmentList, false);
+                }
+                else {
+                    $('#btnAddProgram').prop('disabled', false);
+                    GetSuccessAddAttachList(Input.AttachmentList, true);
+                }
                 
             },
             error: function (response) {
@@ -134,7 +142,7 @@ function GetSuccessDetailsList(RealisasiList) {
         var total = 0;
         for (i = 0; i < RealisasiList.length; i++) {
             if (RealisasiList[i].RealisasiNo != null) {
-                var Jumlah = RealisasiList[i].SumberDanaPGE + RealisasiList[i].SumberDanaPersero + RealisasiList[i].SumberPKBL;
+                var Jumlah = RealisasiList[i].SumberDanaPGEPusat + RealisasiList[i].SumberDanaPGEArea + RealisasiList[i].SumberDanaPersero + RealisasiList[i].SumberPKBL;
                 var strhtml = '<tr>' +
                     '<td >' + RealisasiList[i].RealisasiNo + ' </td>' +
                     '<td >' + formatDate(dateFromJSON(RealisasiList[i].WaktuMulai), dateFormat) + ' </td>' +
@@ -171,7 +179,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+            window.location = "/Sharepointfree/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);

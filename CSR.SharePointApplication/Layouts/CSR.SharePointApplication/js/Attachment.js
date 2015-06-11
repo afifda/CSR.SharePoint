@@ -250,26 +250,13 @@ function GetSuccessAddAttachList(attachmentCRUDList, Aktif) {
                 document.getElementById("Action_ID").style.display = 'none';
                 $(strhtml).appendTo($("#gvAttachment"));
             }
-        } else if ($('#btnSubmit').prop('disabled', true) == $('#btnSubmit').prop('disabled', true)) {
-            for (i = 0; i < result.length; i++) {
-                var rowCount = $('#gvAttachment tr').length;
-                var strhtml = '<tr>' +
-                    '<td class = "ClsNumber">' + rowCount + ' </td>' +
-                    '<td class = "ClsFileName">' + result[i].NamaFile + '</td>' +
-                    '<td class = "ClsPathFile aDocLink"><a href="javascript:void(0)" onclick="downloadDocFunc(\'' + result[i].TempPath.replace(/'/g, "####&&&&") + '\');">' + result[i].TempPath + '</a></td>' +
-					'<td class = "ClsTempFile" td style = "display:none">' + result[i].NamaPath + '</td>' +
-                    '<td class = "ClsAction"><input type="button"  class="button2 ClsRemove" value="Remove" /></td>' +
-                    '</tr>'
-
-                $(strhtml).appendTo($("#gvAttachment"));
-            }
         } else {
             for (i = 0; i < result.length; i++) {
                 var rowCount = $('#gvAttachment tr').length;
                 var strhtml = '<tr>' +
                     '<td class = "ClsNumber">' + rowCount + ' </td>' +
                     '<td class = "ClsFileName">' + result[i].NamaFile + '</td>' +
-                    '<td class = "ClsPathFile aDocLink"><a href="javascript:void(0)" onclick="downloadDocFunc(\'' + result[i].TempPath.replace(/'/g, "####&&&&") + '\');">' + result[i].TempPath + '</a></td>' +
+                    '<td class = "ClsPathFile aDocLink"><a href="javascript:void(0)" onclick="downloadDocFunc(\'' + result[i].NamaPath.replace(/'/g, "####&&&&") + '\');">' + result[i].NamaPath + '</a></td>' +
 					'<td class = "ClsTempFile" td style = "display:none">' + result[i].NamaPath + '</td>' +
                     '<td class = "ClsAction"><input type="button"  class="button2 ClsRemove" value="Remove"/></td>' +
                     '</tr>'
@@ -287,12 +274,20 @@ function GetSuccessAddAttachList(attachmentCRUDList, Aktif) {
 
 function downloadDocFunc(docLink) {
     docLink = docLink.replace("####&&&&", "'");
-    //var requestNo = $.getUrlVars()["TransaksiNo"];
     var requestNo = getUrlVars()["TransaksiNo"];
-    if (requestNo == null)
-        requestNo = $('#hfTransaksiNo').val();
+    var RealisasiNo = getUrlVars()["RealisasiNo"];
 
-    window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + requestNo;
+
+    if (requestNo != null && requestNo != undefined && requestNo !="") {
+        requestNo = $('#hfTransaksiNo').val();
+        window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + requestNo;
+    } else {
+        RealisasiNo = $('#hfRealisasiNo').val();
+        window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + RealisasiNo;
+    }
+        
+
+    
 
     return false;
 }

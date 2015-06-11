@@ -138,30 +138,21 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
 
         private void DownloadFileAttachment(HttpContext context, string docPath, string reqNo)
         {
-            string message = string.Empty;
-  
-
-            //UserInformationLogic userInformationLogic = new UserInformationLogic();
-            
+            string message = string.Empty;  
             try
             {
-                //UserInformationCRUD userInfoCRUD = userInformationLogic.GetUserInformation();
-                //List<string> nrkList = new List<string>();
-
-                //TransportRequestParameterCriteria request = new TransportRequestParameterCriteria() { ReqTransport_No = reqNo };
-                //nrkList.AddRange(new ApprovalPathInformationLogic().GetApproverPathInfo(request).Select(n => n.NRK));
-                //nrkList.Add(new UserInformationLogic().GetRequestorNameByRequestNo(reqNo).NRK);
- 
+                var curSite = SPContext.Current.Site;
+                var curWeb = SPContext.Current.Web;
                 SPSecurity.RunWithElevatedPrivileges(delegate()
-                {
-                    //WorkflowCRUD workflowCRUD = new WorkflowLogic().GetWorkflow((int)Workflow.P3);
+                {                    
                     string fullPath = SiteURL + "/" + docPath;
                     int lastIndex = docPath.LastIndexOf("/");
                     string fileName = docPath.Substring(lastIndex + 1, (docPath.Length - lastIndex - 1));
-
-                    using (SPSite currentSite = new SPSite(SPContext.Current.Site.ID))
+                 
+                    //using (var site = new SPSite(SPContext.Current.Site.ID))
+                    using (var site = new SPSite(curSite.ID))    
                     {
-                        using (SPWeb web = currentSite.OpenWeb(SPContext.Current.Web.ID))
+                        using (SPWeb web = site.OpenWeb(curWeb.ID))
                         {
                             web.AllowUnsafeUpdates = true;
                             string strContentType = string.Empty;

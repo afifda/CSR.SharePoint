@@ -190,11 +190,12 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         Waktu_Sampai = realisasiEntity.WaktuSelesai,
                         Outcome_Diharapkan = string.Empty,
                         Keterangan = realisasiEntity.Keterangan,
-                        Jumlah_Anggaran = realisasiEntity.SumberDanaPersero + realisasiEntity.SumberDanaPGE + realisasiEntity.SumberPKBL,
+                        Jumlah_Anggaran = realisasiEntity.SumberDanaPersero + realisasiEntity.SumberDanaPGEPusat + realisasiEntity.SumberPKBL + realisasiEntity.SumberDanaPGEArea,
                         Created_Date = DateTime.Now,
                         Created_By = User.UserName,
                         Last_Modified_Date = DateTime.Now,
-                        Last_Modified_By = User.UserName
+                        Last_Modified_By = User.UserName,
+                        isplan = false
                     };
                     realisasiEntity.TransaksiNo = logic.SPSaveWithOutput<ProgramEntity>(program, "TransaksiNo");
                     realisasiEntity.RealisasiNo = realisasiEntity.TransaksiNo + "-1";

@@ -11,7 +11,8 @@
         var WaktuSelesai = $('#dateTo').val();
         var Pelaksana = $('#txtPelaksana').val();
         var Penerima = $('#txtPenerima').val();
-        var SumberDanaPGE = $('#txtSumberPGE').val();
+        var SumberDanaPGEPusat = $('#txtSumberPGEPusat').val();
+        var SumberDanaPGEArea = $('#txtSumberPGEArea').val();
         var SumberDanaPersero = $('#txtSumberPersero').val();
         var SumberPKBL = $('#txtSumberPKBL').val();        
 
@@ -41,7 +42,7 @@
         if (Penerima.length < 1) {
             validationMessage += "Penerima harus di isi. \n";
         }
-        if (SumberDanaPGE.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1) {
+        if (SumberDanaPGEPusat.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1 && SumberDanaPGEArea.length < 1) {
             validationMessage += "Tidak ada sumber dana, Silahkan di isi minimal satu sumber dana. \n";
         }
         
@@ -61,7 +62,8 @@
         var WaktuSelesai = $('#dateTo').val();
         var Pelaksana = $('#txtPelaksana').val();
         var Penerima = $('#txtPenerima').val();
-        var SumberDanaPGE = $('#txtSumberPGE').val();
+        var SumberDanaPGEPusat = $('#txtSumberPGEPusat').val();
+        var SumberDanaPGEArea = $('#txtSumberPGEArea').val();
         var SumberDanaPersero = $('#txtSumberPersero').val();
         var SumberPKBL = $('#txtSumberPKBL').val();
 
@@ -91,7 +93,7 @@
         if (Penerima.length < 1) {
             validationMessage += "Penerima harus di isi. \n";
         }
-        if (SumberDanaPGE.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1) {
+        if (SumberDanaPGEPusat.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1 && SumberDanaPGEArea.length < 1) {
             validationMessage += "Tidak ada sumber dana, Silahkan di isi minimal satu sumber dana. \n";
         }
 
@@ -103,11 +105,17 @@
         submitAndLock();
     });
     $('#btnBatal').click(function () {
-        window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+        window.location = "/Sharepointfree/SitePages/Home.aspx";
     });
         
-    $('#txtSumberPGE').blur(function () {
-        $('#txtSumberPGE').formatCurrency({
+    $('#txtSumberPGEPusat').blur(function () {
+        $('#txtSumberPGEPusat').formatCurrency({
+            symbol: ''
+        });
+    });
+    
+    $('#txtSumberPGEArea').blur(function () {
+        $('#txtSumberPGEArea').formatCurrency({
             symbol: ''
         });
     });
@@ -185,21 +193,23 @@ function InitializeRealisasi() {
             $('#dateTo').val(formatDate(dateFromJSON(Input.WaktuSelesai), dateFormat));
             $('#txtPelaksana').val(Input.Pelaksana);
             $('#txtPenerima').val(Input.Penerima);
-            $('#txtSumberPGE').val(Input.SumberDanaPGE);
+            $('#txtSumberPGEPusat').val(Input.SumberDanaPGEPusat);
+            $('#txtSumberPGEArea').val(Input.SumberDanaPGEArea);
             $('#txtSumberPersero').val(Input.SumberDanaPersero);
             $('#txtSumberPKBL').val(Input.SumberPKBL);
             $('#txtKeterangan').val(Input.Keterangan);
             $('.currencyFormat').formatCurrency({
                 symbol: ''
-            });
-            GetSuccessAddAttachList(Input.AttachmentList, false);
+            });            
             if (Input.Is_Locked == true) {
                 $('#btnAddProgram').prop('disabled', true);
                 $('#btnAddProgramAndLock').prop('disabled', true);
+                GetSuccessAddAttachList(Input.AttachmentList, false);
             }
             else {
                 $('#btnAddProgram').prop('disabled', false);
-                $('#btnAddProgramAndLock').prop('disabled', false);                
+                $('#btnAddProgramAndLock').prop('disabled', false);
+                GetSuccessAddAttachList(Input.AttachmentList, true);
             }
 
         },
@@ -223,7 +233,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+            window.location = "/Sharepointfree/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
@@ -244,7 +254,7 @@ function submitAndLock() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+            window.location = "/Sharepointfree/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
@@ -261,11 +271,18 @@ function getRequestData() {
     inputRealisasi.Pelaksana = $('#txtPelaksana').val();
     inputRealisasi.Penerima = $('#txtPenerima').val();
     
-    if ($('#txtSumberPGE').val() == "") {
-        inputRealisasi.SumberDanaPGE = 0
+    if ($('#txtSumberPGEPusat').val() == "") {
+        inputRealisasi.SumberDanaPGEPusat = 0
     }
     else {
-        inputRealisasi.SumberDanaPGE = parseFloat($('#txtSumberPGE').val().replace(/[^0-9\.]+/g, ""));
+        inputRealisasi.SumberDanaPGEPusat = parseFloat($('#txtSumberPGEPusat').val().replace(/[^0-9\.]+/g, ""));
+    }
+
+    if ($('#txtSumberPGEArea').val() == "") {
+        inputRealisasi.SumberDanaPGEArea = 0
+    }
+    else {
+        inputRealisasi.SumberDanaPGEArea = parseFloat($('#txtSumberPGEArea').val().replace(/[^0-9\.]+/g, ""));
     }
 
     if ($('#txtSumberPersero').val() == "") {
