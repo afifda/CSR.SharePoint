@@ -121,10 +121,12 @@ function InitializeProgram() {
                 
                 if (Input.Is_Locked == true) {
                     $('#btnAddProgram').prop('disabled', true);
+                    $('#btnAddMasterBidang').prop('disabled', true);
                     GetSuccessAddAttachList(Input.AttachmentList, false);
                 }
                 else {
                     $('#btnAddProgram').prop('disabled', false);
+                    $('#btnAddMasterBidang').prop('disabled', false);
                     GetSuccessAddAttachList(Input.AttachmentList, true);
                 }
                 

@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
-    LoadAvailableYear();    
+    LoadAvailableYear();
+    $('#btnConfirm').click(function () {
+        Confirm();
+    });
 });
 
 function LoadAvailableYear() {
@@ -130,7 +133,7 @@ function Confirm() {
         datatype: "json",
         async: true,
         success: function (response) {
-            alert("Konfirmasi Sukses")
+            alert("Rencana Program sudah terkunci")
         },
         error: function (response) {
             alert(response.responseText);

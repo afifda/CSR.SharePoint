@@ -370,5 +370,40 @@ namespace CSR.Service.BusinessLogic
             }
 
         }
+
+        //public void sendEmailRencanaProgram(string Area_Code)
+        //{            
+        //    List<EmailEntyti> EmailEntyti = null;
+        //    MasterDataLogic logic = new MasterDataLogic();
+        //    EmailEntyti = logic.SPRead<EmailEntyti>(new EmailEntyti() { Area = Area_Code });
+        //    MasterUserByUserNameEntity UserInformationNew = new MasterUserByUserNameEntity();
+        //    UserInformationNew = UserInformation(SPContext.Current.Web.CurrentUser.LoginName);            
+
+        //    for (int i = 0; i < EmailEntyti.Count; i++)
+        //    {
+        //        try
+        //        {
+        //            MailMessage mM = new MailMessage();
+        //            mM.From = new MailAddress("portal.pge1@pertamina.com");//appsetting
+        //            //string smtpFrom = "portal.pge1@pertamina.com";
+        //            mM.To.Add(EmailEntyti[i].To);
+        //            mM.Subject = EmailEntyti[i].Subject;
+        //            mM.Body = "<html><head>Yth Bapak/Ibu " + EmailEntyti[i].Kepada + "</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.Nama_Pegawai + "  di Area " + UserInformationNew.AreaName + " telah menggirim dan menggunci rencana program'</dt></br><dt></dt></br><dt>Terima Kasih</dt></dl></body></html>";
+        //            mM.IsBodyHtml = true;
+        //            SmtpClient sC = new SmtpClient("ga");
+        //            sC.Credentials = new NetworkCredential("sharepoint2010", "123456", "pgeindonesia");
+        //            sC.Send(mM);
+
+        //            //string smtpServer = "10.1.32.165";//"10.90.1.1";
+        //            //string smtpFrom = "portal.pge1@pertamina.com";
+        //            //MailMessage mailMessage = new MailMessage(smtpFrom, email);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ex.Message.ToString();
+        //        }
+        //    }
+
+        //}
     }
 }

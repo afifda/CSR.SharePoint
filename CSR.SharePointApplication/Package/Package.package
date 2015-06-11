@@ -2,7 +2,7 @@
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="0d01fc0c-c17d-4aee-87aa-29b3baf02fc3" solutionId="0d01fc0c-c17d-4aee-87aa-29b3baf02fc3" resetWebServer="false" sharePointProductVersion="15.0" name="CSR.SharePointApplication" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <assemblies>
     <projectOutputAssembly location="CSR.Service.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\CSR.Service\CSR.Service.csproj" />
-    <customAssembly location="UtilityLibrary.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\PGE\UtilityLibrary.dll" />
+    <customAssembly location="UtilityLibrary.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\..\UtilityLibrary.dll" />
   </assemblies>
   <features>
     <featureReference itemId="1e9d1537-d3fe-4233-b68e-07039c5b7a52" />

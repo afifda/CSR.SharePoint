@@ -70,6 +70,10 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             try
             {
                 int row = new BaseLogic().UpdateLockedStatus(transNo, "P", true);
+                //MasterUserByUserNameEntity UserInformationNew = new MasterUserByUserNameEntity();
+                //UserInformationNew = UserInformation;
+                //BaseLogic baselogic = new BaseLogic();
+                //baselogic.sendEmailRencanaProgram(UserInformationNew.AreaCode);
             }
             catch (Exception ex)
             {
