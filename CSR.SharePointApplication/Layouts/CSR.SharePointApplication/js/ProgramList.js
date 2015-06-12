@@ -23,6 +23,7 @@ function LoadAvailableYear() {
             $.each(result, function (key, value) {
                 $("#ddlYear").append($("<option></option>").val(result).html(result));
             });
+            $('#ddlArea').prop('disabled', true);
             LoadProgramList();
             },
         error: function (response) {            
@@ -32,26 +33,44 @@ function LoadAvailableYear() {
     return true;
 }
 
-function SuccessAddYear(data, status, xhr) {
-    var result = data;
-    $.each(result, function (key, value) {
-        $("#ddlYear").append($("<option></option>").val
-     (result).html(result));
+function LoadAvailableArea() {
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=getAvailableArea";
+    $.ajax({
+        type: "POST",
+        url: handlerUrl,
+        data: {},
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        async: "false",
+        success: function (response) {
+            var result = JSON.parse(response);
+            $.each(result, function (key, value) {
+                $("#ddlArea").append($("<option></option>").val(result.AreaCode).html(result.AreaName));
+            });
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
     });
-    LoadProgramList();
+    return true;
 }
 
-
 function LoadProgramList() {
-    if ($('#hfIsAdmin').val() == "1") {
+    var strArea = "";
+    LoadAvailableArea();
+    if ($('#hfIsAdmin').val() == "1") {        
         $('#btnUnlock').show();
         $('#btnUnlock').click(function () {
             Unlock();
         });
+        $('#ddlArea').prop('disabled', false);
+        strArea = "&Area=" + $('#hfSelectedArea').val();        
     }
-    var yearSelected = $('#ddlYear').val();
+    $('#ddlArea').val($('#hfSelectedArea').val());
+    var yearSelected = $('#hfSelectedYear').val();
+    $('#ddlYear').val(yearSelected);
     $('.appr').prop('disabled', $.find(':input[class=chk][type=checkbox]:checked').length == 0);
-    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=loadProgramList&Year=" + yearSelected;
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=loadProgramList&Year=" + yearSelected + strArea;
     $.ajax({
         type: "POST",
         url: handlerUrl,

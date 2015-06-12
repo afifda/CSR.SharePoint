@@ -7,12 +7,28 @@
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProgramListUserControl.ascx.cs" Inherits="CSR.SharePointApplication.ProgramList.ProgramListUserControl" %>
 
+<style>
+    table.display td:first-child {
+        text-align: center;
+    }
+</style>
+
+<div id="wrapping" class="clearfix">    
+    <div id="left-side">
+        <div class="div">
+            <select id="ddlYear" class="input"></select>
+            <asp:HiddenField ID="hfSelectedYear" runat="server" ClientIDMode="Static"/>
+        </div>
+        <div class="div">
+            <select id="ddlArea" class="input"></select>
+            <asp:HiddenField ID="hfSelectedArea" runat="server" ClientIDMode="Static"/>
+        </div>
+    </div>
+    <div id="right-side"> 
+    </div>
+</div>
 <div id="wrapping" class="clearfix">
     <div id="one-side">
-        <div class="title-h1">Program List</div>
-        <div class="div">
-             <select id="ddlYear" class="input"></select>
-        </div>
         <div class="button-template">
             <asp:HiddenField ID="hfIsAdmin" runat="server" ClientIDMode="Static"/>
             <input type="button" id="btnGenerateTable" value="Lihat" class="button"/>
@@ -20,9 +36,10 @@
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>        
     </div>
     <br /><br />
-    <table id="tblProgramList" class="display" cellspacing="1" width="100%">
+    <%--<table id="tblProgramList" class="display" cellspacing="1" width="100%">--%>
+    <table id="tblProgramList" class="tabelgrid display">
         <thead>
-            <tr>    
+            <%--<tr>    
                 <th></th>            
                 <th title="Program No"></th>
                 <th title="Bidang Program"></th>
@@ -32,7 +49,7 @@
                 <th title="Keterangan"></th>
                 <th title="Jumlah Anggaran"></th>
                 <th title="Status"></th>
-            </tr>
+            </tr>--%>
             <tr>         
                 <th>
                     <input type="checkbox" id="checkAll" />

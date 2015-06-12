@@ -48,10 +48,14 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 case "getavailableyear":
                     GetAvailableYear(context);
                     break;
+                case "getavailablearea":
+                    GetAvailableArea(context);
+                    break;
                 case "loadprogramlist":
                     int year1;
                     if (!int.TryParse(context.Request.Params["Year"], out year1)) break;
-                    LoadProgramList(context, year1);
+                    string strArea = context.Request.Params["Area"];
+                    LoadProgramList(context, year1, strArea);
                     break;
                 case "confirmprogramlist":
                     int year2;
@@ -70,6 +74,14 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     UpdateUnlockedRealisasi(context, RealNo);
                     break;
             }
+        }
+
+        private void GetAvailableArea(HttpContext context)
+        {
+            List<MasterAreaEntity> Available_Area = new MasterDataLogic().Read<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
+            MasterAreaEntity AllArea = new MasterAreaEntity(){ AreaCode = "0", AreaName = "--ALL--"};
+            Available_Area.Insert(0, AllArea);
+            context.Response.Write(new JavaScriptSerializer().Serialize(Available_Area));
         }
 
         private void UpdateLockedProgram(HttpContext context, int year, string transaksiList)
@@ -113,7 +125,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         }
 
 
-        private void LoadProgramList(HttpContext context, int year)
+        private void LoadProgramList(HttpContext context, int year, string area)
         {
             List<ProgramEntity> programList = new ProgramLogic().GetProgramList(year);
 
@@ -122,8 +134,17 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             if (UserInformationNew.AreaName != "Jakarta")
             {
                 programList = (from p in programList
-                              where p.Area_Kode == UserInformation.AreaCode
-                              select p).ToList();
+                               where p.Area_Kode == UserInformation.AreaCode
+                               select p).ToList();
+            }
+            else
+            {
+                if (area != "0") 
+                {
+                    programList = (from p in programList
+                                   where p.Area_Kode == area
+                                   select p).ToList();
+                }
             }
             context.Response.Write(new JavaScriptSerializer().Serialize(programList));
         }

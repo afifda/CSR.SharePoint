@@ -30,6 +30,21 @@ namespace CSR.SharePointApplication.ProgramList
             {
                 this.hfIsAdmin.Value = "1";
             }
+
+            this.hfSelectedYear.Value = DateTime.Now.Year.ToString();
+            string strYear = Request.QueryString["Year"];
+            if (string.IsNullOrEmpty(strYear))
+            {
+                int _year;
+                if (int.TryParse(strYear, out _year)) this.hfSelectedYear.Value = _year.ToString(); 
+            }
+
+            this.hfSelectedYear.Value = UserInformation.AreaCode;
+            string strArea = Request.QueryString["Area"];
+            if (string.IsNullOrEmpty(strYear))
+            {
+                this.hfSelectedArea.Value = strArea;
+            }
         }
     }
 }

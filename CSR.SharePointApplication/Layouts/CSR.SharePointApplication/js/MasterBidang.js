@@ -45,7 +45,7 @@ function Init() {
                     var strhtml = '<tr id="BidangRow"' + seq + '>' +
                         '<td style = "display:none">' + Bidang[i].BP_Kode + ' </td>' +
                         '<td >' + Bidang[i].BP_Nama + ' </td>' +                        
-                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Edit"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
+                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Ubah"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
                     $(strhtml).appendTo($("#tblMasterBidang"));
 
