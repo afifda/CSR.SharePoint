@@ -203,14 +203,14 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 SPSecurity.RunWithElevatedPrivileges(delegate()
                 {                    
                     //WorkflowCRUD workflowCRUD = new WorkflowLogic().GetWorkflow((int)Workflow.P3);
-                    string fullPath = SiteURL + "/SharepointDzaky" + "/" + docPath;
+                    string fullPath = SiteURL + "/SharepointFree" + "/" + docPath;
                     int lastIndex = docPath.LastIndexOf("/");
                     string fileName = docPath.Substring(lastIndex + 1, (docPath.Length - lastIndex - 1));
                  
                     using (SPSite currentSite = new SPSite(SiteURL))
                     {
                         //using (SPWeb web = currentSite.OpenWeb(SPContext.Current.Web.ID))
-                        using (SPWeb web = currentSite.OpenWeb("/SharepointDzaky"))
+                        using (SPWeb web = currentSite.OpenWeb("/SharepointFree"))
                         {
                             web.AllowUnsafeUpdates = true;
                             string strContentType = string.Empty;
