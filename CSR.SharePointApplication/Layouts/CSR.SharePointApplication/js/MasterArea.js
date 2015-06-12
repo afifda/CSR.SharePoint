@@ -53,7 +53,7 @@ function Init()
                     var strhtml = '<tr id="AreaRow_"' + seq + '>' +
                         '<td >' + Area[i].AreaCode + ' </td>' +
                         '<td >' + Area[i].AreaName + ' </td>' +                        
-                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Edit"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
+                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Ubah"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
                     $(strhtml).appendTo($("#tblMasterArea"));
                     

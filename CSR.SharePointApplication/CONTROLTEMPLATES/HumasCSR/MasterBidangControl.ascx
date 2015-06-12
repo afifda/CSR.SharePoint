@@ -21,7 +21,7 @@
            </table>
         </div>
         <div class="button-template2">
-            <input type="button" id="btnAddMasterBidang" value="Add"/>
+            <input type="button" id="btnAddMasterBidang" value="Tambah"/>
         </div>
         
         <div class="modal" id="modalMasterBidang">
@@ -43,7 +43,8 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" id="btnSaveMasterBidang" value="Simpan" class="button"/>
-                        <button type="button" data-dismiss="modal" class="button">Tutup</button>
+                        <input type="button" data-dismiss="modal" value="Batal" class="button"/>
+                        <%--<button type="button" data-dismiss="modal" class="button">Tutup</button>--%>
                     </div>
                 </div>
             </div>

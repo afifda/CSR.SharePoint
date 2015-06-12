@@ -28,7 +28,7 @@
            </table>
         </div>
         <div class="button-template2">
-            <input type="button" id="btnAddMasterArea" value="Add"/>
+            <input type="button" id="btnAddMasterArea" value="Tambah"/>
         </div>
         
         <div class="modal" id="modalMasterArea">
@@ -92,8 +92,9 @@
                         </div>                
                     </div>
                     <div class="modal-footer">
-                        <input type="button" id="btnSaveMasterArea" value="Add" class="button"/>
-                        <button type="button" data-dismiss="modal" class="button">Close</button>
+                        <input type="button" id="btnSaveMasterArea" value="Simpan" class="button"/>
+                        <input type="button" data-dismiss="modal" value="Batal" class="button"/>
+                        <%--<button type="button" data-dismiss="modal" class="button">Close</button>--%>
                     </div>
                 </div>
             </div>

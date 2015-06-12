@@ -64,7 +64,7 @@ function Init() {
                         '<td >' + User[i].UserName + ' </td>' +
                         '<td >' + User[i].AreaName + ' </td>' +
                         '<td style = "display:none">' + User[i].AreaCode + ' </td>' +
-                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Edit"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
+                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Ubah"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
                     $(strhtml).appendTo($("#tblMasterUser"));
 
