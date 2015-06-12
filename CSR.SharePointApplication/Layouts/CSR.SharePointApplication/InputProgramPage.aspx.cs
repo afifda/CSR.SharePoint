@@ -20,6 +20,10 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             {
                 Response.Redirect("/_layouts/15/eWorkflow.WebAccess/ErrorPage.aspx?ErrCode=NotAuthorized", true);
             }
+            if (User.AreaName == "Jakarta")
+            {
+                this.hfIsAdmin.Value = "1";
+            }
             string strTransNo = Request.QueryString["TransaksiNo"];
             if (!string.IsNullOrEmpty(strTransNo))
             {

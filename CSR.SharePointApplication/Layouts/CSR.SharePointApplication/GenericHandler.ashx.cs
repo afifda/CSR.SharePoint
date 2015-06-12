@@ -56,24 +56,55 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 case "confirmprogramlist":
                     int year2;
                     if (!int.TryParse(context.Request.Params["Year"], out year2)) break;
-                    UpdateLockedProgram(context, year2);
+                    string TransaksiList = context.Request.Params["TransaksiNo"];
+                    UpdateLockedProgram(context, year2, TransaksiList);
+                    break;
+                case "unlockprogramlist":
+                    int year3;
+                    if (!int.TryParse(context.Request.Params["Year"], out year3)) break;
+                    string UnlockTransaksiList = context.Request.Params["TransaksiNo"];
+                    UpdateUnlockedProgram(context, year3, UnlockTransaksiList);
+                    break;
+                case "unlockrealisasi":
+                    string RealNo = context.Request.Params["RealNo"];
+                    UpdateUnlockedRealisasi(context, RealNo);
                     break;
             }
         }
 
-        private void UpdateLockedProgram(HttpContext context, int year)
+        private void UpdateLockedProgram(HttpContext context, int year, string transaksiList)
         {
-            List<ProgramEntity> program = new BaseLogic().SPRead<ProgramEntity>(new ProgramEntity() { TransaksiNo = "" });
-            List<string> transNo = (from p in program
-                                    where p.Area_Kode == UserInformation.AreaCode
-                                    select p.TransaksiNo).ToList();
+            List<string> transNo = transaksiList.Split('|').ToList();
             try
             {
                 int row = new BaseLogic().UpdateLockedStatus(transNo, "P", true);
-                //MasterUserByUserNameEntity UserInformationNew = new MasterUserByUserNameEntity();
-                //UserInformationNew = UserInformation;
-                //BaseLogic baselogic = new BaseLogic();
-                //baselogic.sendEmailRencanaProgram(UserInformationNew.AreaCode);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void UpdateUnlockedProgram(HttpContext context, int year, string transaksiList)
+        {
+            List<string> transNo = transaksiList.Split('|').ToList();
+            try
+            {
+                int row = new BaseLogic().UpdateLockedStatus(transNo, "P", false);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void UpdateUnlockedRealisasi(HttpContext context, string realNo)
+        {
+            List<string> transNo = new List<string>();
+            transNo.Add(realNo);
+            try
+            {
+                int row = new BaseLogic().UpdateLockedStatus(transNo, "R", false);
             }
             catch (Exception ex)
             {

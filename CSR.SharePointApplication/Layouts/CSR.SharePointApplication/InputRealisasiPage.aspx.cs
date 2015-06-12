@@ -211,7 +211,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }
                    
-                    baselogic.sendEmailThroughGmail(program.Area_Kode,program.TransaksiNo);
+                    //baselogic.sendEmailThroughGmail(program.Area_Kode,program.TransaksiNo);
                 }
             }
             catch (Exception ex)

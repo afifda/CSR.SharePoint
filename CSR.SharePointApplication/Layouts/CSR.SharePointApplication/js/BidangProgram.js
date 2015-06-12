@@ -144,6 +144,10 @@ function GetSuccessDetailsList(RealisasiList) {
         var total = 0;
         for (i = 0; i < RealisasiList.length; i++) {
             if (RealisasiList[i].RealisasiNo != null) {
+                var strUnlock = "";
+                if ($('#hfIsAdmin').val() == "1" && RealisasiList[i].Is_Locked) {
+                    strUnlock = '&nbsp<a href="javasdownloadDcript:void(0)" onclick="unlockFunc(\'' + RealisasiList[i].RealisasiNo + '\');">Buka Kunci</a>;'
+                }
                 var Jumlah = RealisasiList[i].SumberDanaPGEPusat + RealisasiList[i].SumberDanaPGEArea + RealisasiList[i].SumberDanaPersero + RealisasiList[i].SumberPKBL;
                 var strhtml = '<tr>' +
                     '<td >' + RealisasiList[i].RealisasiNo + ' </td>' +
@@ -152,13 +156,13 @@ function GetSuccessDetailsList(RealisasiList) {
                     '<td >' + RealisasiList[i].Pelaksana + ' </td>' +
                     '<td >' + RealisasiList[i].Penerima + ' </td>' +
                     '<td class="currencyFormat rightAligned">' + Jumlah + '</td>' +
-                    '<td ><a href="InputRealisasiPage.aspx?RealisasiNo=' + RealisasiList[i].RealisasiNo + '">lihat</a>' + '</td>' +
+                    '<td ><a href="InputRealisasiPage.aspx?RealisasiNo=' + RealisasiList[i].RealisasiNo + '">lihat</a>' + strUnlock + '</td>' +
                     '</tr>';
                 $(strhtml).appendTo($("#tblRealisasi"));
             }
         }
         $('.currencyFormat').formatCurrency({
-            symbol: ''
+            symbol: 'IDR '
         });
         $('.rightAligned').css('text-align', 'right');
     }
@@ -166,6 +170,12 @@ function GetSuccessDetailsList(RealisasiList) {
     else {
         alert('System cannot query your keyword...');
     }
+}
+
+function unlockFunc(realNo) {
+    window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=UnlockRealisasi&RealNo=" + realNo;
+    alert("Realisasi telah berhasil dibuka.")
+    return false;
 }
 
 function submit() {

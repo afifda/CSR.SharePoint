@@ -14,6 +14,7 @@
              <select id="ddlYear" class="input"></select>
         </div>
         <div class="button-template">
+            <asp:HiddenField ID="hfIsAdmin" runat="server" ClientIDMode="Static"/>
             <input type="button" id="btnGenerateTable" value="Lihat" class="button"/>
         </div>
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>        
@@ -21,7 +22,8 @@
     <br /><br />
     <table id="tblProgramList" class="display" cellspacing="1" width="100%">
         <thead>
-            <tr>                
+            <tr>    
+                <th></th>            
                 <th title="Program No"></th>
                 <th title="Bidang Program"></th>
                 <th title="Judul Program"></th>
@@ -29,21 +31,27 @@
                 <th title="Area"></th>
                 <th title="Keterangan"></th>
                 <th title="Jumlah Anggaran"></th>
+                <th title="Status"></th>
             </tr>
-            <tr>                
-                <th> Program No</th>
+            <tr>         
+                <th>
+                    <input type="checkbox" id="checkAll" />
+                </th>       
+                <th class="sorting"> Program No</th>
                 <th> Bidang Program</th>
                 <th> Judul Program</th>
                 <th> Kategori</th>
                 <th> Area</th>
                 <th> Keterangan</th>
                 <th> Jumlah Anggaran</th>
+                <th> Status</th>
             </tr>
          </thead>
     </table>
 </div>
  <div class="modal-footer">
     <input type="button" id="btnConfirm" value="Kirim dan Kunci" class="button"/>
+    <input type="button" id="btnUnlock" value="Buka Kunci" class="button" style="display:none"/>
 </div>
 
 <link href="../../_layouts/15/CSR.SharePointApplication/CSS/jquery.dataTables.min.css" rel="stylesheet" />
