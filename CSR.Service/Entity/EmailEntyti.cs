@@ -21,20 +21,22 @@ namespace CSR.Service.Entity
         [Column(name: "Message", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Message { get; set; }
 
-        [Column(name: "Bidang", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public string Bidang { get; set; }
-
         [Column(name: "Kepada", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Kepada { get; set; }
 
-        [Column(name: "Type", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public string Type { get; set; }
-
-        [Column(name: "URL", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public string URL { get; set; }
         public string Area_Nama { get; set; }
         public string BP_Nama { get; set; }
         public string NameType { get; set; }
+
+        //[Column(name: "Bidang", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
+        //public string Bidang { get; set; }
+
+        //[Column(name: "Type", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
+        //public string Type { get; set; }
+
+        //[Column(name: "URL", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
+        //public string URL { get; set; }
+        
 
 
 

@@ -111,6 +111,7 @@ namespace CSR.Service.Entity
         public int BP_Kode { get; set; }
         public string Judul_Program { get; set; }
         public string Area_Kode { get; set; }
+        public string BP_Nama { get; set; }
 
         public List<AttachmentEntity> AttachmentList { get; set; }
     }

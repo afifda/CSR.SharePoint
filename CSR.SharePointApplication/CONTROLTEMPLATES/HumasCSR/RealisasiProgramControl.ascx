@@ -104,6 +104,6 @@
     <input type="button" id="btnAddProgramAndLock" class="button" value="Simpan dan Kunci"/>
     <input type="button" id="btnBatal" class="button" value="Batal"/>    
 </div>
-
+<script src="../../../_layouts/15/CSR.SharePointApplication/js/date.js"></script>
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/jquery.formatCurrency-1.4.0.min.js"></script>
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/RealisasiProgram.js"></script>

@@ -139,29 +139,22 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         private void DownloadFileAttachment(HttpContext context, string docPath, string reqNo)
         {
             string message = string.Empty;
-  
-
-            //UserInformationLogic userInformationLogic = new UserInformationLogic();
-            
+            var SiteURL = SPContext.Current.Web.Url;           
             try
             {
-                //UserInformationCRUD userInfoCRUD = userInformationLogic.GetUserInformation();
-                //List<string> nrkList = new List<string>();
-
-                //TransportRequestParameterCriteria request = new TransportRequestParameterCriteria() { ReqTransport_No = reqNo };
-                //nrkList.AddRange(new ApprovalPathInformationLogic().GetApproverPathInfo(request).Select(n => n.NRK));
-                //nrkList.Add(new UserInformationLogic().GetRequestorNameByRequestNo(reqNo).NRK);
+ 
  
                 SPSecurity.RunWithElevatedPrivileges(delegate()
                 {
                     //WorkflowCRUD workflowCRUD = new WorkflowLogic().GetWorkflow((int)Workflow.P3);
-                    string fullPath = SiteURL + "/" + docPath;
+                    string fullPath = SiteURL + "/SharepointDzaky" + "/" + docPath;
                     int lastIndex = docPath.LastIndexOf("/");
                     string fileName = docPath.Substring(lastIndex + 1, (docPath.Length - lastIndex - 1));
 
-                    using (SPSite currentSite = new SPSite(SPContext.Current.Site.ID))
+                    using (SPSite currentSite = new SPSite(SiteURL))
                     {
-                        using (SPWeb web = currentSite.OpenWeb(SPContext.Current.Web.ID))
+                        //using (SPWeb web = currentSite.OpenWeb(SPContext.Current.Web.ID))
+                        using (SPWeb web = currentSite.OpenWeb("/SharepointDzaky"))
                         {
                             web.AllowUnsafeUpdates = true;
                             string strContentType = string.Empty;

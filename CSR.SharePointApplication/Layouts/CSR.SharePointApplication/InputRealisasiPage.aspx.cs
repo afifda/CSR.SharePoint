@@ -175,7 +175,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }
-                    baselogic.sendEmailThroughGmail(realisasiList[0].Area_Kode, realisasiList[0].TransaksiNo);
+                    baselogic.sendEmailThroughGmail(realisasiList[0].Area_Kode, realisasiList[0].TransaksiNo, realisasiList[0].BP_Nama);
 
                 }
                 else
@@ -210,7 +210,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }
                    
-                    baselogic.sendEmailThroughGmail(program.Area_Kode,program.TransaksiNo);
+                    baselogic.sendEmailThroughGmail(program.Area_Kode,program.TransaksiNo,program.BP_Nama);
                 }
             }
             catch (Exception ex)
