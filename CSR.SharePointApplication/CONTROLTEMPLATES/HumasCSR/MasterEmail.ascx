@@ -15,10 +15,10 @@
                   <thead>                
                     <tr>   
                        <th class="header-grid">Area Code</th>
-                        <th class="header-grid">Bidang</th>
+                        <%--<th class="header-grid">Bidang</th>--%>
                         <th class="header-grid">Kepada</th>
-                        <th class="header-grid">Type</th>
-                        <th class="header-grid">URL</th>
+                        <%--<th class="header-grid">Type</th>--%>
+                        <%--<th class="header-grid">URL</th>--%>
                        <th class="header-grid">Email</th>
                        <th class="header-grid">Subject</th>
                        <th class="header-grid">Message</th>
@@ -28,7 +28,7 @@
            </table>
         </div>
         <div class="button-template2">
-            <input type="button" id="btnAddMasterArea" value="Tambah"/>
+            <input type="button" id="btnAddMasterArea" value="Add"/>
         </div>
         
         <div class="modal" id="modalMasterArea">
@@ -45,17 +45,17 @@
                                 <span class="titikdua">:</span>                                
                                 <select id="txtArea" class="input"></select>
                             </div>
-                            <div class="div">
+                            <%--<div class="div">
                                 <span class="lbl">Bidang <span class="red">*</span></span>
                                 <span class="titikdua">:</span>                                
                                 <select id="txtBidang" class="input"></select>
-                            </div>
+                            </div>--%>
                             <div class="div">
                                 <span class="lbl">Kepada <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtKepada" class="input" id="txtKepada" type="text" />
                             </div>
-                            <div class="div">
+                            <%--<div class="div">
                                 <span class="lbl">TypeProgram</span>
                                 <span class="titikdua">:</span>
 				                <table>
@@ -68,12 +68,12 @@
 						                </td>		
 					                </tr>
 				                </table>   
-                            </div>
-                            <div class="div">
+                            </div>--%>
+                            <%--<div class="div">
                                 <span class="lbl">AlamatURL<span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtURL" class="input" id="txtURL" type="text" />
-                            </div>
+                            </div>--%>
                             <div class="div">
                                 <span class="lbl">Email <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
@@ -93,8 +93,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" id="btnSaveMasterArea" value="Simpan" class="button"/>
-                        <input type="button" data-dismiss="modal" value="Batal" class="button"/>
-                        <%--<button type="button" data-dismiss="modal" class="button">Close</button>--%>
+                        <button type="button" data-dismiss="modal" class="button">Keluar</button>
                     </div>
                 </div>
             </div>

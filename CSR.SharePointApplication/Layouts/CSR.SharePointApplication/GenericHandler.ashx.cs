@@ -134,8 +134,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             if (UserInformationNew.AreaName != "Jakarta")
             {
                 programList = (from p in programList
-                               where p.Area_Kode == UserInformation.AreaCode
-                               select p).ToList();
+                              where p.Area_Kode == UserInformation.AreaCode
+                              select p).ToList();
             }
             else
             {
@@ -144,7 +144,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     programList = (from p in programList
                                    where p.Area_Kode == area
                                    select p).ToList();
-                }
+            }
             }
             context.Response.Write(new JavaScriptSerializer().Serialize(programList));
         }
@@ -195,20 +195,22 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         private void DownloadFileAttachment(HttpContext context, string docPath, string reqNo)
         {
             string message = string.Empty;  
+            var SiteURL = SPContext.Current.Web.Url;           
             try
             {
-                var curSite = SPContext.Current.Site;
-                var curWeb = SPContext.Current.Web;
+ 
+ 
                 SPSecurity.RunWithElevatedPrivileges(delegate()
                 {                    
-                    string fullPath = SiteURL + "/" + docPath;
+                    //WorkflowCRUD workflowCRUD = new WorkflowLogic().GetWorkflow((int)Workflow.P3);
+                    string fullPath = SiteURL + "/SharepointDzaky" + "/" + docPath;
                     int lastIndex = docPath.LastIndexOf("/");
                     string fileName = docPath.Substring(lastIndex + 1, (docPath.Length - lastIndex - 1));
                  
-                    //using (var site = new SPSite(SPContext.Current.Site.ID))
-                    using (var site = new SPSite(curSite.ID))    
+                    using (SPSite currentSite = new SPSite(SiteURL))
                     {
-                        using (SPWeb web = site.OpenWeb(curWeb.ID))
+                        //using (SPWeb web = currentSite.OpenWeb(SPContext.Current.Web.ID))
+                        using (SPWeb web = currentSite.OpenWeb("/SharepointDzaky"))
                         {
                             web.AllowUnsafeUpdates = true;
                             string strContentType = string.Empty;

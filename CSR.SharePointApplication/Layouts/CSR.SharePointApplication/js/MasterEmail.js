@@ -61,10 +61,10 @@ function Init() {
                     var seq = i + 1;
                     var strhtml = '<tr id="AreaRow_"' + seq + '>' +
                         '<td >' + Area[i].Area + ' </td>' +
-                        '<td >' + Area[i].Bidang + ' </td>' + 
+                        //'<td >' + Area[i].Bidang + ' </td>' + 
                         '<td >' + Area[i].Kepada + ' </td>' +
-                        '<td >' + Area[i].Type + ' </td>' +
-                        '<td >' + Area[i].URL + ' </td>' +
+                        //'<td >' + Area[i].Type + ' </td>' +
+                        //'<td >' + Area[i].URL + ' </td>' +
                         '<td >' + Area[i].To + ' </td>' +
                         '<td >' + Area[i].Subject + ' </td>' +
                         '<td >' + Area[i].Message + ' </td>' +
@@ -132,21 +132,18 @@ function editArea() {
     $("#hfEditMode").val("1");
     $("#modalMasterArea").modal("show");
     $("#txtArea").val(row.children()[0].innerText).prop("disabled", false);
-    $("#txtBidang").val(row.children()[1].innerText).prop("disabled", false);
-    $("#txtKepada").val(row.children()[2].innerText);
-    if (row.children()[3].innerText = "P") {
-        document.getElementById("RadioProgram").checked = true;
-    } else {
-        document.getElementById("RadioRealisasi").checked = true;
-    }
-
-    $("#txtURL").val(row.children()[4].innerText)
-    $("#txtTo").val(row.children()[5].innerText)
-    $("#txtSubject").val(row.children()[6].innerText)
-    $("#txtMessage").val(row.children()[7].innerText)
-
-
-}
+    $("#txtKepada").val(row.children()[1].innerText);
+    $("#txtTo").val(row.children()[2].innerText)
+    $("#txtSubject").val(row.children()[3].innerText)
+    $("#txtMessage").val(row.children()[4].innerText)
+    //$("#txtBidang").val(row.children()[1].innerText).prop("disabled", false);
+    //if (row.children()[3].innerText = "P") {
+    //    document.getElementById("RadioProgram").checked = true;
+    //} else {
+    //    document.getElementById("RadioRealisasi").checked = true;
+    //}
+    //$("#txtURL").val(row.children()[4].innerText)
+ }
 
 function deleteArea() {
     var $element = this;
@@ -189,14 +186,14 @@ function saveEmail() {
     masterUser.To = $("#txtTo").val();
     masterUser.Subject = $("#txtSubject").val();
     masterUser.Message = $("#txtMessage").val();
-    masterUser.Bidang = $("#txtBidang").val();
     masterUser.Kepada = $("#txtKepada").val();
-    var type = $('input[name=Program]:checked').val();
-    if (type != 0) {
-        var type = $('input[name=Realisasi]:checked').val();
-    }
-    masterUser.Type = type;
-    masterUser.URL = $("#txtURL").val();
+    //masterUser.Bidang = $("#txtBidang").val();
+    //var type = $('input[name=Program]:checked').val();
+    //if (type != 0) {
+    //    var type = $('input[name=Realisasi]:checked').val();
+    //}
+    //masterUser.Type = type;
+    //masterUser.URL = $("#txtURL").val();
     var parameter = new Object();
     parameter.masterEmailString = JSON.stringify(masterUser);
     parameter.isEdit = EditMethod;
