@@ -45,7 +45,7 @@ function Init() {
                     var strhtml = '<tr id="KategoriRow_"' + seq + '>' +
                         '<td style = "display:none">' + Kategori[i].KP_Kode + ' </td>' +
                         '<td >' + Kategori[i].KP_Nama + ' </td>' +                        
-                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Edit"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
+                        '<td align="Center"><input type="button"  class="button2 btnEdit" value="Ubah"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
                     $(strhtml).appendTo($("#tblMasterKategori"));
 

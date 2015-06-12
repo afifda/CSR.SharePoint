@@ -8,20 +8,31 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProgramListUserControl.ascx.cs" Inherits="CSR.SharePointApplication.ProgramList.ProgramListUserControl" %>
 
 <div id="wrapping" class="clearfix">
-    <div id="one-side">
-        <div class="title-h1">Program List</div>
-        <div class="div">
-             <select id="ddlYear" class="input"></select>
+    <%--<div class="title-h1">Input Program</div>--%>
+        <div id="left-side">
+            <div class="div">
+                <select id="ddlYear" class="input"></select>
+            </div>
         </div>
+        <div id="right-side"> 
+        </div>
+</div>
+<div id="wrapping" class="clearfix">
+    <div id="one-side">
+        <%--<div class="title-h1">Program List</div>--%>
+        <%--<div class="div">
+             <select id="ddlYear" class="input"></select>
+        </div>--%>
         <div class="button-template">
             <input type="button" id="btnGenerateTable" value="Lihat" class="button"/>
         </div>
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>        
     </div>
     <br /><br />
-    <table id="tblProgramList" class="display" cellspacing="1" width="100%">
+    <%--<table id="tblProgramList" class="display" cellspacing="1" width="100%">--%>
+    <table id="tblProgramList" class="tabelgrid">
         <thead>
-            <tr>                
+            <%--<tr>                
                 <th title="Program No"></th>
                 <th title="Bidang Program"></th>
                 <th title="Judul Program"></th>
@@ -29,15 +40,15 @@
                 <th title="Area"></th>
                 <th title="Keterangan"></th>
                 <th title="Jumlah Anggaran"></th>
-            </tr>
+            </tr>--%>
             <tr>                
-                <th> Program No</th>
-                <th> Bidang Program</th>
-                <th> Judul Program</th>
-                <th> Kategori</th>
-                <th> Area</th>
-                <th> Keterangan</th>
-                <th> Jumlah Anggaran</th>
+                <th class="header-grid"> Program No</th>
+                <th class="header-grid"> Bidang Program</th>
+                <th class="header-grid"> Judul Program</th>
+                <th class="header-grid"> Kategori</th>
+                <th class="header-grid"> Area</th>
+                <th class="header-grid"> Keterangan</th>
+                <th class="header-grid"> Jumlah Anggaran</th>
             </tr>
          </thead>
     </table>

@@ -37,14 +37,15 @@
         </div>        
         <div id="right-side">            
             <div class="div">
-                <span class="lbl">Jumlah Anggaran<span class="red">*</span></span>
+                <span class="lbl">Jumlah Anggaran (IDR) <span class="red"> *</span></span>
                 <span class="titikdua">:</span>
                 <input type="text" id="txtJumlahAnggaran" class="input currencyFormat" onkeypress="return isNumberKey(event)"/>
             </div> 
             <div class="div">
                 <span class="lbl">Outcome Yang di Harapkan </span>
                 <span class="titikdua">:</span>
-                <input type="text" id="txtOutcome" class="input" />           
+                <asp:TextBox ID="txtOutcome" runat="server" TextMode="MultiLine" Rows="5" CssClass="input-textarea" ClientIDMode="Static"></asp:TextBox>
+                <%--<input type="text" id="txtOutcome" class="input" />--%>           
             </div>
             <div class="div">
                 <span class="lbl">Waktu <span class="red">*</span></span>
@@ -95,13 +96,14 @@
            </table>
         </div>
         <div class="button-template2">
-            <input type="button" id="btnAddMasterBidang" value="Add"/>
+            <input type="button" id="btnAddMasterBidang" value="Tambah"/>
         </div>
     </div>
 </div>
 <div class="button-template2">
     <input type="button" id="btnAddProgram" class="button" value="Simpan"/>
-    <input type="button" id="btnBatal" class="button" value="Batal"/>
+    <input type="button" data-dismiss="modal" value="Batal" class="button"/>
+    <%--<input type="button" id="btnBatal" class="button" value="Batal"/>--%>
 </div>
 
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/jquery.formatCurrency-1.4.0.min.js"></script>

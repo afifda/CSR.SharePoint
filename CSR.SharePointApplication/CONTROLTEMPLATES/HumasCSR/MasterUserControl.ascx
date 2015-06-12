@@ -18,13 +18,13 @@
                        <th class="header-grid">Nama Pegawai</th>
                        <th class="header-grid">User Name</th>
                        <th class="header-grid">Kode Area</th>
-                        <th class="header-grid">Action</th>
+                       <th class="header-grid">Action</th>
                     </tr>
                  </thead>
            </table>
         </div>
         <div class="button-template2">
-            <input type="button" id="btnAddMasterUser" value="Add"/>
+            <input type="button" id="btnAddMasterUser" value="Tambah"/>
         </div>
         
         <div class="modal" id="modalMasterUser">
@@ -60,7 +60,8 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" id="btnSaveMasterUser" value="Simpan" class="button"/>
-                        <button type="button" data-dismiss="modal" class="button">Tutup</button>
+                        <input type="button" data-dismiss="modal" value="Batal" class="button"/>
+                        <%--<button type="button" data-dismiss="modal" class="button">Tutup</button>--%>
                     </div>
                 </div>
             </div>

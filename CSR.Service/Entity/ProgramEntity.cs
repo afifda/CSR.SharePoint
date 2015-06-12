@@ -43,6 +43,7 @@ namespace CSR.Service.Entity
         [Column(name: "Last_Modified_By", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Last_Modified_By { get; set; }
         public bool Is_Locked { get; set; }
+        public bool isplan { get; set; }
         public List<AttachmentEntity> AttachmentList { get; set; }
         
     }
@@ -83,6 +84,7 @@ namespace CSR.Service.Entity
         [Column(name: "Last_Modified_By", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Last_Modified_By { get; set; }
         public bool Is_Locked { get; set; }
+        public bool isplan { get; set; }
         public List<AttachmentEntity> AttachmentList { get; set; }
         public List<RealisasiEntity> RealisasiList { get; set; }
     }

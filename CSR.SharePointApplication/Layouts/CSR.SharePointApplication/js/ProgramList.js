@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
-    LoadAvailableYear();    
+    LoadAvailableYear();
+    $('#btnConfirm').click(function () {
+        Confirm();
+    });
 });
 
 function LoadAvailableYear() {
@@ -61,7 +64,7 @@ function GetSuccessProgramList(data) {
         var total = 0;
         for (i = 0; i < data.length; i++) {
             var strhtml = '<tr>' +
-                '<td ><a href="/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
+                '<td ><a href="/Sharepointfree/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
                 '<td >' + data[i].BP_Nama + ' </td>' +
                 '<td >' + data[i].Judul_Program + ' </td>' +
                 '<td >' + data[i].KP_Nama + ' </td>' +
@@ -130,7 +133,7 @@ function Confirm() {
         datatype: "json",
         async: true,
         success: function (response) {
-            alert("Konfirmasi Sukses")
+            alert("Rencana Program sudah terkunci")
         },
         error: function (response) {
             alert(response.responseText);

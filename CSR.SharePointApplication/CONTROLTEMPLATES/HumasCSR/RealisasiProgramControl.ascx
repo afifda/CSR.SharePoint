@@ -63,17 +63,22 @@
                 <input type="text" id="txtJumlah" class="input currencyFormat" onkeypress="return isNumberKey(event)"/>
             </div>            --%>
             <div class="div">
-                <span class="lbl">Sumber PGE </span>
+                <span class="lbl">Sumber PGE Pusat (IDR) </span>
                 <span class="titikdua">:</span>
-                <input type="text" id="txtSumberPGE" class="input currencyFormat" onkeypress="return isNumberKey(event)" />           
+                <input type="text" id="txtSumberPGEPusat" class="input currencyFormat" onkeypress="return isNumberKey(event)" />           
             </div> 
             <div class="div">
-                <span class="lbl">Sumber Persero </span>
+                <span class="lbl">Sumber PGE Area (IDR) </span>
+                <span class="titikdua">:</span>
+                <input type="text" id="txtSumberPGEArea" class="input currencyFormat" onkeypress="return isNumberKey(event)" />           
+            </div> 
+            <div class="div">
+                <span class="lbl">Sumber Persero (IDR) </span>
                 <span class="titikdua">:</span>
                 <input type="text" id="txtSumberPersero" class="input currencyFormat" onkeypress="return isNumberKey(event)" />           
             </div> 
             <div class="div">
-                <span class="lbl">Sumber PKBL </span>
+                <span class="lbl">Sumber PKBL (IDR) </span>
                 <span class="titikdua">:</span>
                 <input type="text" id="txtSumberPKBL" class="input currencyFormat" onkeypress="return isNumberKey(event)" />           
             </div> 

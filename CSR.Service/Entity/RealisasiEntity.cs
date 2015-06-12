@@ -27,8 +27,11 @@ namespace CSR.Service.Entity
         [Column(name: "Penerima", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Penerima { get; set; }
 
-        [Column(name: "SumberDanaPGE", isUpdateParam: true, isAllowNull: true, isInsertParam: true)]
-        public decimal SumberDanaPGE { get; set; }
+        [Column(name: "SumberDanaPGEPusat", isUpdateParam: true, isAllowNull: true, isInsertParam: true)]
+        public decimal SumberDanaPGEPusat { get; set; }
+
+        [Column(name: "SumberDanaPGEArea", isUpdateParam: true, isAllowNull: true, isInsertParam: true)]
+        public decimal SumberDanaPGEArea { get; set; }
 
         [Column(name: "SumberDanaPersero", isUpdateParam: true, isAllowNull: true, isInsertParam: true)]
         public decimal SumberDanaPersero { get; set; }
@@ -81,8 +84,11 @@ namespace CSR.Service.Entity
         [Column(name: "Penerima", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Penerima { get; set; }
 
-        [Column(name: "SumberDanaPGE", isUpdateParam: true, isAllowNull: true, isInsertParam: true)]
-        public decimal SumberDanaPGE { get; set; }
+        [Column(name: "SumberDanaPGEPusat", isUpdateParam: true, isAllowNull: true, isInsertParam: true)]
+        public decimal SumberDanaPGEPusat { get; set; }
+
+        [Column(name: "SumberDanaPGEArea", isUpdateParam: true, isAllowNull: true, isInsertParam: true)]
+        public decimal SumberDanaPGEArea { get; set; }
 
         [Column(name: "SumberDanaPersero", isUpdateParam: true, isAllowNull: true, isInsertParam: true)]
         public decimal SumberDanaPersero { get; set; }
