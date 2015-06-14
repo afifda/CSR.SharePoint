@@ -12,14 +12,14 @@
             } else if ($('#fuAttachment').val().length > 0) {
                 AddtoGridAttch();
             } else {
-                alert('Please insert File to attachment first etc');
+                alert('Upload file harus secara urut, dimulai dari isi file pertama');
                 return false;
             }
         }
         
         if ($('#fuAttachment').val().length <= 0)
         {
-            alert('Please insert File to attachment first etc');
+            alert('Upload file harus secara urut, dimulai dari isi file pertama');
             return false;
         }
         return false;

@@ -9,22 +9,26 @@
 
     $('#btnSaveMasterArea').click(function () {
         var Area = $("#txtArea").val();
-        var To = $("#txtTo").val();
+        var To = $("#txtKepada").val();
+        var emailTo = $("#txtEmail").val();
         var Subject = $("#txtSubject").val();
         var Message = $("#txtMessage").val();
 
         var validationMessage = "";
 
-        if (Area.length < 1) {
+        if (Area == "" || Area == null) {
             validationMessage += "Area harus di pilih. \n";
         }
-        if (To.length < 1) {
+        if (To == "") {
             validationMessage += "Kepada harus di isi. \n";
         }
-        if (Subject.length < 1) {
+        if (emailTo == "") {
+            validationMessage += "Email tujuan harus di isi. \n";
+        }
+        if (Subject == "") {
             validationMessage += "Subject harus di isi. \n";
         }
-        if (Message.length < 1) {
+        if (Message == "" ) {
             validationMessage += "Pesan harus di pilih. \n";
         }
         if (validationMessage.length > 0) {
@@ -183,7 +187,7 @@ function saveEmail() {
     if (editMode == 0) EditMethod = false;
     var masterUser = new Object();
     masterUser.Area = $("#txtArea").val();
-    masterUser.To = $("#txtTo").val();
+    masterUser.To = $("#txtEmail").val();
     masterUser.Subject = $("#txtSubject").val();
     masterUser.Message = $("#txtMessage").val();
     masterUser.Kepada = $("#txtKepada").val();

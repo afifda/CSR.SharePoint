@@ -145,9 +145,16 @@ function GetSuccessDetailsList(RealisasiList) {
         for (i = 0; i < RealisasiList.length; i++) {
             if (RealisasiList[i].RealisasiNo != null) {
                 var strUnlock = "";
-                if ($('#hfIsAdmin').val() == "1" && RealisasiList[i].Is_Locked) {
-                    strUnlock = '&nbsp<a href="javasdownloadDcript:void(0)" onclick="unlockFunc(\'' + RealisasiList[i].RealisasiNo + '\');">Buka Kunci</a>;'
+                var lock = "";
+                if ($('#hfIsAdmin').val() == "1") {
+                    if (RealisasiList[i].Is_Locked_Realisasi == true) {
+                        strUnlock = '&nbsp<a href="javasdownloadDcript:void(0)" onclick="unlockFunc(\'' + RealisasiList[i].RealisasiNo + '\');">Buka Kunci</a>'
+                    }
+                    else {
+                        lock = '&nbsp<a href="javasdownloadDcript:void(0)" onclick="lockFunc(\'' + RealisasiList[i].RealisasiNo + '\');">Kunci</a>'
+                    }                    
                 }
+                
                 var Jumlah = RealisasiList[i].SumberDanaPGEPusat + RealisasiList[i].SumberDanaPGEArea + RealisasiList[i].SumberDanaPersero + RealisasiList[i].SumberPKBL;
                 var strhtml = '<tr>' +
                     '<td >' + RealisasiList[i].RealisasiNo + ' </td>' +
@@ -156,7 +163,7 @@ function GetSuccessDetailsList(RealisasiList) {
                     '<td >' + RealisasiList[i].Pelaksana + ' </td>' +
                     '<td >' + RealisasiList[i].Penerima + ' </td>' +
                     '<td class="currencyFormat rightAligned">' + Jumlah + '</td>' +
-                    '<td ><a href="InputRealisasiPage.aspx?RealisasiNo=' + RealisasiList[i].RealisasiNo + '">lihat</a>' + strUnlock + '</td>' +
+                    '<td ><a href="InputRealisasiPage.aspx?RealisasiNo=' + RealisasiList[i].RealisasiNo + '">lihat </a>' + strUnlock + lock +'</td>' +
                     '</tr>';
                 $(strhtml).appendTo($("#tblRealisasi"));
             }
@@ -172,10 +179,42 @@ function GetSuccessDetailsList(RealisasiList) {
     }
 }
 
-function unlockFunc(realNo) {
-    window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=UnlockRealisasi&RealNo=" + realNo;
-    alert("Realisasi telah berhasil dibuka.")
-    return false;
+function unlockFunc(realNo) {   
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=UnlockRealisasi&RealNo=" + realNo;
+    $.ajax({
+        type: "POST",
+        url: handlerUrl,
+        data: {},
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        async: true,
+        success: function (response) {           
+            alert("Realisasi telah berhasil dibuka.");
+            window.location.reload();
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    });       
+}
+
+function lockFunc(realNo) {
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=lockrealisasi&RealNo=" + realNo;
+    $.ajax({
+        type: "POST",
+        url: handlerUrl,
+        data: {},
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        async: true,
+        success: function (response) {
+            alert("Realisasi telah berhasil dikunci.");
+            window.location.reload();
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    });
 }
 
 function submit() {

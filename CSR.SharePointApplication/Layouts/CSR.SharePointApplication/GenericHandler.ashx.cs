@@ -69,6 +69,10 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     string UnlockTransaksiList = context.Request.Params["TransaksiNo"];
                     UpdateUnlockedProgram(context, year3, UnlockTransaksiList);
                     break;
+               case "lockrealisasi":
+                    string RealNoLock = context.Request.Params["RealNo"];
+                    UpdatelockedRealisasi(context, RealNoLock);
+                    break;
                 case "unlockrealisasi":
                     string RealNo = context.Request.Params["RealNo"];
                     UpdateUnlockedRealisasi(context, RealNo);
@@ -78,7 +82,10 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
 
         private void GetAvailableArea(HttpContext context)
         {
-            List<MasterAreaEntity> Available_Area = new MasterDataLogic().Read<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
+            //List<MasterAreaEntity> Available_Area = new MasterDataLogic().Read<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
+            List<MasterAreaEntity> Available_Area = null;
+            MasterDataLogic logic = new MasterDataLogic();
+            Available_Area = logic.SPRead<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
             MasterAreaEntity AllArea = new MasterAreaEntity(){ AreaCode = "0", AreaName = "--ALL--"};
             Available_Area.Insert(0, AllArea);
             context.Response.Write(new JavaScriptSerializer().Serialize(Available_Area));
@@ -124,6 +131,19 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             }
         }
 
+        private void UpdatelockedRealisasi(HttpContext context, string realNo)
+        {
+            List<string> transNo = new List<string>();
+            transNo.Add(realNo);
+            try
+            {
+                int row = new BaseLogic().UpdateLockedStatus(transNo, "R", true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         private void LoadProgramList(HttpContext context, int year, string area)
         {

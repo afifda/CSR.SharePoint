@@ -44,40 +44,16 @@
                                 <span class="lbl">Area <span class="red">*</span></span>
                                 <span class="titikdua">:</span>                                
                                 <select id="txtArea" class="input"></select>
-                            </div>
-                            <%--<div class="div">
-                                <span class="lbl">Bidang <span class="red">*</span></span>
-                                <span class="titikdua">:</span>                                
-                                <select id="txtBidang" class="input"></select>
-                            </div>--%>
+                            </div>                            
                             <div class="div">
                                 <span class="lbl">Kepada <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtKepada" class="input" id="txtKepada" type="text" />
-                            </div>
-                            <%--<div class="div">
-                                <span class="lbl">TypeProgram</span>
-                                <span class="titikdua">:</span>
-				                <table>
-					                <tr>
-						                <td>
-							                <input type="radio" name="Program" value="P" rows="3" id="RadioProgram">Program </input>
-						                </td>
-						                <td>
-							                <input type="radio" name="Realisasi" value="R" rows="3" id="RadioRealisasi">Realisasi </input>
-						                </td>		
-					                </tr>
-				                </table>   
-                            </div>--%>
-                            <%--<div class="div">
-                                <span class="lbl">AlamatURL<span class="red">*</span></span>
-                                <span class="titikdua">:</span>
-                                <input name="txtURL" class="input" id="txtURL" type="text" />
-                            </div>--%>
+                            </div>                            
                             <div class="div">
                                 <span class="lbl">Email <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
-                                <input name="txtTo" class="input" id="txtTo" type="text" />
+                                <input name="txtEmail" class="input" id="txtEmail" type="text" />
                             </div>
                             <div class="div">
                                 <span class="lbl">Subject <span class="red">*</span></span>

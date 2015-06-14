@@ -106,7 +106,7 @@
 </div>
 <div class="button-template2">
     <input type="button" id="btnAddProgram" class="button" value="Simpan"/>
-    <input type="button" id="btnAddProgramAndLock" class="button" value="Simpan dan Kunci"/>
+    <%--<input type="button" id="btnAddProgramAndLock" class="button" value="Simpan dan Kunci"/>--%>
     <input type="button" id="btnBatal" class="button" value="Batal"/>    
 </div>
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/date.js"></script>

@@ -1,11 +1,13 @@
 ﻿var isDataTableCreated = false;
 $(document).ready(function () {
     LoadAvailableYear();
+    LoadAvailableArea();
     $('#btnConfirm').click(function () {
         Confirm();
     });
     $('#btnGenerateTable').click(function () {
-        LoadAvailableYear();
+        var strArea = $('#ddlArea').val();
+        LoadProgramList(strArea);
     });
 });
 
@@ -20,11 +22,21 @@ function LoadAvailableYear() {
         async: "false",
         success: function (response) {
             var result = JSON.parse(response);
+            //$("#ddlYear").remove();
             $.each(result, function (key, value) {
                 $("#ddlYear").append($("<option></option>").val(result).html(result));
             });
             $('#ddlArea').prop('disabled', true);
-            LoadProgramList();
+            if ($('#hfIsAdmin').val() == "1") {
+                $('#btnUnlock').show();
+                $('#btnUnlock').click(function () {
+                    Unlock();
+                });
+                strArea = 0;
+                $('#ddlArea').prop('disabled', false);
+                //strArea = "&Area=" + $('#hfSelectedArea').val();        
+            }
+            LoadProgramList(strArea);
             },
         error: function (response) {            
             alert(response.responseText);
@@ -45,7 +57,7 @@ function LoadAvailableArea() {
         success: function (response) {
             var result = JSON.parse(response);
             $.each(result, function (key, value) {
-                $("#ddlArea").append($("<option></option>").val(result.AreaCode).html(result.AreaName));
+                $("#ddlArea").append($("<option></option>").val(result[key].AreaCode).html(result[key].AreaName));
             });
         },
         error: function (response) {
@@ -55,22 +67,15 @@ function LoadAvailableArea() {
     return true;
 }
 
-function LoadProgramList() {
-    var strArea = "";
-    LoadAvailableArea();
-    if ($('#hfIsAdmin').val() == "1") {        
-        $('#btnUnlock').show();
-        $('#btnUnlock').click(function () {
-            Unlock();
-        });
-        $('#ddlArea').prop('disabled', false);
-        strArea = "&Area=" + $('#hfSelectedArea').val();        
-    }
-    $('#ddlArea').val($('#hfSelectedArea').val());
-    var yearSelected = $('#hfSelectedYear').val();
-    $('#ddlYear').val(yearSelected);
+function LoadProgramList(strArea) {
+    
+    //LoadAvailableArea();    
+    //$('#ddlArea').val($('#hfSelectedArea').val());
+    //var yearSelected = $('#hfSelectedYear').val();
+    //$('#ddlYear').val(yearSelected);    
+    yearSelected = $('#ddlYear').val();
     $('.appr').prop('disabled', $.find(':input[class=chk][type=checkbox]:checked').length == 0);
-    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=loadProgramList&Year=" + yearSelected + strArea;
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=loadProgramList&Year=" + yearSelected + "&Area=" + strArea;
     $.ajax({
         type: "POST",
         url: handlerUrl,
@@ -115,11 +120,14 @@ function GetSuccessProgramList(data) {
         if (!isDataTableCreated) {
             CreateDataTable();
         }
-        //$('.rightAligned').css('text-align', 'right');
+        else
+        {
+            $('#tblProgramList').dataTable().fnDestroy();
+            CreateDataTable();
+        }
     }
-
     else {
-        alert('System cannot query your keyword...');
+        alert('Data tidak ditemukan, silahkan periksa kembali filter yang anda pilih.');
     }
 }
 
@@ -149,6 +157,7 @@ function CreateDataTable() {
                 $('#checkAll').prop('checked', $.find(':input[class=chk][type=checkbox]').length == $.find(':input[class=chk][type=checkbox]:checked').length)
                 $('.appr').prop('disabled', $.find(':input[class=chk][type=checkbox]:checked').length == 0);
             });
+            
         }
     });
 

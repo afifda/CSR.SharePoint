@@ -41,8 +41,9 @@ namespace CSR.Service.Entity
         [Column(name: "Created_By", isUpdateParam: false, isAllowNull: false, isInsertParam: true)]
         public string Created_By { get; set; }
         [Column(name: "Last_Modified_By", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
-        public string Last_Modified_By { get; set; }
+        public string Last_Modified_By { get; set; }        
         public bool Is_Locked { get; set; }
+        [Column(name: "isplan", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public bool isplan { get; set; }
         public List<AttachmentEntity> AttachmentList { get; set; }
         
@@ -83,7 +84,9 @@ namespace CSR.Service.Entity
         public string Created_By { get; set; }
         [Column(name: "Last_Modified_By", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public string Last_Modified_By { get; set; }
+        public bool Is_Locked_Realisasi { get; set; }
         public bool Is_Locked { get; set; }
+        [Column(name: "isplan", isUpdateParam: true, isAllowNull: false, isInsertParam: true)]
         public bool isplan { get; set; }
         public List<AttachmentEntity> AttachmentList { get; set; }
         public List<RealisasiEntity> RealisasiList { get; set; }

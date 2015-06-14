@@ -100,21 +100,107 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
 
         [System.Web.Services.WebMethod]
         public static string SaveAndLockRealisasi(string programString)
-        {
+        {            
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            RealisasiEntity realisasiEntity = (RealisasiEntity)serializer.Deserialize(programString, typeof(RealisasiEntity));
+            BaseLogic baselogic = new BaseLogic();
+            string SiteURL = SPContext.Current.Web.Url;
+            string DocLib = DocLibProgram;
+            int status = 0;
             try
             {
-                SaveRealisasi(programString);
-                JavaScriptSerializer serializer = new JavaScriptSerializer();
-                RealisasiEntity realisasiEntity = (RealisasiEntity)serializer.Deserialize(programString, typeof(RealisasiEntity));
-                List<string> realNo = new List<string>();
-                realNo.Add(realisasiEntity.RealisasiNo);
-                int locked = new BaseLogic().UpdateLockedStatus(realNo, "R", true);
+                ProgramLogic logic = new ProgramLogic();
+                if (IsEdit)
+                {
+                    realisasiEntity.Last_Modified_Date = DateTime.Now;
+                    realisasiEntity.Last_Modified_By = User.UserName;
+                    logic.SPUpdate<RealisasiEntity>(realisasiEntity);
+                    if (realisasiEntity.AttachmentList.Count != 0)
+                    {
+                        realisasiEntity.AttachmentList.ForEach(a => a.TransaksiNo = realisasiEntity.RealisasiNo);
+                        status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
+                        status = logic.SaveAttachment(realisasiEntity.AttachmentList);
+                    }                    
+                }
+                else if (IsPlanned)
+                {
+                    List<RealisasiByTransaksiNoEntity> realisasiList = logic.SPRead<RealisasiByTransaksiNoEntity>(new RealisasiByTransaksiNoEntity() { TransaksiNo = realisasiEntity.TransaksiNo });
+
+                    if (realisasiList == null || realisasiList.Count == 0)
+                    {
+                        realisasiEntity.RealisasiNo = realisasiEntity.TransaksiNo + "-1";
+                    }
+                    else if (realisasiList.Count == 1 && string.IsNullOrEmpty(realisasiList[0].RealisasiNo))
+                    {
+                        realisasiEntity.RealisasiNo = realisasiEntity.TransaksiNo + "-1";
+                    }
+                    else
+                    {
+                        List<string> noList = (from r in realisasiList
+                                               orderby r.Created_Date descending
+                                               select r.RealisasiNo.Split('-')[4]).ToList();
+                        int lastNo = int.Parse(noList[0]);
+                        realisasiEntity.RealisasiNo = realisasiEntity.TransaksiNo + "-" + (lastNo + 1).ToString();
+                    }
+                    realisasiEntity.Created_Date = DateTime.Now;
+                    realisasiEntity.Created_By = User.UserName;
+                    realisasiEntity.Last_Modified_Date = DateTime.Now;
+                    realisasiEntity.Last_Modified_By = User.UserName;
+                    logic.SPSave<RealisasiEntity>(realisasiEntity);
+                    if (realisasiEntity.AttachmentList.Count != 0)
+                    {
+                        realisasiEntity.AttachmentList.ForEach(a => a.TransaksiNo = realisasiEntity.RealisasiNo);
+                        status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
+                        status = logic.SaveAttachment(realisasiEntity.AttachmentList);
+                    }
+                    baselogic.sendEmailThroughGmail(realisasiList[0].Area_Kode, realisasiList[0].TransaksiNo, realisasiList[0].BP_Nama);
+
+                }
+                else
+                {
+                    ProgramEntity program = new ProgramEntity()
+                    {
+                        Area_Kode = realisasiEntity.Area_Kode,
+                        KP_Kode = realisasiEntity.KP_Kode,
+                        BP_Kode = realisasiEntity.BP_Kode,
+                        Judul_Program = realisasiEntity.Judul_Program,
+                        Waktu_Mulai = realisasiEntity.WaktuMulai,
+                        Waktu_Sampai = realisasiEntity.WaktuSelesai,
+                        Outcome_Diharapkan = string.Empty,
+                        Keterangan = realisasiEntity.Keterangan,
+                        Jumlah_Anggaran = realisasiEntity.SumberDanaPersero + realisasiEntity.SumberDanaPGEPusat + realisasiEntity.SumberPKBL + realisasiEntity.SumberDanaPGEArea,
+                        Created_Date = DateTime.Now,
+                        Created_By = User.UserName,
+                        Last_Modified_Date = DateTime.Now,
+                        Last_Modified_By = User.UserName,
+                        isplan = false
+                    };
+                    realisasiEntity.TransaksiNo = logic.SPSaveWithOutput<ProgramEntity>(program, "TransaksiNo");
+                    realisasiEntity.RealisasiNo = realisasiEntity.TransaksiNo + "-1";
+                    realisasiEntity.Created_Date = DateTime.Now;
+                    realisasiEntity.Created_By = User.UserName;
+                    realisasiEntity.Last_Modified_Date = DateTime.Now;
+                    realisasiEntity.Last_Modified_By = User.UserName;
+                    logic.SPSave<RealisasiEntity>(realisasiEntity);
+                    List<string> realNo = new List<string>();
+                    realNo.Add(realisasiEntity.RealisasiNo);
+                    int locked = new BaseLogic().UpdateLockedStatus(realNo, "R", true);
+                    if (realisasiEntity.AttachmentList.Count != 0)
+                    {
+                        realisasiEntity.AttachmentList.ForEach(a => a.TransaksiNo = realisasiEntity.RealisasiNo);
+                        status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
+                        status = logic.SaveAttachment(realisasiEntity.AttachmentList);
+                    }
+
+                    baselogic.sendEmailThroughGmail(program.Area_Kode, program.TransaksiNo, program.BP_Nama);
+                }
             }
             catch (Exception ex)
             {
                 return string.Format("Telah terjadi error. ({0})", ex.Message);
             }
-            return "Success. Realisasi Dan Lampiran File telah disimpan.";   
+            return "Success. Realisasi Dan Lampiran File telah disimpan.";           
+
 
         }
 
