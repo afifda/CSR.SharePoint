@@ -24,7 +24,7 @@ function LoadAvailableYear() {
             var result = JSON.parse(response);
             //$("#ddlYear").remove();
             $.each(result, function (key, value) {
-                $("#ddlYear").append($("<option></option>").val(result).html(result));
+                $("#ddlYear").append($("<option></option>").val(value).html(value));
             });
             $('#ddlArea').prop('disabled', true);
             if ($('#hfIsAdmin').val() == "1") {
@@ -102,7 +102,7 @@ function GetSuccessProgramList(data) {
             var strStatus = data[i].Is_Locked ? "Telah Dikunci" : "Belum Dikunci";
             var strhtml = '<tr>' +
                 '<td ><input type="checkbox" class="chk" data-transno="' + data[i].TransaksiNo + '"></input></td>' +
-                '<td ><a href="/Sharepointfree/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
+                '<td ><a href="/sites/humasCSR/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
                 '<td >' + data[i].BP_Nama + ' </td>' +
                 '<td >' + data[i].Judul_Program + ' </td>' +
                 '<td >' + data[i].KP_Nama + ' </td>' +
@@ -114,7 +114,7 @@ function GetSuccessProgramList(data) {
             $(strhtml).appendTo($("#tblProgramList"));
         }
         $('.currencyFormat').formatCurrency({
-            symbol: 'IDR '
+            symbol: ''
         });
         $('.rightAligned').css('text-align', 'right');
         if (!isDataTableCreated) {

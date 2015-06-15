@@ -60,7 +60,7 @@
                 <th> Kategori</th>
                 <th> Area</th>
                 <th> Keterangan</th>
-                <th> Jumlah Anggaran</th>
+                <th> Jumlah Anggaran (IDR)</th>
                 <th> Status</th>
             </tr>
          </thead>

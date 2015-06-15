@@ -105,7 +105,7 @@
     //    submitAndLock();
     //});
     $('#btnBatal').click(function () {
-        window.location = "/Sharepointfree/SitePages/Home.aspx";
+        window.location = "/sites/humasCSR/SitePages/Home.aspx";
     });
         
     $('#txtSumberPGEPusat').blur(function () {
@@ -233,7 +233,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/Sharepointfree/SitePages/Home.aspx";
+            window.location = "/sites/humasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
@@ -254,7 +254,7 @@ function submitAndLock() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/Sharepointfree/SitePages/Home.aspx";
+            window.location = "/sites/humasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);

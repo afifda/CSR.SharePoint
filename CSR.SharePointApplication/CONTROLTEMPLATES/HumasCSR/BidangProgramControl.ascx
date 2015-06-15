@@ -89,7 +89,7 @@
                         <th class="header-grid">WaktuSelesai</th>
                         <th class="header-grid">Pelaksana</th>
                         <th class="header-grid">Penerima</th>
-                        <th class="header-grid">Jumlah Dana</th>
+                        <th class="header-grid">Jumlah Dana (IDR)</th>
                         <th class="header-grid">Detail</th>
                     </tr>
                  </thead>

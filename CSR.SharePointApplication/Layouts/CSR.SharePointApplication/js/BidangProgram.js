@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     Init();
     $('#btnBatal').click(function () {
-        window.location = "/Sharepointfree/SitePages/Home.aspx";
+        window.location = "/sites/humasCSR/SitePages/Home.aspx";
     });
     $('#btnAddProgram').click(function () {
         var Judul_Program = $('#txtJudul').val();
@@ -169,7 +169,7 @@ function GetSuccessDetailsList(RealisasiList) {
             }
         }
         $('.currencyFormat').formatCurrency({
-            symbol: 'IDR '
+            symbol: ''
         });
         $('.rightAligned').css('text-align', 'right');
     }
@@ -230,7 +230,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/Sharepointfree/SitePages/Home.aspx";
+            window.location = "/sites/humasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
