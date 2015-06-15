@@ -515,7 +515,7 @@ namespace CSR.Service.DataAccess
                 using (SPSite site = new SPSite(siteUrl))
                 {
                     site.AllowUnsafeUpdates = true;
-                    using (SPWeb web = site.OpenWeb("/sites/humasCSR/"))
+                    using (SPWeb web = site.OpenWeb("/sites/HumasCSR/"))
                     {
                         try
                         {

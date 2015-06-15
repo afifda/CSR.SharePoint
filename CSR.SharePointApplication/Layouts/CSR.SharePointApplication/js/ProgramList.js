@@ -102,7 +102,7 @@ function GetSuccessProgramList(data) {
             var strStatus = data[i].Is_Locked ? "Telah Dikunci" : "Belum Dikunci";
             var strhtml = '<tr>' +
                 '<td ><input type="checkbox" class="chk" data-transno="' + data[i].TransaksiNo + '"></input></td>' +
-                '<td ><a href="/sites/humasCSR/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
+                '<td ><a href="/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
                 '<td >' + data[i].BP_Nama + ' </td>' +
                 '<td >' + data[i].Judul_Program + ' </td>' +
                 '<td >' + data[i].KP_Nama + ' </td>' +

@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     Init();
     $('#btnBatal').click(function () {
-        window.location = "/sites/humasCSR/SitePages/Home.aspx";
+        window.location = "/sites/HumasCSR/SitePages/Home.aspx";
     });
     $('#btnAddProgram').click(function () {
         var Judul_Program = $('#txtJudul').val();
@@ -230,7 +230,7 @@ function submit() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/sites/humasCSR/SitePages/Home.aspx";
+            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);
