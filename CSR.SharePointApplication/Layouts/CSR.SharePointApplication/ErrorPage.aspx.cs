@@ -8,7 +8,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string QueryString = Request.QueryString["ErrCode"].ToString();
+            string QueryString = Request.QueryString["ErrCode"];
+            if (string.IsNullOrEmpty(QueryString)) lblErrorMessage.Text = Constant.ERROR_DEFAULT;
             switch (QueryString)
             { 
                 case "NotAuthorized":

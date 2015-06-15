@@ -20,7 +20,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             if (!IsValidUser)
             {
                 string web = SPContext.Current.Web.Url;
-                Response.Redirect(web + "/_layouts/15/eWorkflow.WebAccess/ErrorPage.aspx?ErrCode=NotAuthorized", true);
+                Response.Redirect(web + "/_layouts/15/CSR.SharePointApplication/ErrorPage.aspx?ErrCode=NotAuthorized", true);
             }
             IsEdit = false;
             IsPlanned = true;

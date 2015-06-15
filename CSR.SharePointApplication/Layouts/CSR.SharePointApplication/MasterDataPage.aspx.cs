@@ -16,7 +16,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         {
             if (!IsValidUser)
             {
-                Response.Redirect("/_layouts/15/eWorkflow.WebAccess/ErrorPage.aspx?ErrCode=NotAuthorized", true);
+                Response.Redirect("/_layouts/15/CSR.SharePointApplication/ErrorPage.aspx?ErrCode=NotAuthorized", true);
             }
             string strMasterType = Request.QueryString["MasterType"];
             if (string.IsNullOrEmpty(strMasterType))

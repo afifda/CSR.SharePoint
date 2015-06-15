@@ -134,9 +134,10 @@ function GetSuccessProgramList(data) {
 function CreateDataTable() {
     var table = $('#tblProgramList').DataTable({
         "columnDefs": [
+            { "targets": 0, "sortable": false },
             { "visible": false, "targets": 2 }
         ],
-        "order": [[1, 'asc']],
+        "order": [[2, 'asc']],
         "displayLength": 25,
         "drawCallback": function (settings) {
             var api = this.api();
@@ -164,11 +165,11 @@ function CreateDataTable() {
     // Order by the grouping
     $('#tblProgramList tbody').on('click', 'tr.group', function () {
         var currentOrder = table.order()[0];
-        if (currentOrder[0] === 1 && currentOrder[1] === 'asc') {
-            table.order([1, 'desc']).draw();
+        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+            table.order([2, 'desc']).draw();
         }
         else {
-            table.order([1, 'asc']).draw();
+            table.order([2, 'asc']).draw();
         }
     });
 
