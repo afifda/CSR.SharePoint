@@ -57,7 +57,7 @@
     <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
     <Reference Include="UtilityLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08618834eeecc1f9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Afif\AP\Migration Tools\UtilityLibrary\UtilityLibrary\bin\Debug\UtilityLibrary.dll</HintPath>
+      <HintPath>..\PGE\UtilityLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -227,7 +227,9 @@
       <SharePointProjectItemId>{0d057b65-ddb9-40d6-a6cf-6d56fb0b8f23}</SharePointProjectItemId>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSR.Service\CSR.Service.csproj">
       <Project>{a8160cab-2937-442d-80dd-172128352d0b}</Project>

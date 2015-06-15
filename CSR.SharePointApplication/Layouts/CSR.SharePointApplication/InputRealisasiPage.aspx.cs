@@ -49,6 +49,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         [System.Web.Services.WebMethod]
         public static string LoadRealisasi(string realisasiNo, string transaksiNo)
         {
+            string SiteURL = SPContext.Current.Web.Url;
+            string DocLib = DocLibProgram;
             RealisasiEntity realisasi = new RealisasiEntity() { RealisasiNo = realisasiNo };
             RealisasiByTransaksiNoEntity realisasiByTrans = new RealisasiByTransaksiNoEntity() { TransaksiNo = transaksiNo };
             if (string.IsNullOrEmpty(realisasiNo) && string.IsNullOrEmpty(transaksiNo)) return string.Empty;
@@ -60,6 +62,10 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 {
                     realisasi = logic.SPRead<RealisasiEntity>(realisasi).FirstOrDefault();
                     realisasi.AttachmentList = logic.GetAttachments(new AttachmentEntity() { TransaksiNo = realisasiNo });
+                    if (realisasi.AttachmentList.Count != 0)
+                    {
+                        realisasi.AttachmentList = logic.DownloadFile(SiteURL, DocLib, realisasi.AttachmentList);
+                    }
                     result = new JavaScriptSerializer().Serialize(realisasi);
                 }
                 else if (!string.IsNullOrEmpty(realisasiByTrans.TransaksiNo))
