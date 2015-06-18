@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     Init();
-
+    $('#btnDeleteRealisasi').hide();
+    
     $('#btnAddProgram').click(function () {
 
         var KP_Kode = $('#ddlKategori').val();
@@ -53,59 +54,14 @@
           
         submit();
     });
-    //$('#btnAddProgramAndLock').click(function () {
-    //    var KP_Kode = $('#ddlKategori').val();
-    //    var BP_Kode = $('#ddlBidang').val();
-    //    var Judul_Program = $('#txtJudul').val();
-    //    var Area_Kode = $('#ddlArea').val();
-    //    var WaktuMulai = $('#dateFrom').val();
-    //    var WaktuSelesai = $('#dateTo').val();
-    //    var Pelaksana = $('#txtPelaksana').val();
-    //    var Penerima = $('#txtPenerima').val();
-    //    var SumberDanaPGEPusat = $('#txtSumberPGEPusat').val();
-    //    var SumberDanaPGEArea = $('#txtSumberPGEArea').val();
-    //    var SumberDanaPersero = $('#txtSumberPersero').val();
-    //    var SumberPKBL = $('#txtSumberPKBL').val();
-
-    //    var validationMessage = "";
-
-    //    if (KP_Kode.length < 1) {
-    //        validationMessage += "Kategori Program harus di pilih. \n";
-    //    }
-    //    if (BP_Kode.length < 1) {
-    //        validationMessage += "Bidang Program harus di pilih. \n";
-    //    }
-    //    if (Judul_Program.length < 1) {
-    //        validationMessage += "Judul Program harus di isi. \n";
-    //    }
-    //    if (Area_Kode.length < 1) {
-    //        validationMessage += "Area harus di pilih. \n";
-    //    }
-    //    if (WaktuMulai.length < 1) {
-    //        validationMessage += "Waktu Mulai harus di isi. \n";
-    //    }
-    //    if (WaktuSelesai.length < 1) {
-    //        validationMessage += "Waktu Selesai harus di isi. \n";
-    //    }
-    //    if (Pelaksana.length < 1) {
-    //        validationMessage += "Pelaksana harus di isi. \n";
-    //    }
-    //    if (Penerima.length < 1) {
-    //        validationMessage += "Penerima harus di isi. \n";
-    //    }
-    //    if (SumberDanaPGEPusat.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1 && SumberDanaPGEArea.length < 1) {
-    //        validationMessage += "Tidak ada sumber dana, Silahkan di isi minimal satu sumber dana. \n";
-    //    }
-
-    //    if (validationMessage.length > 0) {
-    //        alert(validationMessage);
-    //        return false;
-    //    }
-
-    //    submitAndLock();
-    //});
+    
     $('#btnBatal').click(function () {
         window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+    });
+
+    $('#btnDeleteRealisasi').click(function () {
+        var RealisasiNo = $('#hfRealisasiNo').val();
+        deleteRealisaisi(RealisasiNo);
     });
         
     $('#txtSumberPGEPusat').blur(function () {
@@ -182,7 +138,11 @@ function InitializeRealisasi() {
         datatype: "json",
         async: true,
         success: function (response) {
-            var Input = JSON.parse(response.d);
+            if (response.d == "RealisasiNotFound") {
+                alert("Realisasi tidak ditemukan");
+                return false;
+            }
+            var Input = JSON.parse(response.d);            
             if (Input == null) return false;
             $('#txtTransaksiNo').val(Input.TransaksiNo).prop('disabled', true);
             $('#ddlKategori').val(Input.KP_Kode).prop('disabled', true);
@@ -203,15 +163,18 @@ function InitializeRealisasi() {
             });            
             if (Input.Is_Locked_Realisasi == true) {
                 $('#btnAddProgram').prop('disabled', true);
-                //$('#btnAddProgramAndLock').prop('disabled', true);
                 GetSuccessAddAttachList(Input.AttachmentList, false);
             }
             else {
                 $('#btnAddProgram').prop('disabled', false);
-                //$('#btnAddProgramAndLock').prop('disabled', false);
                 GetSuccessAddAttachList(Input.AttachmentList, true);
             }
-
+            if ($('#hfIsAdmin').val() == "1") {
+                $('#btnDeleteRealisasi').show();
+            }
+            else {
+                $('#btnDeleteRealisasi').hide();
+            }
         },
         error: function (response) {
             alert(response.responseText);
@@ -321,4 +284,29 @@ function isNumberKey(evt) {
         return false;
 
     return true;
+}
+
+function deleteRealisaisi(RealisasiNo) {
+    $body = $("body");
+    $body.addClass("loading");
+    var parameter = new Object();
+    parameter.RealisasiNo = RealisasiNo;
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        url: window.location.pathname + "/DeleteRealisasi",
+        data: JSON.stringify(parameter),
+        async: true,
+        success: function (response) {
+            var Input = response.d;
+            $body.removeClass("loading");
+            alert(Input);
+            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+        },
+        error: function (response) {
+            $body.removeClass("loading");
+            alert(response.responseText);
+        }
+    });   
 }

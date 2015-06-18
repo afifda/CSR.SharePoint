@@ -38,6 +38,7 @@
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
     <asp:HiddenField ID="hfRealisasiNo" runat="server" ClientIDMode="Static"/>
     <asp:HiddenField ID="hfTransaksiNo" runat="server" ClientIDMode="Static"/>
+     <asp:HiddenField ID="hfIsAdmin" runat="server" ClientIDMode="Static"/>
     <uc1:RealisasiProgramControl runat="server" id="RealisasiProgramControl" />
     <div class="loadingModal"></div>
 </asp:Content>

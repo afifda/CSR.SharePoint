@@ -22,6 +22,10 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 string web = SPContext.Current.Web.Url;
                 Response.Redirect(web + "/_layouts/15/CSR.SharePointApplication/ErrorPage.aspx?ErrCode=NotAuthorized", true);
             }
+            if (User.AreaName == "Jakarta")
+            {
+                this.hfIsAdmin.Value = "1";
+            }
             IsEdit = false;
             IsPlanned = true;
             string strTransNo = Request.QueryString["TransaksiNo"];
@@ -61,6 +65,10 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 if (!string.IsNullOrEmpty(realisasi.RealisasiNo))
                 {
                     realisasi = logic.SPRead<RealisasiEntity>(realisasi).FirstOrDefault();
+                    if (realisasi == null)
+                    {
+                        return "RealisasiNotFound";
+                    }
                     realisasi.AttachmentList = logic.GetAttachments(new AttachmentEntity() { TransaksiNo = realisasiNo });
                     if (realisasi.AttachmentList.Count != 0)
                     {
@@ -311,6 +319,25 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 return string.Format("Telah terjadi error. ({0})", ex.Message);
             }
             return "Success. Realisasi Dan Lampiran File telah disimpan.";           
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string DeleteRealisasi(string RealisasiNo)
+        {
+            //JavaScriptSerializer serializer = new JavaScriptSerializer();
+            //RealisasiEntity realisasiEntity = (RealisasiEntity)serializer.Deserialize(TransaksiNo, typeof(RealisasiEntity));
+            //BaseLogic baselogic = new BaseLogic();
+               try
+               {
+                   ProgramLogic logic = new ProgramLogic();
+                   logic.SPDelete<RealisasiEntity>(new RealisasiEntity() { RealisasiNo = RealisasiNo });    
+                   //logic.Delete<RealisasiEntity>(realisasiEntity);
+               }                          
+               catch (Exception ex)
+               {
+                   return string.Format("Telah terjadi error. ({0})", ex.Message);
+               }
+               return "Success. Realisasi telah dihapus.";
         }
     }
 }
