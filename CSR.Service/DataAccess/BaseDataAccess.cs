@@ -27,7 +27,8 @@ namespace CSR.Service.DataAccess
         public BaseDataAccess()
         {
             Connection = new DoubleASqlConnection();
-            Connection.ConnectionString = ConfigurationManager.ConnectionStrings[ConnectionStringOptions.CSRConnection.ToString()].ConnectionString;            
+            Connection.ConnectionString = ConfigurationManager.ConnectionStrings[ConnectionStringOptions.CSRConnection.ToString()].ConnectionString;
+            //Connection.ConnectionString = @"Data Source=sqlpge02;Initial Catalog=PGE_CSR;Persist Security Info=True;User ID=sa;Password=sqlserver2012PGE";
         }
         public BaseDataAccess(ConnectionStringOptions connectionString)
         {
@@ -515,7 +516,7 @@ namespace CSR.Service.DataAccess
                 using (SPSite site = new SPSite(siteUrl))
                 {
                     site.AllowUnsafeUpdates = true;
-                    using (SPWeb web = site.OpenWeb("/SharepointDzaky/"))
+                    using (SPWeb web = site.OpenWeb("/sites/HumasCSR/"))
                     {
                         try
                         {

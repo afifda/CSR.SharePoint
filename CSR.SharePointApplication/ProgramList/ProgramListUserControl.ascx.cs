@@ -22,7 +22,7 @@ namespace CSR.SharePointApplication.ProgramList
             if (UserInformation == null)
             {
                 string web = SPContext.Current.Web.Url;
-                Response.Redirect(web + "/_layouts/15/eWorkflow.WebAccess/ErrorPage.aspx?ErrCode=NotAuthorized", true);
+                Response.Redirect(web + "/_layouts/15/CSR.SharePointApplication/ErrorPage.aspx?ErrCode=NotAuthorized", true);
             }
             this.hfIsAdmin.Value = "0";
 

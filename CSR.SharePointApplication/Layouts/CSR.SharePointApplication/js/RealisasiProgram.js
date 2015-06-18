@@ -53,59 +53,59 @@
           
         submit();
     });
-    $('#btnAddProgramAndLock').click(function () {
-        var KP_Kode = $('#ddlKategori').val();
-        var BP_Kode = $('#ddlBidang').val();
-        var Judul_Program = $('#txtJudul').val();
-        var Area_Kode = $('#ddlArea').val();
-        var WaktuMulai = $('#dateFrom').val();
-        var WaktuSelesai = $('#dateTo').val();
-        var Pelaksana = $('#txtPelaksana').val();
-        var Penerima = $('#txtPenerima').val();
-        var SumberDanaPGEPusat = $('#txtSumberPGEPusat').val();
-        var SumberDanaPGEArea = $('#txtSumberPGEArea').val();
-        var SumberDanaPersero = $('#txtSumberPersero').val();
-        var SumberPKBL = $('#txtSumberPKBL').val();
+    //$('#btnAddProgramAndLock').click(function () {
+    //    var KP_Kode = $('#ddlKategori').val();
+    //    var BP_Kode = $('#ddlBidang').val();
+    //    var Judul_Program = $('#txtJudul').val();
+    //    var Area_Kode = $('#ddlArea').val();
+    //    var WaktuMulai = $('#dateFrom').val();
+    //    var WaktuSelesai = $('#dateTo').val();
+    //    var Pelaksana = $('#txtPelaksana').val();
+    //    var Penerima = $('#txtPenerima').val();
+    //    var SumberDanaPGEPusat = $('#txtSumberPGEPusat').val();
+    //    var SumberDanaPGEArea = $('#txtSumberPGEArea').val();
+    //    var SumberDanaPersero = $('#txtSumberPersero').val();
+    //    var SumberPKBL = $('#txtSumberPKBL').val();
 
-        var validationMessage = "";
+    //    var validationMessage = "";
 
-        if (KP_Kode.length < 1) {
-            validationMessage += "Kategori Program harus di pilih. \n";
-        }
-        if (BP_Kode.length < 1) {
-            validationMessage += "Bidang Program harus di pilih. \n";
-        }
-        if (Judul_Program.length < 1) {
-            validationMessage += "Judul Program harus di isi. \n";
-        }
-        if (Area_Kode.length < 1) {
-            validationMessage += "Area harus di pilih. \n";
-        }
-        if (WaktuMulai.length < 1) {
-            validationMessage += "Waktu Mulai harus di isi. \n";
-        }
-        if (WaktuSelesai.length < 1) {
-            validationMessage += "Waktu Selesai harus di isi. \n";
-        }
-        if (Pelaksana.length < 1) {
-            validationMessage += "Pelaksana harus di isi. \n";
-        }
-        if (Penerima.length < 1) {
-            validationMessage += "Penerima harus di isi. \n";
-        }
-        if (SumberDanaPGEPusat.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1 && SumberDanaPGEArea.length < 1) {
-            validationMessage += "Tidak ada sumber dana, Silahkan di isi minimal satu sumber dana. \n";
-        }
+    //    if (KP_Kode.length < 1) {
+    //        validationMessage += "Kategori Program harus di pilih. \n";
+    //    }
+    //    if (BP_Kode.length < 1) {
+    //        validationMessage += "Bidang Program harus di pilih. \n";
+    //    }
+    //    if (Judul_Program.length < 1) {
+    //        validationMessage += "Judul Program harus di isi. \n";
+    //    }
+    //    if (Area_Kode.length < 1) {
+    //        validationMessage += "Area harus di pilih. \n";
+    //    }
+    //    if (WaktuMulai.length < 1) {
+    //        validationMessage += "Waktu Mulai harus di isi. \n";
+    //    }
+    //    if (WaktuSelesai.length < 1) {
+    //        validationMessage += "Waktu Selesai harus di isi. \n";
+    //    }
+    //    if (Pelaksana.length < 1) {
+    //        validationMessage += "Pelaksana harus di isi. \n";
+    //    }
+    //    if (Penerima.length < 1) {
+    //        validationMessage += "Penerima harus di isi. \n";
+    //    }
+    //    if (SumberDanaPGEPusat.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1 && SumberDanaPGEArea.length < 1) {
+    //        validationMessage += "Tidak ada sumber dana, Silahkan di isi minimal satu sumber dana. \n";
+    //    }
 
-        if (validationMessage.length > 0) {
-            alert(validationMessage);
-            return false;
-        }
+    //    if (validationMessage.length > 0) {
+    //        alert(validationMessage);
+    //        return false;
+    //    }
 
-        submitAndLock();
-    });
+    //    submitAndLock();
+    //});
     $('#btnBatal').click(function () {
-        window.location = "/Sharepointfree/SitePages/Home.aspx";
+        window.location = "/sites/HumasCSR/SitePages/Home.aspx";
     });
         
     $('#txtSumberPGEPusat').blur(function () {
@@ -201,14 +201,14 @@ function InitializeRealisasi() {
             $('.currencyFormat').formatCurrency({
                 symbol: ''
             });            
-            if (Input.Is_Locked == true) {
+            if (Input.Is_Locked_Realisasi == true) {
                 $('#btnAddProgram').prop('disabled', true);
-                $('#btnAddProgramAndLock').prop('disabled', true);
+                //$('#btnAddProgramAndLock').prop('disabled', true);
                 GetSuccessAddAttachList(Input.AttachmentList, false);
             }
             else {
                 $('#btnAddProgram').prop('disabled', false);
-                $('#btnAddProgramAndLock').prop('disabled', false);
+                //$('#btnAddProgramAndLock').prop('disabled', false);
                 GetSuccessAddAttachList(Input.AttachmentList, true);
             }
 
@@ -221,6 +221,8 @@ function InitializeRealisasi() {
 }
 
 function submit() {
+    $body = $("body");
+    $body.addClass("loading");
     var parameter = new Object();
     parameter.programString = JSON.stringify(getRequestData());
     $.ajax({
@@ -232,10 +234,12 @@ function submit() {
         async: true,
         success: function (response) {
             var Input = response.d;
+            $body.removeClass("loading");
             alert(Input);
-            window.location = "/Sharepointfree/SitePages/Home.aspx";
+            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
+            $body.removeClass("loading");
             alert(response.responseText);
         }
     });
@@ -254,7 +258,7 @@ function submitAndLock() {
         success: function (response) {
             var Input = response.d;
             alert(Input);
-            window.location = "/Sharepointfree/SitePages/Home.aspx";
+            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
             alert(response.responseText);

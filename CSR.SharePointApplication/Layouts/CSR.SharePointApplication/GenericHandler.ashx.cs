@@ -69,6 +69,10 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     string UnlockTransaksiList = context.Request.Params["TransaksiNo"];
                     UpdateUnlockedProgram(context, year3, UnlockTransaksiList);
                     break;
+               case "lockrealisasi":
+                    string RealNoLock = context.Request.Params["RealNo"];
+                    UpdatelockedRealisasi(context, RealNoLock);
+                    break;
                 case "unlockrealisasi":
                     string RealNo = context.Request.Params["RealNo"];
                     UpdateUnlockedRealisasi(context, RealNo);
@@ -78,9 +82,21 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
 
         private void GetAvailableArea(HttpContext context)
         {
-            List<MasterAreaEntity> Available_Area = new MasterDataLogic().Read<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
-            MasterAreaEntity AllArea = new MasterAreaEntity(){ AreaCode = "0", AreaName = "--ALL--"};
-            Available_Area.Insert(0, AllArea);
+            //List<MasterAreaEntity> Available_Area = new MasterDataLogic().Read<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
+            List<MasterAreaEntity> Available_Area = null;
+            MasterDataLogic logic = new MasterDataLogic();
+            string areaCode = string.Empty;
+            if (UserInformation.AreaName != "Jakarta")
+            {
+                areaCode = UserInformation.AreaCode;
+            }
+            Available_Area = logic.SPRead<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = areaCode });
+            if (UserInformation.AreaName == "Jakarta")
+            {
+                MasterAreaEntity AllArea = new MasterAreaEntity() { AreaCode = "0", AreaName = "--ALL--" };
+                Available_Area.Insert(0, AllArea);
+            }
+            
             context.Response.Write(new JavaScriptSerializer().Serialize(Available_Area));
         }
 
@@ -124,6 +140,19 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             }
         }
 
+        private void UpdatelockedRealisasi(HttpContext context, string realNo)
+        {
+            List<string> transNo = new List<string>();
+            transNo.Add(realNo);
+            try
+            {
+                int row = new BaseLogic().UpdateLockedStatus(transNo, "R", true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         private void LoadProgramList(HttpContext context, int year, string area)
         {
@@ -203,14 +232,14 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 SPSecurity.RunWithElevatedPrivileges(delegate()
                 {                    
                     //WorkflowCRUD workflowCRUD = new WorkflowLogic().GetWorkflow((int)Workflow.P3);
-                    string fullPath = SiteURL + "/SharepointFree" + "/" + docPath;
+                    string fullPath = SiteURL + "/sites/HumasCSR" + "/" + docPath;
                     int lastIndex = docPath.LastIndexOf("/");
                     string fileName = docPath.Substring(lastIndex + 1, (docPath.Length - lastIndex - 1));
                  
                     using (SPSite currentSite = new SPSite(SiteURL))
                     {
                         //using (SPWeb web = currentSite.OpenWeb(SPContext.Current.Web.ID))
-                        using (SPWeb web = currentSite.OpenWeb("/SharepointFree"))
+                        using (SPWeb web = currentSite.OpenWeb("/sites/HumasCSR"))
                         {
                             web.AllowUnsafeUpdates = true;
                             string strContentType = string.Empty;

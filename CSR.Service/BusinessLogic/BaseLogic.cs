@@ -350,19 +350,14 @@ namespace CSR.Service.BusinessLogic
                 {
                     MailMessage mM = new MailMessage();
                     mM.From = new MailAddress("portal.pge1@pertamina.com");//appsetting
-                    //string smtpFrom = "portal.pge1@pertamina.com";
                     mM.To.Add(EmailEntyti[i].To);
                     mM.Subject = EmailEntyti[i].Subject;                    
-                    //mM.Body = "<html><head>Yth Bapak/Ibu "+EmailEntyti[i].Kepada+"</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.Nama_Pegawai + "  di Area " + EmailEntyti[i].Area_Nama + " telah memasukkan data" + EmailEntyti[i].NameType + "CSR bidang " + EmailEntyti[i].BP_Nama + "</dt></br><dt>Silahkan Melakukan Review melalui link Berikut:" + URL + "'</dt></br><dt></dt></br><dt>Terima Kasih</dt></dl></body></html>";
                     mM.Body = "<html><head>Yth Bapak/Ibu " + EmailEntyti[i].Kepada + "</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.Nama_Pegawai + "  di Area " + EmailEntyti[i].Area_Nama + " telah memasukkan data CSR bidang " + Bidang + "</dt></br><dt>Silahkan Melakukan Review melalui link Berikut:" + URL + "'</dt></br><dt></dt></br><dt>Terima Kasih</dt></dl></body></html>";
                     mM.IsBodyHtml = true;
                     SmtpClient sC = new SmtpClient("10.1.32.165");
-                    sC.Credentials = new NetworkCredential("sharepoint2010", "123456", "pgeindonesia");
+                    sC.Credentials = new NetworkCredential("portal.pge1", "pertaminapge");
                     sC.Send(mM);
 
-                    //string smtpServer = "10.1.32.165";//"10.90.1.1";
-                    //string smtpFrom = "portal.pge1@pertamina.com";
-                    //MailMessage mailMessage = new MailMessage(smtpFrom, email);
                 }
                 catch (Exception ex)
                 {

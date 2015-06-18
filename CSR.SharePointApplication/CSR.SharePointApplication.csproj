@@ -118,20 +118,6 @@
     <Compile Include="CONTROLTEMPLATES\HumasCSR\RealisasiProgramControl.ascx.designer.cs">
       <DependentUpon>RealisasiProgramControl.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="CONTROLTEMPLATES\HumasCSR\ReportExcelControl.ascx.cs">
-      <DependentUpon>ReportExcelControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CONTROLTEMPLATES\HumasCSR\ReportExcelControl.ascx.designer.cs">
-      <DependentUpon>ReportExcelControl.ascx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CONTROLTEMPLATES\HumasCSR\ReportPieChartControl.ascx.cs">
-      <DependentUpon>ReportPieChartControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CONTROLTEMPLATES\HumasCSR\ReportPieChartControl.ascx.designer.cs">
-      <DependentUpon>ReportPieChartControl.ascx.cs</DependentUpon>
-    </Compile>
     <Compile Include="Layouts\CSR.SharePointApplication\BaseLayoutPages.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -165,34 +151,6 @@
     </Compile>
     <Compile Include="Layouts\CSR.SharePointApplication\ErrorPage.aspx.designer.cs">
       <DependentUpon>ErrorPage.aspx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Layouts\CSR.SharePointApplication\ReportExcelPage.aspx.cs">
-      <DependentUpon>ReportExcelPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Layouts\CSR.SharePointApplication\ReportExcelPage.aspx.designer.cs">
-      <DependentUpon>ReportExcelPage.aspx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Layouts\CSR.SharePointApplication\ReportParameterPage.aspx.cs">
-      <DependentUpon>ReportParameterPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Layouts\CSR.SharePointApplication\ReportParameterPage.aspx.designer.cs">
-      <DependentUpon>ReportParameterPage.aspx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Layouts\CSR.SharePointApplication\ReportPieChartPage.aspx.cs">
-      <DependentUpon>ReportPieChartPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Layouts\CSR.SharePointApplication\ReportPieChartPage.aspx.designer.cs">
-      <DependentUpon>ReportPieChartPage.aspx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Layouts\Report.aspx.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Layouts\Report.aspx.designer.cs">
-      <DependentUpon>Report.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="ProgramList\ProgramList.cs" />
     <Compile Include="ProgramList\ProgramListUserControl.ascx.cs">
@@ -245,13 +203,19 @@
     <Content Include="CONTROLTEMPLATES\HumasCSR\MasterKategoriControl.ascx" />
     <Content Include="CONTROLTEMPLATES\HumasCSR\MasterUserControl.ascx" />
     <Content Include="CONTROLTEMPLATES\HumasCSR\RealisasiProgramControl.ascx" />
-    <Content Include="CONTROLTEMPLATES\HumasCSR\ReportExcelControl.ascx" />
-    <Content Include="CONTROLTEMPLATES\HumasCSR\ReportPieChartControl.ascx" />
     <Content Include="Features\Feature1\Feature1.Template.xml">
       <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
     <Content Include="Layouts\CSR.SharePointApplication\CSS\jquery.dataTables.min.css" />
     <Content Include="Layouts\CSR.SharePointApplication\CSS\SML_template.css" />
+    <Content Include="Layouts\CSR.SharePointApplication\images\ajax-loader.gif" />
+    <Content Include="Layouts\CSR.SharePointApplication\images\locked.png" />
+    <Content Include="Layouts\CSR.SharePointApplication\images\sort_asc.png" />
+    <Content Include="Layouts\CSR.SharePointApplication\images\sort_asc_disabled.png" />
+    <Content Include="Layouts\CSR.SharePointApplication\images\sort_both.png" />
+    <Content Include="Layouts\CSR.SharePointApplication\images\sort_desc.png" />
+    <Content Include="Layouts\CSR.SharePointApplication\images\sort_desc_disabled.png" />
+    <Content Include="Layouts\CSR.SharePointApplication\images\unlocked.png" />
     <Content Include="Layouts\CSR.SharePointApplication\InputProgramPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\InputRealisasiPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\js\Attachment.js" />
@@ -270,10 +234,6 @@
     <Content Include="Layouts\CSR.SharePointApplication\js\UserControl.js" />
     <Content Include="Layouts\CSR.SharePointApplication\MasterDataPage.aspx" />
     <Content Include="Layouts\CSR.SharePointApplication\ErrorPage.aspx" />
-    <Content Include="Layouts\CSR.SharePointApplication\ReportExcelPage.aspx" />
-    <Content Include="Layouts\CSR.SharePointApplication\ReportParameterPage.aspx" />
-    <Content Include="Layouts\CSR.SharePointApplication\ReportPieChartPage.aspx" />
-    <Content Include="Layouts\Report.aspx" />
     <Content Include="ProgramList\Elements.xml" />
     <Content Include="ProgramList\ProgramListUserControl.ascx" />
   </ItemGroup>

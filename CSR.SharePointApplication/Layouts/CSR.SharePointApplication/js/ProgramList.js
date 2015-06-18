@@ -1,11 +1,13 @@
 ﻿var isDataTableCreated = false;
 $(document).ready(function () {
     LoadAvailableYear();
+    LoadAvailableArea();
     $('#btnConfirm').click(function () {
         Confirm();
     });
     $('#btnGenerateTable').click(function () {
-        LoadAvailableYear();
+        var strArea = $('#ddlArea').val();
+        LoadProgramList(strArea);
     });
 });
 
@@ -20,11 +22,21 @@ function LoadAvailableYear() {
         async: "false",
         success: function (response) {
             var result = JSON.parse(response);
+            //$("#ddlYear").remove();
             $.each(result, function (key, value) {
-                $("#ddlYear").append($("<option></option>").val(result).html(result));
+                $("#ddlYear").append($("<option></option>").val(value).html(value));
             });
             $('#ddlArea').prop('disabled', true);
-            LoadProgramList();
+            if ($('#hfIsAdmin').val() == "1") {
+                $('#btnUnlock').show();
+                $('#btnUnlock').click(function () {
+                    Unlock();
+                });
+                strArea = 0;
+                $('#ddlArea').prop('disabled', false);
+                //strArea = "&Area=" + $('#hfSelectedArea').val();        
+            }
+            
             },
         error: function (response) {            
             alert(response.responseText);
@@ -45,8 +57,10 @@ function LoadAvailableArea() {
         success: function (response) {
             var result = JSON.parse(response);
             $.each(result, function (key, value) {
-                $("#ddlArea").append($("<option></option>").val(result.AreaCode).html(result.AreaName));
+                $("#ddlArea").append($("<option></option>").val(result[key].AreaCode).html(result[key].AreaName));
             });
+            var strArea = $("#ddlArea").val();
+            LoadProgramList(strArea);
         },
         error: function (response) {
             alert(response.responseText);
@@ -55,22 +69,15 @@ function LoadAvailableArea() {
     return true;
 }
 
-function LoadProgramList() {
-    var strArea = "";
-    LoadAvailableArea();
-    if ($('#hfIsAdmin').val() == "1") {        
-        $('#btnUnlock').show();
-        $('#btnUnlock').click(function () {
-            Unlock();
-        });
-        $('#ddlArea').prop('disabled', false);
-        strArea = "&Area=" + $('#hfSelectedArea').val();        
-    }
-    $('#ddlArea').val($('#hfSelectedArea').val());
-    var yearSelected = $('#hfSelectedYear').val();
-    $('#ddlYear').val(yearSelected);
+function LoadProgramList(strArea) {
+    
+    //LoadAvailableArea();    
+    //$('#ddlArea').val($('#hfSelectedArea').val());
+    //var yearSelected = $('#hfSelectedYear').val();
+    //$('#ddlYear').val(yearSelected);    
+    yearSelected = $('#ddlYear').val();
     $('.appr').prop('disabled', $.find(':input[class=chk][type=checkbox]:checked').length == 0);
-    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=loadProgramList&Year=" + yearSelected + strArea;
+    var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=loadProgramList&Year=" + yearSelected + "&Area=" + strArea;
     $.ajax({
         type: "POST",
         url: handlerUrl,
@@ -93,11 +100,13 @@ function GetSuccessProgramList(data) {
     if (data.length > 0) {
         $('#tblProgramList tbody').remove();
         var total = 0;
+        var strLocked = '<img src="/SharePointFree/_layouts/15/CSR.SharePointApplication/images/locked.png" style="width:20px;heigth:auto;" alt="Telah Dikunci">'
+        var strUnLocked = '<img src="/SharePointFree/_layouts/15/CSR.SharePointApplication/images/unlocked.png" style="width:20px;heigth:auto;" alt="Belum Dikunci">'
         for (i = 0; i < data.length; i++) {
-            var strStatus = data[i].Is_Locked ? "Telah Dikunci" : "Belum Dikunci";
+            var strStatus = data[i].Is_Locked ? strLocked : strUnLocked;
             var strhtml = '<tr>' +
                 '<td ><input type="checkbox" class="chk" data-transno="' + data[i].TransaksiNo + '"></input></td>' +
-                '<td ><a href="/Sharepointfree/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
+                '<td ><a href="/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +
                 '<td >' + data[i].BP_Nama + ' </td>' +
                 '<td >' + data[i].Judul_Program + ' </td>' +
                 '<td >' + data[i].KP_Nama + ' </td>' +
@@ -109,26 +118,30 @@ function GetSuccessProgramList(data) {
             $(strhtml).appendTo($("#tblProgramList"));
         }
         $('.currencyFormat').formatCurrency({
-            symbol: 'IDR '
+            symbol: ''
         });
         $('.rightAligned').css('text-align', 'right');
         if (!isDataTableCreated) {
             CreateDataTable();
         }
-        //$('.rightAligned').css('text-align', 'right');
+        else
+        {
+            $('#tblProgramList').dataTable().fnDestroy();
+            CreateDataTable();
+        }
     }
-
     else {
-        alert('System cannot query your keyword...');
+        alert('Data tidak ditemukan, silahkan periksa kembali filter yang anda pilih.');
     }
 }
 
 function CreateDataTable() {
     var table = $('#tblProgramList').DataTable({
         "columnDefs": [
+            { "targets": 0, "sortable": false },
             { "visible": false, "targets": 2 }
         ],
-        "order": [[1, 'asc']],
+        "order": [[2, 'asc']],
         "displayLength": 25,
         "drawCallback": function (settings) {
             var api = this.api();
@@ -149,17 +162,18 @@ function CreateDataTable() {
                 $('#checkAll').prop('checked', $.find(':input[class=chk][type=checkbox]').length == $.find(':input[class=chk][type=checkbox]:checked').length)
                 $('.appr').prop('disabled', $.find(':input[class=chk][type=checkbox]:checked').length == 0);
             });
+            
         }
     });
 
     // Order by the grouping
     $('#tblProgramList tbody').on('click', 'tr.group', function () {
         var currentOrder = table.order()[0];
-        if (currentOrder[0] === 1 && currentOrder[1] === 'asc') {
-            table.order([1, 'desc']).draw();
+        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+            table.order([2, 'desc']).draw();
         }
         else {
-            table.order([1, 'asc']).draw();
+            table.order([2, 'asc']).draw();
         }
     });
 

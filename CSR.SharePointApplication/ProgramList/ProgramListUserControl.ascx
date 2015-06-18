@@ -16,12 +16,18 @@
 <div id="wrapping" class="clearfix">    
     <div id="left-side">
         <div class="div">
+            <span class="lbl">Tahun </span>
             <select id="ddlYear" class="input"></select>
             <asp:HiddenField ID="hfSelectedYear" runat="server" ClientIDMode="Static"/>
         </div>
         <div class="div">
+            <span class="lbl">Area </span>
             <select id="ddlArea" class="input"></select>
             <asp:HiddenField ID="hfSelectedArea" runat="server" ClientIDMode="Static"/>
+        </div>
+        <div class="button-template">
+            <asp:HiddenField ID="hfIsAdmin" runat="server" ClientIDMode="Static"/>
+            <input type="button" id="btnGenerateTable" value="Lihat" class="button"/>
         </div>
     </div>
     <div id="right-side"> 
@@ -29,10 +35,7 @@
 </div>
 <div id="wrapping" class="clearfix">
     <div id="one-side">
-        <div class="button-template">
-            <asp:HiddenField ID="hfIsAdmin" runat="server" ClientIDMode="Static"/>
-            <input type="button" id="btnGenerateTable" value="Lihat" class="button"/>
-        </div>
+        
         <asp:Label ID="LblError" runat="server" ForeColor="Red"></asp:Label>        
     </div>
     <br /><br />
