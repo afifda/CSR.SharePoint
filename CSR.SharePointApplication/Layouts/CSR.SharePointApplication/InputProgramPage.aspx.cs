@@ -114,6 +114,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 {
                     programEntity.Last_Modified_Date = DateTime.Now;
                     programEntity.Last_Modified_By = User.UserName;
+                    programEntity.isplan = true;
                     logic.SPUpdate<ProgramEntity>(programEntity);
                     if (programEntity.AttachmentList.Count != 0)
                     {
@@ -130,6 +131,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     programEntity.Created_By = User.UserName;
                     programEntity.Last_Modified_Date = DateTime.Now;
                     programEntity.Last_Modified_By = User.UserName;
+                    programEntity.isplan = true;
                     programEntity.TransaksiNo = logic.SPSaveWithOutput<ProgramEntity>(programEntity, "TransaksiNo");
                     if (programEntity.AttachmentList.Count != 0)
                     {
