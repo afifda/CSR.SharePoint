@@ -1,4 +1,10 @@
-﻿$(document).ready(function () {
+﻿$body = $("body");
+
+$(document).on({
+    ajaxStart: function () { $body.addClass("loading"); },
+    ajaxStop: function () { $body.removeClass("loading"); }
+});
+$(document).ready(function () {
     Init();
     $('#btnBatal').click(function () {
         window.location = "/sites/HumasCSR/SitePages/Home.aspx";
@@ -121,12 +127,10 @@ function InitializeProgram() {
                 
                 if (Input.Is_Locked == true) {
                     $('#btnAddProgram').prop('disabled', true);
-                    $('#btnAddMasterBidang').prop('disabled', true);
                     GetSuccessAddAttachList(Input.AttachmentList, false);
                 }
                 else {
                     $('#btnAddProgram').prop('disabled', false);
-                    $('#btnAddMasterBidang').prop('disabled', false);
                     GetSuccessAddAttachList(Input.AttachmentList, true);
                 }
                 

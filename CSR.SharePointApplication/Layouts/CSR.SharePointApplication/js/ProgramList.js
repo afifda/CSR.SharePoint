@@ -36,7 +36,7 @@ function LoadAvailableYear() {
                 $('#ddlArea').prop('disabled', false);
                 //strArea = "&Area=" + $('#hfSelectedArea').val();        
             }
-            LoadProgramList(strArea);
+            
             },
         error: function (response) {            
             alert(response.responseText);
@@ -59,6 +59,8 @@ function LoadAvailableArea() {
             $.each(result, function (key, value) {
                 $("#ddlArea").append($("<option></option>").val(result[key].AreaCode).html(result[key].AreaName));
             });
+            var strArea = $("#ddlArea").val();
+            LoadProgramList(strArea);
         },
         error: function (response) {
             alert(response.responseText);
@@ -98,8 +100,10 @@ function GetSuccessProgramList(data) {
     if (data.length > 0) {
         $('#tblProgramList tbody').remove();
         var total = 0;
+        var strLocked = '<img src="/SharePointFree/_layouts/15/CSR.SharePointApplication/images/locked.png" style="width:20px;heigth:auto;" alt="Telah Dikunci">'
+        var strUnLocked = '<img src="/SharePointFree/_layouts/15/CSR.SharePointApplication/images/unlocked.png" style="width:20px;heigth:auto;" alt="Belum Dikunci">'
         for (i = 0; i < data.length; i++) {
-            var strStatus = data[i].Is_Locked ? "Telah Dikunci" : "Belum Dikunci";
+            var strStatus = data[i].Is_Locked ? strLocked : strUnLocked;
             var strhtml = '<tr>' +
                 '<td ><input type="checkbox" class="chk" data-transno="' + data[i].TransaksiNo + '"></input></td>' +
                 '<td ><a href="/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=' + data[i].TransaksiNo + '">' + data[i].TransaksiNo + '</a> ' + ' </td>' +

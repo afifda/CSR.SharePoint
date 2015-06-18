@@ -85,9 +85,18 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             //List<MasterAreaEntity> Available_Area = new MasterDataLogic().Read<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
             List<MasterAreaEntity> Available_Area = null;
             MasterDataLogic logic = new MasterDataLogic();
-            Available_Area = logic.SPRead<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
-            MasterAreaEntity AllArea = new MasterAreaEntity(){ AreaCode = "0", AreaName = "--ALL--"};
-            Available_Area.Insert(0, AllArea);
+            string areaCode = string.Empty;
+            if (UserInformation.AreaName != "Jakarta")
+            {
+                areaCode = UserInformation.AreaCode;
+            }
+            Available_Area = logic.SPRead<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = areaCode });
+            if (UserInformation.AreaName == "Jakarta")
+            {
+                MasterAreaEntity AllArea = new MasterAreaEntity() { AreaCode = "0", AreaName = "--ALL--" };
+                Available_Area.Insert(0, AllArea);
+            }
+            
             context.Response.Write(new JavaScriptSerializer().Serialize(Available_Area));
         }
 

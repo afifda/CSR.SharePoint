@@ -22,7 +22,8 @@ namespace CSR.Service.DataAccess
         public BaseSPDataAccess(bool isTransaction = false)
         {
             Connection = new DoubleASqlConnection();
-            Connection.ConnectionString = ConfigurationManager.ConnectionStrings[ConnectionStringOptions.CSRConnection.ToString()].ConnectionString;            
+            Connection.ConnectionString = ConfigurationManager.ConnectionStrings[ConnectionStringOptions.CSRConnection.ToString()].ConnectionString;
+            //Connection.ConnectionString = @"Data Source=sqlpge02;Initial Catalog=PGE_CSR;Persist Security Info=True;User ID=sa;Password=sqlserver2012PGE";
         }
         public BaseSPDataAccess(ConnectionStringOptions connectionString, bool isTransaction = false)
         {
