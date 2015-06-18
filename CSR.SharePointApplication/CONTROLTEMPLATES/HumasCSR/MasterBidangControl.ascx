@@ -13,7 +13,8 @@
         <div class="div">
              <table id="tblMasterBidang" class="tabelgrid">
                   <thead>                
-                    <tr>   
+                    <tr>
+                       <th class="header-grid">Nama Kategori</th>    
                        <th class="header-grid">Nama Bidang</th>
                        <th class="header-grid">Action</th>
                     </tr>
@@ -32,7 +33,12 @@
                         <h4 class="modal-title">Detail Bidang</h4>
                     </div>
                     <div class="modal-body">
-                        <div>                            
+                        <div>                                                    
+                            <div class="div">
+                                <span class="lbl">Nama Kategori <span class="red">*</span></span>
+                                <span class="titikdua">:</span>
+                                <select id="ddlKategori" class="input"></select>
+                            </div>  
                             <div class="div">
                                 <span class="lbl">Nama Bidang <span class="red">*</span></span>
                                 <span class="titikdua">:</span>

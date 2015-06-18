@@ -10,6 +10,12 @@ namespace CSR.Service.Entity
     [Table("[Mst_BidangProgram]", true, false, "", "usp_SaveMasterBidangProgram", "usp_ReadMasterBidangProgram", "usp_UpdateMasterBidangProgram", "usp_DeleteMasterBidangProgram")]
     public class MasterBidangProgramEntity
     {
+        [Column(name: "KP_Kode", isDeleteParam: false, isUpdateParam: true, isAllowNull: false, isReadParam: false, isInsertParam: true)]
+        public int KP_Kode { get; set; }
+
+        [Column(name: "KP_Nama", isUpdateParam: false, isAllowNull: true, isInsertParam: false)]
+        public string KP_Nama { get; set; }
+
         [Column(name: "BP_Kode", isDeleteParam: true, isUpdateParam: true, isAllowNull: false, isReadParam: true, isInsertParam: false, isPrimaryKey: true)]
         public int BP_Kode { get; set; }
 
