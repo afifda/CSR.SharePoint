@@ -105,9 +105,9 @@
     </div>
 </div>
 <div class="button-template2">
-    <input type="button" id="btnAddProgram" class="button" value="Simpan"/>    
-    <input type="button" id="btnBatal" class="button" value="Batal"/>    
+    <input type="button" id="btnAddProgram" class="button" value="Simpan"/>           
     <input type="button" id="btnDeleteRealisasi" class="button" value="Hapus"/>
+    <input type="button" id="btnBatal" class="button" value="Keluar"/> 
 </div>
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/date.js"></script>
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/jquery.formatCurrency-1.4.0.min.js"></script>

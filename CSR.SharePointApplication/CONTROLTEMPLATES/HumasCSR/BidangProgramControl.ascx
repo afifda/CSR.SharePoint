@@ -102,8 +102,9 @@
 </div>
 <div class="button-template2">
     <input type="button" id="btnAddProgram" class="button" value="Simpan"/>
-    <input type="button" data-dismiss="modal" value="Batal" class="button"/>
-    <%--<input type="button" id="btnBatal" class="button" value="Batal"/>--%>
+    <input type="button" id="btnDeleteProgram" class="button" value="Hapus" style="display:none"/>
+    <input type="button" value="Keluar" class="button" id="btnBatal"/>
+    
 </div>
 
 <script src="../../../_layouts/15/CSR.SharePointApplication/js/jquery.formatCurrency-1.4.0.min.js"></script>

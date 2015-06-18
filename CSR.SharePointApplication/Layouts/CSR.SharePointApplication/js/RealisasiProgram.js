@@ -60,8 +60,26 @@
     });
 
     $('#btnDeleteRealisasi').click(function () {
-        var RealisasiNo = $('#hfRealisasiNo').val();
-        deleteRealisaisi(RealisasiNo);
+        $("#dialog-confirm").html("Apakah anda yakin menghapus realisasi ini?");
+
+        // Define the Dialog and its properties.
+        $("#dialog-confirm").dialog({
+            resizable: false,
+            modal: true,
+            title: "Warning",
+            height: 150,
+            width: 350,
+            buttons: {
+                "Ya": function () {
+                    var RealisasiNo = $('#hfRealisasiNo').val();
+                    deleteRealisaisi(RealisasiNo);
+                    $(this).dialog('close');
+                },
+                "Tidak": function () {
+                    $(this).dialog('close');
+                }
+            }
+        });        
     });
         
     $('#txtSumberPGEPusat').blur(function () {

@@ -70,35 +70,53 @@ function editKategori() {
 }
 
 function deleteKategori() {
-    var $element = this;
-    var row = $($element).parents("tr:first");
+    $("#dialog-confirm").html("Apakah anda yakin menghapus kategori ini?");
 
-    var KodeKategori = row.children()[0].innerText;
-    var parameter = {
-        kodeKategori: KodeKategori
-    };
-    $.ajax({
-        type: "POST",
-        url: window.location.pathname + "/DeleteMasterKategori",
-        async: false,
-        cache: false,
-        data: JSON.stringify(parameter),
-        contentType: "application/json; charset=utf-8",
-        datatype: "json",
-        async: false,
-        success: function (response) {
-            var Kategori = response.d;
-            if (Kategori == "Success") {
-                $("#modalMasterKategori").modal("hide");
-                alert("Master Kategori telah dihapus.")
-                Init();
+    // Define the Dialog and its properties.
+    $("#dialog-confirm").dialog({
+        resizable: false,
+        modal: true,
+        title: "Warning",
+        height: 150,
+        width: 350,
+        buttons: {
+            "Ya": function () {
+                var $element = this;
+                var row = $($element).parents("tr:first");
+
+                var KodeKategori = row.children()[0].innerText;
+                var parameter = {
+                    kodeKategori: KodeKategori
+                };
+                $.ajax({
+                    type: "POST",
+                    url: window.location.pathname + "/DeleteMasterKategori",
+                    async: false,
+                    cache: false,
+                    data: JSON.stringify(parameter),
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    async: false,
+                    success: function (response) {
+                        var Kategori = response.d;
+                        if (Kategori == "Success") {
+                            $("#modalMasterKategori").modal("hide");
+                            alert("Master Kategori telah dihapus.")
+                            Init();
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                        $("#modalMasterKategori").modal("hide");
+                    }
+                });
+                $(this).dialog('close');
+            },
+            "Tidak": function () {
+                $(this).dialog('close');
             }
-        },
-        error: function (response) {
-            alert(response.responseText);
-            $("#modalMasterKategori").modal("hide");
         }
-    });
+    });    
 }
 
 function saveKategori() {

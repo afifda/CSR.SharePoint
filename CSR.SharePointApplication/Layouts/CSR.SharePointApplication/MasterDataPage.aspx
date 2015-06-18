@@ -15,6 +15,7 @@
     <div id="ControlContainer" runat="server" ClientIDMode="Static">
         <input type="hidden" id="hfEditMode" />
     </div>
+    <div id="dialog-confirm"></div>
 </asp:Content>
 
 <asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">

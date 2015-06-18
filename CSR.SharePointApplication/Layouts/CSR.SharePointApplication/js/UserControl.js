@@ -113,35 +113,54 @@ function editUser() {
 }
 
 function deleteUser() {
-    var $element = this;
-    var row = $($element).parents("tr:first");
+    $("#dialog-confirm").html("Apakah anda yakin menghapus user ini?");
 
-    var No_Pegawai = row.children()[0].innerText;
-    var parameter = {
-        NoPegawai: No_Pegawai   
-    };
-    $.ajax({
-        type: "POST",
-        url: window.location.pathname + "/DeleteMasterUser",
-        async: false,
-        cache: false,
-        data: JSON.stringify(parameter),
-        contentType: "application/json; charset=utf-8",
-        datatype: "json",
-        async: false,
-        success: function (response) {
-            var User = response.d;
-            if (User == "Success") {
-                $("#modalMasterUser").modal("hide");
-                alert("Master User telah dihapus.")
-                Init();
+    // Define the Dialog and its properties.
+    $("#dialog-confirm").dialog({
+        resizable: false,
+        modal: true,
+        title: "Warning",
+        height: 150,
+        width: 350,
+        buttons: {
+            "Ya": function () {
+                var $element = this;
+                var row = $($element).parents("tr:first");
+
+                var No_Pegawai = row.children()[0].innerText;
+                var parameter = {
+                    NoPegawai: No_Pegawai
+                };
+                $.ajax({
+                    type: "POST",
+                    url: window.location.pathname + "/DeleteMasterUser",
+                    async: false,
+                    cache: false,
+                    data: JSON.stringify(parameter),
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    async: false,
+                    success: function (response) {
+                        var User = response.d;
+                        if (User == "Success") {
+                            $("#modalMasterUser").modal("hide");
+                            alert("Master User telah dihapus.")
+                            Init();
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                        $("#modalMasterUser").modal("hide");
+                    }
+                });
+                $(this).dialog('close');
+            },
+            "Tidak": function () {
+                $(this).dialog('close');
             }
-        },
-        error: function (response) {
-            alert(response.responseText);
-            $("#modalMasterUser").modal("hide");
         }
     });
+    
 }
 
 function saveUser() {

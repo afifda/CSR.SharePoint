@@ -103,9 +103,18 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         private void UpdateLockedProgram(HttpContext context, int year, string transaksiList)
         {
             List<string> transNo = transaksiList.Split('|').ToList();
+            ProgramEntity program = new BaseLogic().SPRead<ProgramEntity>(new ProgramEntity() { TransaksiNo = transNo[0] }).FirstOrDefault();
             try
             {
                 int row = new BaseLogic().UpdateLockedStatus(transNo, "P", true);
+                //email Notification
+                if (row > 0)
+                {
+                    BaseLogic logic = new BaseLogic();
+                    logic.SendMailKirimKunci(program.Area_Kode, "Input Program");
+                }
+
+
             }
             catch (Exception ex)
             {

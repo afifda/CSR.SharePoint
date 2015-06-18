@@ -14,7 +14,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsValidUser)
+            if (!IsValidUser || User.AreaName != "Jakarta")
             {
                 Response.Redirect("/_layouts/15/CSR.SharePointApplication/ErrorPage.aspx?ErrCode=NotAuthorized", true);
             }

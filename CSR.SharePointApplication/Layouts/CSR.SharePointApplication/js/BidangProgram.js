@@ -40,7 +40,7 @@
         }
 
         submit();
-    });
+    });   
 
     $('#btnAddMasterBidang').click(function () {
         var transaksiNo = $('#hfTransaksiNo').val()
@@ -126,6 +126,32 @@ function InitializeProgram() {
                 else {
                     $('#btnAddProgram').prop('disabled', false);
                     GetSuccessAddAttachList(Input.AttachmentList, true);
+                }
+                if ($('#hfIsAdmin').val() == "1") {
+                    $('#btnDeleteProgram').show();
+                    $('#btnDeleteProgram').click(function () {
+                        $("#dialog-confirm").html("Apakah anda yakin menghapus program ini?");
+
+                        // Define the Dialog and its properties.
+                        $("#dialog-confirm").dialog({
+                            resizable: false,
+                            modal: true,
+                            title: "Warning",
+                            height: 150,
+                            width: 350,
+                            buttons: {
+                                "Ya": function () {
+                                    var TransNo = $('#hfTransaksiNo').val();
+                                    DeleteProgram(TransNo);
+                                    $(this).dialog('close');
+                                },
+                                "Tidak": function () {
+                                    $(this).dialog('close');
+                                }
+                            }
+                        });
+                        
+                    });
                 }
                 
             },
@@ -263,4 +289,29 @@ function isNumberKey(evt) {
         return false;
 
     return true;
+}
+
+function DeleteProgram(TransNo) {
+    $body = $("body");
+    $body.addClass("loading");
+    var parameter = new Object();
+    parameter.TransaksiNo = TransNo;
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        url: window.location.pathname + "/DeleteProgram",
+        data: JSON.stringify(parameter),
+        async: true,
+        success: function (response) {
+            var Input = response.d;
+            $body.removeClass("loading");
+            alert(Input);
+            window.location = "/sites/HumasCSR/SitePages/Home.aspx";
+        },
+        error: function (response) {
+            $body.removeClass("loading");
+            alert(response.responseText);
+        }
+    });
 }

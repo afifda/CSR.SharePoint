@@ -70,12 +70,7 @@ function LoadAvailableArea() {
 }
 
 function LoadProgramList(strArea) {
-    
-    //LoadAvailableArea();    
-    //$('#ddlArea').val($('#hfSelectedArea').val());
-    //var yearSelected = $('#hfSelectedYear').val();
-    //$('#ddlYear').val(yearSelected);    
-    yearSelected = $('#ddlYear').val();
+    var yearSelected = $('#ddlYear').val();
     $('.appr').prop('disabled', $.find(':input[class=chk][type=checkbox]:checked').length == 0);
     var handlerUrl = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=loadProgramList&Year=" + yearSelected + "&Area=" + strArea;
     $.ajax({

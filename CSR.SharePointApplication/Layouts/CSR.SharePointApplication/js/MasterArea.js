@@ -80,35 +80,53 @@ function editArea()
 
 function deleteArea()
 {
-    var $element = this;
-    var row = $($element).parents("tr:first");
+    $("#dialog-confirm").html("Apakah anda yakin menghapus area ini?");
 
-    var KodeArea = row.children()[0].innerText;
-    var parameter = {
-        kodeArea: KodeArea
-    };
-    $.ajax({
-        type: "POST",
-        url: window.location.pathname + "/DeleteMasterArea",
-        async: false,
-        cache: false,
-        data: JSON.stringify(parameter),
-        contentType: "application/json; charset=utf-8",
-        datatype: "json",
-        async: false,
-        success: function (response) {
-            var Area = response.d;
-            if (Area == "Success") {
-                $("#modalMasterArea").modal("hide");
-                alert("Master Area telah dihapus.")
-                Init();
+    // Define the Dialog and its properties.
+    $("#dialog-confirm").dialog({
+        resizable: false,
+        modal: true,
+        title: "Warning",
+        height: 150,
+        width: 350,
+        buttons: {
+            "Ya": function () {
+                var $element = this;
+                var row = $($element).parents("tr:first");
+
+                var KodeArea = row.children()[0].innerText;
+                var parameter = {
+                    kodeArea: KodeArea
+                };
+                $.ajax({
+                    type: "POST",
+                    url: window.location.pathname + "/DeleteMasterArea",
+                    async: false,
+                    cache: false,
+                    data: JSON.stringify(parameter),
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    async: false,
+                    success: function (response) {
+                        var Area = response.d;
+                        if (Area == "Success") {
+                            $("#modalMasterArea").modal("hide");
+                            alert("Master Area telah dihapus.")
+                            Init();
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                        $("#modalMasterArea").modal("hide");
+                    }
+                });
+                $(this).dialog('close');
+            },
+            "Tidak": function () {
+                $(this).dialog('close');
             }
-        },
-        error: function (response) {
-            alert(response.responseText);
-            $("#modalMasterArea").modal("hide");
         }
-    });
+    });    
 }
 
 function saveArea()

@@ -366,5 +366,25 @@ namespace CSR.Service.BusinessLogic
             }
 
         }
+
+        public void SendMailKirimKunci(string Area_Code, string Subject)
+        {
+            List<EmailEntyti> EmailEntyti = null;
+            MasterDataLogic logic = new MasterDataLogic();
+            EmailEntyti = logic.SPRead<EmailEntyti>(new EmailEntyti() { Area = "" });
+            MasterUserByUserNameEntity UserInformationNew = new MasterUserByUserNameEntity();
+            UserInformationNew = UserInformation(SPContext.Current.Web.CurrentUser.LoginName);
+            MailMessage mM = new MailMessage();
+            mM.From = new MailAddress("portal.pge1@pertamina.com");//appsetting
+            mM.Subject = Subject;
+            mM.IsBodyHtml = true;
+            mM.CC.Add("");//CC selalu ke kantor jakarta
+            mM.To.Add(EmailEntyti[0].To);
+            mM.Body = "<html><head>Yth Bapak/Ibu " + EmailEntyti[0].Kepada + "</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.Nama_Pegawai + "  di Area " + EmailEntyti[0].Area_Nama + " telah mengentri Program CSR </dt></dl></br><dt>Terima Kasih</dt></dl></body></html>";
+            SmtpClient sC = new SmtpClient("10.1.32.165");
+            sC.Credentials = new NetworkCredential("portal.pge1", "pertaminapge");
+            sC.Send(mM);
+
+        }
     }
 }

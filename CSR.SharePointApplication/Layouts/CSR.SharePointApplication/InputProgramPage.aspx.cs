@@ -148,5 +148,20 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             }
             return "Success. Program Dan Lampiran File telah disimpan.";            
         }
+
+        [System.Web.Services.WebMethod]
+        public static string DeleteProgram(string TransaksiNo)
+        {
+            try
+            {
+                ProgramLogic logic = new ProgramLogic();
+                logic.SPDelete<ProgramEntity>(new ProgramEntity() { TransaksiNo = TransaksiNo });
+            }
+            catch (Exception ex)
+            {
+                return string.Format("Telah terjadi error. ({0})", ex.Message);
+            }
+            return "Success. Program telah dihapus.";
+        }
     }
 }

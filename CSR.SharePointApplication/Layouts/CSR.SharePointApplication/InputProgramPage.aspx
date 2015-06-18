@@ -40,6 +40,7 @@
     <asp:HiddenField ID="hfIsAdmin" runat="server" ClientIDMode="Static"/>
     <uc1:BidangProgramControl runat="server" id="BidangProgramControl" />    
     <div class="loadingModal"></div>
+    <div id="dialog-confirm"></div>
 </asp:Content>
 
 <asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">
