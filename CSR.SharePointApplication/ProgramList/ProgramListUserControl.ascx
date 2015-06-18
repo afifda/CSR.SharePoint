@@ -11,6 +11,30 @@
     table.display td:first-child {
         text-align: center;
     }
+    table.display th:first-child {
+        text-align: center;
+    }
+    .loadingModal {
+            display:    none;
+            position:   fixed;
+            z-index:    1000;
+            top:        0;
+            left:       0;
+            height:     100%;
+            width:      100%;
+            background: rgba( 255, 255, 255, .8 ) 
+                        url('/SharePointFree/_layouts/15/CSR.SharePointApplication/images/ajax-loader.gif') 
+                        50% 50% 
+                        no-repeat;
+        }
+
+        body.loading {
+            overflow: hidden;   
+        }
+
+        body.loading .loadingModal {
+            display: block;
+        }
 </style>
 
 <div id="wrapping" class="clearfix">    
@@ -73,7 +97,7 @@
     <input type="button" id="btnConfirm" value="Kirim dan Kunci" class="button"/>
     <input type="button" id="btnUnlock" value="Buka Kunci" class="button" style="display:none"/>
 </div>
-
+<div class="loadingModal"></div>
 <link href="../../_layouts/15/CSR.SharePointApplication/CSS/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="../_layouts/15/CSR.SharePointApplication/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="../_layouts/15/CSR.SharePointApplication/js/ProgramList.js" type="text/javascript"></script>

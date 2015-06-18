@@ -186,6 +186,13 @@ function CreateDataTable() {
 }
 
 function Confirm() {
+    var itemCheked = $('.chk:checked').length;
+    if (itemCheked == 0) {
+        alert("Please select any record to Execute Action");
+        return false;
+    }
+    $body = $("body");
+    $body.addClass("loading");
     var yearSelected = $('#ddlYear').val();
     var transNo = "";
     $('.chk:checked').each(function () {
@@ -201,16 +208,13 @@ function Confirm() {
         contentType: "application/json; charset=utf-8",
         datatype: "json",
         async: true,
-        success: function (response) {
-            var itemCheked = $('.chk:checked').length;
-            if (itemCheked == 0) {
-                alert("Please select any record to Execute Action");
-                return false;
-            }
+        success: function (response) {            
+            $body.removeClass("loading");
             alert("Rencana Program sudah terkunci");
             window.location.reload();
         },
         error: function (response) {
+            $body.removeClass("loading");
             alert(response.responseText);
         }
     });
