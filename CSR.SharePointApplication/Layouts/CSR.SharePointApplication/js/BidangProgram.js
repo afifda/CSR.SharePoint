@@ -1,10 +1,4 @@
-﻿$body = $("body");
-
-$(document).on({
-    ajaxStart: function () { $body.addClass("loading"); },
-    ajaxStop: function () { $body.removeClass("loading"); }
-});
-$(document).ready(function () {
+﻿$(document).ready(function () {
     Init();
     $('#btnBatal').click(function () {
         window.location = "/sites/HumasCSR/SitePages/Home.aspx";
@@ -222,6 +216,8 @@ function lockFunc(realNo) {
 }
 
 function submit() {
+    $body = $("body");
+    $body.addClass("loading");
     var parameter = new Object();
     parameter.programString = JSON.stringify(getRequestData());
     $.ajax({
@@ -233,10 +229,12 @@ function submit() {
         async: true,
         success: function (response) {
             var Input = response.d;
+            $body.removeClass("loading");
             alert(Input);
             window.location = "/sites/HumasCSR/SitePages/Home.aspx";
         },
         error: function (response) {
+            $body.removeClass("loading");
             alert(response.responseText);
         }
     });
