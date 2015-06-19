@@ -33,12 +33,14 @@
         }
         if (Waktu_Sampai.length < 1) {
             validationMessage += "Waktu Selesai harus di isi. \n";
-        }       
+        }
+        if (Waktu_Sampai < Waktu_Mulai) {
+            validationMessage += "Waktu Selesai lebih kecil dari waktu mulai. \n";
+        }
         if (validationMessage.length > 0) {
             alert(validationMessage);
             return false;
         }
-
         submit();
     });   
 
