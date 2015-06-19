@@ -23,7 +23,7 @@
             height:     100%;
             width:      100%;
             background: rgba( 255, 255, 255, .8 ) 
-                        url('/SharePointFree/_layouts/15/CSR.SharePointApplication/images/ajax-loader.gif') 
+                        url('/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/images/ajax-loader.gif') 
                         50% 50% 
                         no-repeat;
         }

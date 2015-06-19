@@ -95,8 +95,8 @@ function GetSuccessProgramList(data) {
     if (data.length > 0) {
         $('#tblProgramList tbody').remove();
         var total = 0;
-        var strLocked = '<img src="/SharePointFree/_layouts/15/CSR.SharePointApplication/images/locked.png" style="width:20px;heigth:auto;" alt="Telah Dikunci">'
-        var strUnLocked = '<img src="/SharePointFree/_layouts/15/CSR.SharePointApplication/images/unlocked.png" style="width:20px;heigth:auto;" alt="Belum Dikunci">'
+        var strLocked = '<img src="/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/images/locked.png" style="width:20px;heigth:auto;" alt="Telah Dikunci">'
+        var strUnLocked = '<img src="/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/images/unlocked.png" style="width:20px;heigth:auto;" alt="Belum Dikunci">'
         for (i = 0; i < data.length; i++) {
             var strStatus = data[i].Is_Locked ? strLocked : strUnLocked;
             var strhtml = '<tr>' +
