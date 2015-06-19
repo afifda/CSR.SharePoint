@@ -15,7 +15,9 @@
         var SumberDanaPGEPusat = $('#txtSumberPGEPusat').val();
         var SumberDanaPGEArea = $('#txtSumberPGEArea').val();
         var SumberDanaPersero = $('#txtSumberPersero').val();
-        var SumberPKBL = $('#txtSumberPKBL').val();        
+        var SumberPKBL = $('#txtSumberPKBL').val();
+        var from = new Date(WaktuMulai);
+        var to = new Date(WaktuSelesai);
 
         var validationMessage = "";
 
@@ -43,7 +45,7 @@
         if (Penerima.length < 1) {
             validationMessage += "Penerima harus di isi. \n";
         }
-        if (WaktuSelesai < WaktuMulai) {
+        if (to < from) {
             validationMessage += "Waktu selesai lebih kecil dari waktu mulai. \n";
         }
         if (SumberDanaPGEPusat.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1 && SumberDanaPGEArea.length < 1) {

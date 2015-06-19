@@ -12,7 +12,9 @@
         var Waktu_Mulai = $('#dateFrom').val();
         var Waktu_Sampai = $('#dateTo').val();
         var validationMessage = "";
-        
+        var from = new Date(Waktu_Mulai);
+        var to = new Date(Waktu_Sampai);
+
         if (KP_Kode == null || KP_Kode == "") {
             validationMessage += "Kategori Program harus di pilih. \n";
         }
@@ -34,7 +36,7 @@
         if (Waktu_Sampai.length < 1) {
             validationMessage += "Waktu Selesai harus di isi. \n";
         }
-        if (Waktu_Sampai < Waktu_Mulai) {
+        if (to < from) {
             validationMessage += "Waktu Selesai lebih kecil dari waktu mulai. \n";
         }
         if (validationMessage.length > 0) {
