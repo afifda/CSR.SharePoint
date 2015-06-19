@@ -563,6 +563,47 @@ namespace CSR.Service.DataAccess
             });
             return attachmentCRUDList;
         }
+
+        public int DeleteFolderLibrary(string siteUrl, string documentLibraryName, List<AttachmentEntity> attachmentCRUDList)
+        {
+            int result = 0;
+
+            try
+            {
+                SPSecurity.RunWithElevatedPrivileges(delegate()
+                {
+                    using (SPSite site = new SPSite(siteUrl))
+                    {
+                        site.AllowUnsafeUpdates = true;
+                        using (SPWeb web = site.OpenWeb("/sharepointfree/"))
+                        {
+                            SPList docLib = web.Lists.TryGetList(documentLibraryName);
+                            if (docLib == null)
+                            {
+                                throw new Exception(string.Format("Document libary {0} cannot be found", documentLibraryName));
+                            }
+                            web.AllowUnsafeUpdates = true;
+
+                            SPFolder SubFolder = (from SPFolder folder in docLib.RootFolder.SubFolders
+                                                  where folder.Url == docLib.RootFolder.Url + "/" + attachmentCRUDList[0].TransaksiNo
+                                                  select folder).FirstOrDefault();
+                            if (SubFolder == null)
+                                SubFolder = docLib.RootFolder.SubFolders.Add(attachmentCRUDList[0].TransaksiNo);
+
+                            SubFolder.Delete();
+
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return result;
+
+        }
         
     }
 }

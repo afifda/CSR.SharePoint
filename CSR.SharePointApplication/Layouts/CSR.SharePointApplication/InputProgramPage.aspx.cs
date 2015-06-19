@@ -118,7 +118,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     logic.SPUpdate<ProgramEntity>(programEntity);
                     if (programEntity.AttachmentList.Count != 0)
                     {
-                        programEntity.AttachmentList.ForEach(a => a.TransaksiNo = programEntity.TransaksiNo);                        
+                        programEntity.AttachmentList.ForEach(a => a.TransaksiNo = programEntity.TransaksiNo);
+                        status = logic.DeleteFolderAttach(SiteURL, DocLib, programEntity.AttachmentList);
                         status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, programEntity.AttachmentList);
                         status = logic.SaveAttachment(programEntity.AttachmentList);
                     }

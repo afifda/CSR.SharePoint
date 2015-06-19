@@ -15,13 +15,8 @@
                   <thead>                
                     <tr>   
                        <th class="header-grid">Area Code</th>
-                        <%--<th class="header-grid">Bidang</th>--%>
                         <th class="header-grid">Kepada</th>
-                        <%--<th class="header-grid">Type</th>--%>
-                        <%--<th class="header-grid">URL</th>--%>
                        <th class="header-grid">Email</th>
-                       <th class="header-grid">Subject</th>
-                       <th class="header-grid">Message</th>
                        <th class="header-grid">Action</th>
                     </tr>
                  </thead>
@@ -45,50 +40,16 @@
                                 <span class="titikdua">:</span>                                
                                 <select id="txtArea" class="input"></select>
                             </div>
-                            <%--<div class="div">
-                                <span class="lbl">Bidang <span class="red">*</span></span>
-                                <span class="titikdua">:</span>                                
-                                <select id="txtBidang" class="input"></select>
-                            </div>--%>
                             <div class="div">
                                 <span class="lbl">Kepada <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtKepada" class="input" id="txtKepada" type="text" />
                             </div>
-                            <%--<div class="div">
-                                <span class="lbl">TypeProgram</span>
-                                <span class="titikdua">:</span>
-				                <table>
-					                <tr>
-						                <td>
-							                <input type="radio" name="Program" value="P" rows="3" id="RadioProgram">Program </input>
-						                </td>
-						                <td>
-							                <input type="radio" name="Realisasi" value="R" rows="3" id="RadioRealisasi">Realisasi </input>
-						                </td>		
-					                </tr>
-				                </table>   
-                            </div>--%>
-                            <%--<div class="div">
-                                <span class="lbl">AlamatURL<span class="red">*</span></span>
-                                <span class="titikdua">:</span>
-                                <input name="txtURL" class="input" id="txtURL" type="text" />
-                            </div>--%>
                             <div class="div">
                                 <span class="lbl">Email <span class="red">*</span></span>
                                 <span class="titikdua">:</span>
                                 <input name="txtTo" class="input" id="txtTo" type="text" />
-                            </div>
-                            <div class="div">
-                                <span class="lbl">Subject <span class="red">*</span></span>
-                                <span class="titikdua">:</span>
-                                <input name="txtSubject" class="input" id="txtSubject" type="text" />
-                            </div>   
-                            <div class="div">
-                                <span class="lbl">Pesan <span class="red">*</span></span>
-                                <span class="titikdua">:</span>
-                                <input name="txtMessage" class="input" id="txtMessage" type="text" />
-                            </div>                                                
+                            </div>                                             
                         </div>                
                     </div>
                     <div class="modal-footer">

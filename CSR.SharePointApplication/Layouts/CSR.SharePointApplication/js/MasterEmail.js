@@ -9,23 +9,20 @@
 
     $('#btnSaveMasterArea').click(function () {
         var Area = $("#txtArea").val();
-        var To = $("#txtTo").val();
-        var Subject = $("#txtSubject").val();
-        var Message = $("#txtMessage").val();
+        var To = $("#txtKepada").val();
+        var emailTo = $("#txtTo").val();
+
 
         var validationMessage = "";
 
-        if (Area.length < 1) {
+        if (Area == "" || Area == null) {
             validationMessage += "Area harus di pilih. \n";
         }
-        if (To.length < 1) {
+        if (To == "" || To == null) {
             validationMessage += "Kepada harus di isi. \n";
         }
-        if (Subject.length < 1) {
-            validationMessage += "Subject harus di isi. \n";
-        }
-        if (Message.length < 1) {
-            validationMessage += "Pesan harus di pilih. \n";
+        if (emailTo == "" || emailTo == null) {
+            validationMessage += "Email harus di isi. \n";
         }
         if (validationMessage.length > 0) {
             alert(validationMessage);
@@ -41,6 +38,7 @@
 function clearModalMasterArea() {
     $("#txtArea").val("");
     $("#txtTo").val("");
+    $("#txtKepada").val("");
     $("#txtSubject").val("");
     $("#txtMessage").val("");
 }
@@ -61,13 +59,8 @@ function Init() {
                     var seq = i + 1;
                     var strhtml = '<tr id="AreaRow_"' + seq + '>' +
                         '<td >' + Area[i].Area + ' </td>' +
-                        //'<td >' + Area[i].Bidang + ' </td>' + 
                         '<td >' + Area[i].Kepada + ' </td>' +
-                        //'<td >' + Area[i].Type + ' </td>' +
-                        //'<td >' + Area[i].URL + ' </td>' +
                         '<td >' + Area[i].To + ' </td>' +
-                        '<td >' + Area[i].Subject + ' </td>' +
-                        '<td >' + Area[i].Message + ' </td>' +
                         '<td align="Center"><input type="button"  class="button2 btnEdit" value="Ubah"/><input type="button"  class="button2 btnDelete" value="Hapus"/> </td> ' +
                         '</tr>';
                     $(strhtml).appendTo($("#tblMasterArea"));
@@ -133,9 +126,7 @@ function editArea() {
     $("#modalMasterArea").modal("show");
     $("#txtArea").val(row.children()[0].innerText).prop("disabled", false);
     $("#txtKepada").val(row.children()[1].innerText);
-    $("#txtTo").val(row.children()[2].innerText)
-    $("#txtSubject").val(row.children()[3].innerText)
-    $("#txtMessage").val(row.children()[4].innerText)
+    $("#txtTo").val(row.children()[2].innerText);
     //$("#txtBidang").val(row.children()[1].innerText).prop("disabled", false);
     //if (row.children()[3].innerText = "P") {
     //    document.getElementById("RadioProgram").checked = true;
@@ -202,8 +193,6 @@ function saveEmail() {
     var masterUser = new Object();
     masterUser.Area = $("#txtArea").val();
     masterUser.To = $("#txtTo").val();
-    masterUser.Subject = $("#txtSubject").val();
-    masterUser.Message = $("#txtMessage").val();
     masterUser.Kepada = $("#txtKepada").val();
     //masterUser.Bidang = $("#txtBidang").val();
     //var type = $('input[name=Program]:checked').val();

@@ -132,6 +132,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     if (realisasiEntity.AttachmentList.Count != 0)
                     {
                         realisasiEntity.AttachmentList.ForEach(a => a.TransaksiNo = realisasiEntity.RealisasiNo);
+                        status = logic.DeleteFolderAttach(SiteURL, DocLib, realisasiEntity.AttachmentList);
                         status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }                    
@@ -167,7 +168,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }
-                    baselogic.sendEmailThroughGmail(realisasiList[0].Area_Kode, realisasiList[0].TransaksiNo, realisasiList[0].BP_Nama);
+                    baselogic.sendEmailThroughGmail(realisasiList[0].Area_Kode, realisasiList[0].TransaksiNo, realisasiList[0].BP_Nama,"Input Realisasi");
 
                 }
                 else
@@ -206,7 +207,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }
 
-                    baselogic.sendEmailThroughGmail(program.Area_Kode, program.TransaksiNo, program.BP_Nama);
+                    baselogic.sendEmailThroughGmail(program.Area_Kode, program.TransaksiNo, program.BP_Nama,"Input Realisasi");
                 }
             }
             catch (Exception ex)
@@ -237,7 +238,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                     logic.SPUpdate<RealisasiEntity>(realisasiEntity);
                     if (realisasiEntity.AttachmentList.Count != 0)
                     {
-                        realisasiEntity.AttachmentList.ForEach(a => a.TransaksiNo = realisasiEntity.RealisasiNo);                        
+                        realisasiEntity.AttachmentList.ForEach(a => a.TransaksiNo = realisasiEntity.RealisasiNo);
+                        status = logic.DeleteFolderAttach(SiteURL, DocLib, realisasiEntity.AttachmentList);
                         status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }
@@ -275,7 +277,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }
-                    baselogic.sendEmailThroughGmail(realisasiList[0].Area_Kode, realisasiList[0].TransaksiNo, realisasiList[0].BP_Nama);
+                    baselogic.sendEmailThroughGmail(realisasiList[0].Area_Kode, realisasiList[0].TransaksiNo, realisasiList[0].BP_Nama,"Input Realisasi");
 
                 }
                 else
@@ -311,7 +313,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }
                    
-                    baselogic.sendEmailThroughGmail(program.Area_Kode,program.TransaksiNo,program.BP_Nama);
+                    baselogic.sendEmailThroughGmail(program.Area_Kode,program.TransaksiNo,program.BP_Nama,"Input Realisasi");
                 }
             }
             catch (Exception ex)
