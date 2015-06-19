@@ -97,6 +97,8 @@ function editBidang() {
 }
 
 function deleteBidang() {
+    var $element = this;
+    var row = $($element).parents("tr:first");
     $("#dialog-confirm").html("Apakah anda yakin menghapus bidang ini?");
 
     // Define the Dialog and its properties.
@@ -108,9 +110,7 @@ function deleteBidang() {
         width: 350,
         buttons: {
             "Ya": function () {
-                var $element = this;
-                var row = $($element).parents("tr:first");
-
+                
                 var KodeBidang = row.children()[0].innerText;
                 var parameter = {
                     kodeBidang: KodeBidang

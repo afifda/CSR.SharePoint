@@ -113,6 +113,8 @@ function editUser() {
 }
 
 function deleteUser() {
+    var $element = this;
+    var row = $($element).parents("tr:first");
     $("#dialog-confirm").html("Apakah anda yakin menghapus user ini?");
 
     // Define the Dialog and its properties.
@@ -124,9 +126,7 @@ function deleteUser() {
         width: 350,
         buttons: {
             "Ya": function () {
-                var $element = this;
-                var row = $($element).parents("tr:first");
-
+                
                 var No_Pegawai = row.children()[0].innerText;
                 var parameter = {
                     NoPegawai: No_Pegawai

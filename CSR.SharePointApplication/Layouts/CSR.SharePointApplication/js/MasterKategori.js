@@ -70,6 +70,8 @@ function editKategori() {
 }
 
 function deleteKategori() {
+    var $element = this;
+    var row = $($element).parents("tr:first");
     $("#dialog-confirm").html("Apakah anda yakin menghapus kategori ini?");
 
     // Define the Dialog and its properties.
@@ -81,9 +83,7 @@ function deleteKategori() {
         width: 350,
         buttons: {
             "Ya": function () {
-                var $element = this;
-                var row = $($element).parents("tr:first");
-
+                
                 var KodeKategori = row.children()[0].innerText;
                 var parameter = {
                     kodeKategori: KodeKategori

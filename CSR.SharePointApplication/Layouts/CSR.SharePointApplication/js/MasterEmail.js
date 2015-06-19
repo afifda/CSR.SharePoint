@@ -137,6 +137,8 @@ function editArea() {
  }
 
 function deleteArea() {
+    var $element = this;
+    var row = $($element).parents("tr:first");
     $("#dialog-confirm").html("Apakah anda yakin menghapus email ini?");
 
     // Define the Dialog and its properties.
@@ -148,9 +150,7 @@ function deleteArea() {
         width: 350,
         buttons: {
             "Ya": function () {
-                var $element = this;
-                var row = $($element).parents("tr:first");
-
+                
                 var Area = row.children()[0].innerText;
                 var parameter = {
                     Area: Area
