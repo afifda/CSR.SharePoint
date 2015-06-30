@@ -94,7 +94,7 @@
     </table>
 </div>
  <div class="modal-footer">
-    <input type="button" id="btnConfirm" value="Kirim dan Kunci" class="button"/>
+    <input type="button" id="btnConfirm" value="Submit" class="button"/>
     <input type="button" id="btnUnlock" value="Buka Kunci" class="button" style="display:none"/>
 </div>
 <div class="loadingModal"></div>

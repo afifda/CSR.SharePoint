@@ -164,5 +164,22 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             }
             return "Success. Program telah dihapus.";
         }
+        [System.Web.Services.WebMethod]
+        public static string LoadBidang(string Bidang)
+        {
+            object InputPage = null;
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string FormatBidang = (string)serializer.Deserialize(Bidang, typeof(string));
+            try
+            {
+                MasterDataLogic logic = new MasterDataLogic();
+                InputPage = logic.GetLookUptBidangOnChangeByKategory(FormatBidang);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return new JavaScriptSerializer().Serialize(InputPage);
+        }
     }
 }

@@ -111,7 +111,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                 if (row > 0)
                 {
                     BaseLogic logic = new BaseLogic();
-                    logic.SendMailKirimKunci(program.Area_Kode, "Input Program");
+                    logic.SendMailKirimKunci(program.Area_Kode, "Input Program",program.TransaksiNo);
                 }
 
 

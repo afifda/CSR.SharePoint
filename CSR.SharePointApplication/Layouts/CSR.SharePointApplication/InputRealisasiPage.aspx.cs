@@ -312,8 +312,8 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                         status = logic.SaveAttachmentToSharePointLibrary(SiteURL, DocLib, realisasiEntity.AttachmentList);
                         status = logic.SaveAttachment(realisasiEntity.AttachmentList);
                     }
-                   
-                    baselogic.sendEmailThroughGmail(program.Area_Kode,program.TransaksiNo,program.BP_Nama,"Input Realisasi");
+
+                    baselogic.sendEmailThroughGmail(program.Area_Kode, realisasiEntity.TransaksiNo, program.BP_Nama, "Input Realisasi");
                 }
             }
             catch (Exception ex)
@@ -340,6 +340,23 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
                    return string.Format("Telah terjadi error. ({0})", ex.Message);
                }
                return "Success. Realisasi telah dihapus.";
+        }
+        [System.Web.Services.WebMethod]
+        public static string LoadBidang(string Bidang)
+        {
+            object InputPage = null;
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string FormatBidang = (string)serializer.Deserialize(Bidang, typeof(string));
+            try
+            {
+                MasterDataLogic logic = new MasterDataLogic();
+                InputPage = logic.GetLookUptBidangOnChangeByKategory(FormatBidang);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return new JavaScriptSerializer().Serialize(InputPage);
         }
     }
 }

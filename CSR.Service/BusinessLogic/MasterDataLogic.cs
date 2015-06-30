@@ -29,6 +29,9 @@ namespace CSR.Service.BusinessLogic
             MasterDataDataAccess dataAccess = new MasterDataDataAccess();
             List<MasterKategoriProgramEntity> kategori = SPRead<MasterKategoriProgramEntity>(new MasterKategoriProgramEntity() { KP_Kode = 0 });
             List<MasterBidangProgramEntity> bidang = SPRead<MasterBidangProgramEntity>(new MasterBidangProgramEntity() { BP_Kode = 0 });
+                bidang=(from b in bidang
+                        where b.KP_Kode == kategori[0].KP_Kode
+                            select b).ToList();
             List<MasterAreaEntity> area = SPRead<MasterAreaEntity>(new MasterAreaEntity() { AreaCode = "" });
             if (User != null && User.AreaName != "Jakarta")
             {
@@ -49,6 +52,23 @@ namespace CSR.Service.BusinessLogic
         public List<int> GetAvailableYear()
         {
             return new MasterDataDataAccess().GetAvailableYear();
+        }
+        public object GetLookUptBidangOnChangeByKategory(string kategory)
+        {
+
+            MasterDataDataAccess dataAccess = new MasterDataDataAccess();
+            List<MasterBidangProgramEntity> bidang = SPRead<MasterBidangProgramEntity>(new MasterBidangProgramEntity() { BP_Kode = 0 });
+            bidang = (from b in bidang
+                      where b.KP_Kode == Convert.ToInt32(kategory)
+                      select b).ToList();
+            var inputPage = new
+            {
+
+                Bidang = bidang
+
+            };
+            return inputPage;
+
         }
     }
 }

@@ -111,6 +111,13 @@
     
     $('#dateFrom').datepicker();
     $('#dateTo').datepicker();
+    //ddlKategory Change
+    $("#ddlKategori").change(function () {
+        //bussines area and vendor
+        var Kategory = $("select[id$='ddlKategori']").val();
+        $('#ddlBidang').empty();
+        LoadBidang(Kategory);
+    });
 });
 
 function Init() {
@@ -332,4 +339,27 @@ function deleteRealisaisi(RealisasiNo) {
             alert(response.responseText);
         }
     });   
+}
+function LoadBidang(Kategory) {
+    var parameter = new Object();
+    parameter.Bidang = JSON.stringify(Kategory);
+    $.ajax({
+        type: "POST",
+        url: window.location.pathname + "/LoadBidang",
+        data: JSON.stringify(parameter),
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+        async: true,
+        success: function (response) {
+            var Input = JSON.parse(response.d);
+            if (Input == null) return false;
+            $.each(Input.Bidang, function (key, value) {
+                $("#ddlBidang").append($("<option></option>").val
+             (value.BP_Kode).html(value.BP_Nama));
+            });
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    });
 }

@@ -317,10 +317,12 @@ function downloadDocFunc(docLink) {
     var RealisasiNo = getUrlVars()["RealisasiNo"];
     if (requestNo != null) {
         requestNo = $('#hfTransaksiNo').val();
-        window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + requestNo;
+        window.location.href = "/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + requestNo;
+        //window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + requestNo;
     } else {
         RealisasiNo = $('#hfRealisasiNo').val();
-        window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + RealisasiNo;
+        window.location.href = "/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + RealisasiNo;
+        //window.location.href = "/_layouts/15/CSR.SharePointApplication/generichandler.ashx?Method=downloadFileAttachment&DocPath=" + docLink + "&ReqNo=" + RealisasiNo;
     }
 
     return false;
