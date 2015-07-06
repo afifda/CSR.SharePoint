@@ -16,7 +16,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
         {
             if (!IsValidUser || User.AreaName != "Jakarta")
             {
-                Response.Redirect("/_layouts/15/CSR.SharePointApplication/ErrorPage.aspx?ErrCode=NotAuthorized", true);
+                Response.Redirect("/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/ErrorPage.aspx?ErrCode=NotAuthorized", true);
             }
             string strMasterType = Request.QueryString["MasterType"];
             if (string.IsNullOrEmpty(strMasterType))

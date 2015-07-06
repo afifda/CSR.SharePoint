@@ -18,7 +18,7 @@ namespace CSR.SharePointApplication.Layouts.CSR.SharePointApplication
             IsEdit = false;
             if (!IsValidUser)
             {
-                Response.Redirect("/_layouts/15/CSR.SharePointApplication/ErrorPage.aspx?ErrCode=NotAuthorized", true);
+                Response.Redirect("/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/ErrorPage.aspx?ErrCode=NotAuthorized", true);
             }
             if (User.AreaName == "Jakarta")
             {

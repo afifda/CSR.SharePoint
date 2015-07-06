@@ -23,7 +23,7 @@
            </table>
         </div>
         <div class="button-template2">
-            <input type="button" id="btnAddMasterArea" value="Add"/>
+            <input type="button" id="btnAddMasterArea" value="Tambah"/>
         </div>
         
         <div class="modal" id="modalMasterArea">

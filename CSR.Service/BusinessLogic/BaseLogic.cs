@@ -350,57 +350,57 @@ namespace CSR.Service.BusinessLogic
             //get data email
             List<EmailEntyti> EmailEntyti = null;
             MasterDataLogic logic = new MasterDataLogic();
-            EmailEntyti = logic.SPRead<EmailEntyti>(new EmailEntyti() { Area = "" });
+            EmailEntyti = logic.SPRead<EmailEntyti>(new EmailEntyti() { Area = Area_Code });
             MasterUserByUserNameEntity UserInformationNew = new MasterUserByUserNameEntity();
             UserInformationNew = UserInformation(SPContext.Current.Web.CurrentUser.LoginName);
-            string URL = "<a href=" + SPContext.Current.Web.Url + "/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=" + transaksi_No + "> Lihat Laporan Disini </a>";
-
-            MailMessage mM = new MailMessage();
-            mM.From = new MailAddress("portal.pge1@pertamina.com");//appsetting
-            mM.Subject = SubjectType;
-            mM.IsBodyHtml = true;
+            string URL = "<a href=" + SPContext.Current.Web.Url + "/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=" + transaksi_No + "> Lihat Laporan Disini </a>";    
+                        
             for (int i = 0; i < EmailEntyti.Count; i++)
             {
                 try
                 {
-
+                    MailMessage mM = new MailMessage();
+                    mM.From = new MailAddress("portal.pge1@pertamina.com");//appsetting
+                    mM.Subject = SubjectType;
+                    mM.IsBodyHtml = true;
                     mM.To.Add(EmailEntyti[i].To);
-                    mM.Body = "<html><head>Yth Bapak/Ibu " + EmailEntyti[i].Kepada + "</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.Nama_Pegawai + "  di Area " + EmailEntyti[i].Area_Nama + " telah memasukkan data CSR bidang " + Bidang + "</dt></br><dt>Silahkan Melakukan Review melalui link Berikut:" + URL + "'</dt></br><dt></dt></br><dt>Terima Kasih</dt></dl></body></html>";
+                    mM.Body = "<html><head>Yth Bapak/Ibu " + EmailEntyti[i].Kepada + "</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.Nama_Pegawai + "  di Area " + UserInformationNew.AreaName + " telah memasukkan data CSR bidang " + Bidang + "</dt></br><dt>Silahkan Melakukan Review melalui link Berikut:" + URL + "'</dt></br><dt></dt></br><dt>Terima Kasih</dt></dl></body></html>";
 
-
+                    SmtpClient sC = new SmtpClient("10.1.32.165");
+                    sC.Credentials = new NetworkCredential("portal.pge1", "pertaminapge");
+                    sC.Send(mM);
                 }
                 catch (Exception ex)
                 {
                     ex.Message.ToString();
                 }
             }
-            SmtpClient sC = new SmtpClient("10.1.32.165");
-            sC.Credentials = new NetworkCredential("portal.pge1", "pertaminapge");
-            sC.Send(mM);
+            
 
         }
         public void SendMailKirimKunci(string Area_Code, string Subject,string transaksi_No)
         {
             List<EmailEntyti> EmailEntyti = null;
             MasterDataLogic logic = new MasterDataLogic();
-            EmailEntyti = logic.SPRead<EmailEntyti>(new EmailEntyti() { Area = "" });
+            EmailEntyti = logic.SPRead<EmailEntyti>(new EmailEntyti() { Area = Area_Code });
             MasterUserByUserNameEntity UserInformationNew = new MasterUserByUserNameEntity();
             UserInformationNew = UserInformation(SPContext.Current.Web.CurrentUser.LoginName);
-            MailMessage mM = new MailMessage();
-            mM.From = new MailAddress("portal.pge1@pertamina.com");//appsetting
-            mM.Subject = Subject;
-            mM.IsBodyHtml = true;
-            string URL = "<a href=" + SPContext.Current.Web.Url + "/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=" + transaksi_No + "> Silahkan klik berikut untuk melihat </a>";
+            
+            string URL = "<a href=" + SPContext.Current.Web.Url + "/sites/HumasCSR/_layouts/15/CSR.SharePointApplication/InputProgramPage.aspx?TransaksiNo=" + transaksi_No + "> Silahkan klik berikut untuk melihat </a>";
 
             for (int i = 0; i < EmailEntyti.Count; i++)
             {
+                MailMessage mM = new MailMessage();
+                mM.From = new MailAddress("portal.pge1@pertamina.com");//appsetting
+                mM.Subject = Subject;
+                mM.IsBodyHtml = true;
                 mM.To.Add(EmailEntyti[0].To);
-                //mM.Body = "<html><head>Yth Bapak/Ibu " + EmailEntyti[0].Kepada + "</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.Nama_Pegawai + "  di Area " + EmailEntyti[0].Area_Nama + " telah mengentri Program CSR </dt></dl></br><dt>Terima Kasih</dt></dl></body></html>";
-                mM.Body = "<html><head>Yth Bapak/Ibu " + EmailEntyti[0].Kepada + "</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.Nama_Pegawai + "  di Area " + EmailEntyti[0].Area_Nama + " telah mengentri Program CSR </dt></br><dt>Silahkan Melakukan Review melalui link Berikut:" + URL + "'</dt></br><dt></dt></br><dt>Terima Kasih</dt></dl></body></html>";
-            }
-            SmtpClient sC = new SmtpClient("10.1.32.165");
-            sC.Credentials = new NetworkCredential("portal.pge1", "pertaminapge");
-            sC.Send(mM);
+                mM.Body = "<html><head>Yth Bapak/Ibu " + EmailEntyti[0].Kepada + "</head><body><dl><dt>Bapak/Ibu " + UserInformationNew.Nama_Pegawai + "  di Area " + UserInformationNew.AreaName + " telah mengentri Program CSR </dt></br><dt>Silahkan Melakukan Review melalui link Berikut:" + URL + "'</dt></br><dt></dt></br><dt>Terima Kasih</dt></dl></body></html>";
+                
+                SmtpClient sC = new SmtpClient("10.1.32.165");
+                sC.Credentials = new NetworkCredential("portal.pge1", "pertaminapge");
+                sC.Send(mM);
+            }           
 
         }
     }

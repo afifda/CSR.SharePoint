@@ -46,7 +46,7 @@
             validationMessage += "Penerima harus di isi. \n";
         }
         if (to < from) {
-            validationMessage += "Waktu selesai lebih kecil dari waktu mulai. \n";
+            validationMessage += "Waktu selesai harus lebih besar dari waktu mulai. \n";
         }
         if (SumberDanaPGEPusat.length < 1 && SumberDanaPersero.length < 1 && SumberPKBL.length < 1 && SumberDanaPGEArea.length < 1) {
             validationMessage += "Tidak ada sumber dana, Silahkan di isi minimal satu sumber dana. \n";

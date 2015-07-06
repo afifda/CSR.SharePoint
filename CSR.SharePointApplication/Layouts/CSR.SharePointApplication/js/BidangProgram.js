@@ -37,7 +37,7 @@
             validationMessage += "Waktu Selesai harus di isi. \n";
         }
         if (to < from) {
-            validationMessage += "Waktu Selesai lebih kecil dari waktu mulai. \n";
+            validationMessage += "Waktu selesai harus lebih besar dari waktu mulai. \n";
         }
         if (validationMessage.length > 0) {
             alert(validationMessage);
@@ -183,10 +183,10 @@ function GetSuccessDetailsList(RealisasiList) {
                 var lock = "";
                 if ($('#hfIsAdmin').val() == "1") {
                     if (RealisasiList[i].Is_Locked_Realisasi == true) {
-                        strUnlock = '&nbsp<a href="javasdownloadDcript:void(0)" onclick="unlockFunc(\'' + RealisasiList[i].RealisasiNo + '\');">Buka Kunci</a>'
+                        strUnlock = '| '+'&nbsp<a href="javasdownloadDcript:void(0)" onclick="unlockFunc(\'' + RealisasiList[i].RealisasiNo + '\');">Buka Kunci</a>'
                     }
                     else {
-                        lock = '&nbsp<a href="javasdownloadDcript:void(0)" onclick="lockFunc(\'' + RealisasiList[i].RealisasiNo + '\');">Kunci</a>'
+                        lock = '| ' + '&nbsp<a href="javasdownloadDcript:void(0)" onclick="lockFunc(\'' + RealisasiList[i].RealisasiNo + '\');">Kunci</a>'
                     }                    
                 }
                 
@@ -198,7 +198,7 @@ function GetSuccessDetailsList(RealisasiList) {
                     '<td >' + RealisasiList[i].Pelaksana + ' </td>' +
                     '<td >' + RealisasiList[i].Penerima + ' </td>' +
                     '<td class="currencyFormat rightAligned">' + Jumlah + '</td>' +
-                    '<td ><a href="InputRealisasiPage.aspx?RealisasiNo=' + RealisasiList[i].RealisasiNo + '">lihat </a>' + strUnlock + lock +'</td>' +
+                    '<td ><a href="InputRealisasiPage.aspx?RealisasiNo=' + RealisasiList[i].RealisasiNo + '">Lihat </a>' + strUnlock + lock +'</td>' +
                     '</tr>';
                 $(strhtml).appendTo($("#tblRealisasi"));
             }
